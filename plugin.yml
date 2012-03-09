@@ -1,0 +1,4 @@
+name: InfinitePlots
+version: 0.6.2
+main: uk.co.jacekk.bukkit.infiniteplots.InfinitePlots
+load: startup
