@@ -12,12 +12,12 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.WorldInitEvent;
 
-public class WorldInitListener implements Listener {
-	
-	private InfinitePlots plugin;
+import uk.co.jacekk.bukkit.baseplugin.BaseListener;
+
+public class WorldInitListener extends BaseListener<InfinitePlots> {
 	
 	public WorldInitListener(InfinitePlots plugin){
-		this.plugin = plugin;
+		super(plugin);
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)

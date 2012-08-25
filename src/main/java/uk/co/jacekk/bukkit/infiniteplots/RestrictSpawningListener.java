@@ -2,10 +2,15 @@ package uk.co.jacekk.bukkit.infiniteplots;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
-public class RestrictSpawningListener implements Listener {
+import uk.co.jacekk.bukkit.baseplugin.BaseListener;
+
+public class RestrictSpawningListener extends BaseListener<InfinitePlots> {
+	
+	public RestrictSpawningListener(InfinitePlots plugin){
+		super(plugin);
+	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onCreatureSpawn(CreatureSpawnEvent event){

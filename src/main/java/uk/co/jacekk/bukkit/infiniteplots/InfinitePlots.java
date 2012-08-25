@@ -13,7 +13,7 @@ public class InfinitePlots extends BasePlugin {
 		this.config = new PluginConfig(new File(this.baseDirPath + File.separator + "config.yml"), Config.values(), this.log);
 		
 		if (this.config.getBoolean(Config.PLOTS_RESTRICT_SPAWNING)){
-			this.pluginManager.registerEvents(new RestrictSpawningListener(), this);
+			this.pluginManager.registerEvents(new RestrictSpawningListener(this), this);
 		}
 		
 		this.pluginManager.registerEvents(new WorldInitListener(this), this);
