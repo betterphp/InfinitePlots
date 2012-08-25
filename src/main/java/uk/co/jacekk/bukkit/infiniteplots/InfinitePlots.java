@@ -2,27 +2,17 @@ package uk.co.jacekk.bukkit.infiniteplots;
 
 import java.io.File;
 
-import org.bukkit.Server;
 import org.bukkit.generator.ChunkGenerator;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
 
-public class InfinitePlots extends JavaPlugin {
-	
-	protected Server server;
-	protected PluginManager pluginManager;
-	protected InfinitePlotsLogger log;
-	
-	protected InfinitePlotsConfig config;
+import uk.co.jacekk.bukkit.baseplugin.BasePlugin;
+import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
+
+public class InfinitePlots extends BasePlugin {
 	
 	public void onEnable(){
-		this.server = this.getServer();
-		this.pluginManager = this.server.getPluginManager();
-		this.log = new InfinitePlotsLogger("Minecraft", this);
+		this.config = new PluginConfig(new File(this.baseDirPath + File.separator + "config.yml"), Config.values(), this.log);
 		
-		this.config = new InfinitePlotsConfig(new File(this.getDataFolder().getAbsolutePath() + File.separator + "config.yml"));
-		
-		if (this.config.getBoolean("plots.restrict-spawning")){
+		if (this.config.getBoolean(Config.PLOTS_RESTRICT_SPAWNING)){
 			this.pluginManager.registerEvents(new InfinitePlotsEntityListener(), this);
 		}
 		
@@ -30,14 +20,14 @@ public class InfinitePlots extends JavaPlugin {
 	}
 	
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
-		int size = (Integer) ((id != null && id.matches("[-+]?\\d+(\\.\\d+)?")) ? Integer.parseInt(id) : this.config.getInt("plots.size"));
-		int height = this.config.getInt("plots.height");
+		int size = (Integer) ((id != null && id.matches("[-+]?\\d+(\\.\\d+)?")) ? Integer.parseInt(id) : this.config.getInt(Config.PLOTS_SIZE));
+		int height = this.config.getInt(Config.PLOTS_HEIGHT);
 		
-		byte baseId = (byte) this.config.getInt("blocks.base");
-		byte surfaceId = (byte) this.config.getInt("blocks.surface");
-		byte pathId = (byte) this.config.getInt("blocks.path");
-		byte wallLowerId = (byte) this.config.getInt("blocks.lower-wall");
-		byte wallUpperId = (byte) this.config.getInt("blocks.upper-wall");
+		byte baseId = (byte) this.config.getInt(Config.BLOCKS_BASE);
+		byte surfaceId = (byte) this.config.getInt(Config.BLOCKS_SURFACE);
+		byte pathId = (byte) this.config.getInt(Config.BLOCKS_PATH);
+		byte wallLowerId = (byte) this.config.getInt(Config.BLOCKS_LOWER_WALL);
+		byte wallUpperId = (byte) this.config.getInt(Config.BLOCKS_UPPER_WALL);
 		
 		return new InfinitePlotsGenerator(this, size, height, baseId, surfaceId, pathId, wallLowerId, wallUpperId);
 	}
