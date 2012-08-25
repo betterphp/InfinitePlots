@@ -27,16 +27,6 @@ public class InfinitePlots extends JavaPlugin {
 		}
 		
 		this.pluginManager.registerEvents(new InfinitePlotsWorldListener(this), this);
-		
-		this.log.info("Enabled.");
-	}
-	
-	public void onDisable(){
-		this.log.info("Disabled.");
-		
-		this.log = null;
-		
-		this.config = null;
 	}
 	
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
