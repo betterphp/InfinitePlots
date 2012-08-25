@@ -5,11 +5,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
-public class InfinitePlotsEntityListener implements Listener {
+public class RestrictSpawningListener implements Listener {
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onCreatureSpawn(CreatureSpawnEvent event){
-		if (event.getLocation().getWorld().getGenerator() instanceof InfinitePlotsGenerator){
+		if (event.getLocation().getWorld().getGenerator() instanceof PlotsGenerator){
 			event.setCancelled(true);
 		}
 	}

@@ -13,10 +13,10 @@ public class InfinitePlots extends BasePlugin {
 		this.config = new PluginConfig(new File(this.baseDirPath + File.separator + "config.yml"), Config.values(), this.log);
 		
 		if (this.config.getBoolean(Config.PLOTS_RESTRICT_SPAWNING)){
-			this.pluginManager.registerEvents(new InfinitePlotsEntityListener(), this);
+			this.pluginManager.registerEvents(new RestrictSpawningListener(), this);
 		}
 		
-		this.pluginManager.registerEvents(new InfinitePlotsWorldListener(this), this);
+		this.pluginManager.registerEvents(new WorldInitListener(this), this);
 	}
 	
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
@@ -29,7 +29,7 @@ public class InfinitePlots extends BasePlugin {
 		byte wallLowerId = (byte) this.config.getInt(Config.BLOCKS_LOWER_WALL);
 		byte wallUpperId = (byte) this.config.getInt(Config.BLOCKS_UPPER_WALL);
 		
-		return new InfinitePlotsGenerator(this, size, height, baseId, surfaceId, pathId, wallLowerId, wallUpperId);
+		return new PlotsGenerator(this, size, height, baseId, surfaceId, pathId, wallLowerId, wallUpperId);
 	}
 	
 }

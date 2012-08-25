@@ -10,7 +10,7 @@ import org.bukkit.World;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 
-public class InfinitePlotsGenerator extends ChunkGenerator {
+public class PlotsGenerator extends ChunkGenerator {
 	
 	private int plotSize;
 	private int plotSizeBy2;
@@ -25,7 +25,7 @@ public class InfinitePlotsGenerator extends ChunkGenerator {
 	private byte wallLowerId;
 	private byte wallUpperId;
 	
-	public InfinitePlotsGenerator(InfinitePlots instance, int size, int height, byte baseId, byte surfaceId, byte pathId, byte wallLowerId, byte wallUpperId){
+	public PlotsGenerator(InfinitePlots instance, int size, int height, byte baseId, byte surfaceId, byte pathId, byte wallLowerId, byte wallUpperId){
 		this.plotSize = size + 7;
 		this.plotSizeBy2 = this.plotSize / 2;
 		

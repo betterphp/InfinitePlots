@@ -12,11 +12,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.WorldInitEvent;
 
-public class InfinitePlotsWorldListener implements Listener {
+public class WorldInitListener implements Listener {
 	
 	private InfinitePlots plugin;
 	
-	public InfinitePlotsWorldListener(InfinitePlots plugin){
+	public WorldInitListener(InfinitePlots plugin){
 		this.plugin = plugin;
 	}
 	
@@ -24,7 +24,7 @@ public class InfinitePlotsWorldListener implements Listener {
 	public void onWorldInit(WorldInitEvent event){
 		World world = event.getWorld();
 		
-		if (world.getGenerator() instanceof InfinitePlotsGenerator){
+		if (world.getGenerator() instanceof PlotsGenerator){
 			WorldServer worldServer = ((CraftWorld) world).getHandle();
 			
 			try{
