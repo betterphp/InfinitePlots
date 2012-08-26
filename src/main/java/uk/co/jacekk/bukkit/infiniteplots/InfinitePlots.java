@@ -10,6 +10,8 @@ import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
 public class InfinitePlots extends BasePlugin {
 	
 	public void onEnable(){
+		super.onEnable(true);
+		
 		this.config = new PluginConfig(new File(this.baseDirPath + File.separator + "config.yml"), Config.values(), this.log);
 		
 		if (this.config.getBoolean(Config.PLOTS_RESTRICT_SPAWNING)){
