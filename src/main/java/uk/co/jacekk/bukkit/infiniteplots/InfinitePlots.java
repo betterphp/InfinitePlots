@@ -22,7 +22,7 @@ public class InfinitePlots extends BasePlugin {
 	}
 	
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
-		int size = (Integer) ((id != null && id.matches("[-+]?\\d+(\\.\\d+)?")) ? Integer.parseInt(id) : this.config.getInt(Config.PLOTS_SIZE));
+		int size = (id != null && id.matches("[-+]?\\d+(\\.\\d+)?")) ? Integer.parseInt(id) : this.config.getInt(Config.PLOTS_SIZE);
 		int height = this.config.getInt(Config.PLOTS_HEIGHT);
 		
 		byte baseId = (byte) this.config.getInt(Config.BLOCKS_BASE);
