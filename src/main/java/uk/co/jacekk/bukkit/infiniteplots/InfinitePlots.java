@@ -4,8 +4,8 @@ import java.io.File;
 
 import org.bukkit.generator.ChunkGenerator;
 
-import uk.co.jacekk.bukkit.baseplugin.BasePlugin;
-import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v1.BasePlugin;
+import uk.co.jacekk.bukkit.baseplugin.v1.config.PluginConfig;
 
 public class InfinitePlots extends BasePlugin {
 	
