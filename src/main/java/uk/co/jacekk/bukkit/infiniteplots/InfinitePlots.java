@@ -31,7 +31,7 @@ public class InfinitePlots extends BasePlugin {
 		byte wallLowerId = (byte) this.config.getInt(Config.BLOCKS_LOWER_WALL);
 		byte wallUpperId = (byte) this.config.getInt(Config.BLOCKS_UPPER_WALL);
 		
-		return new PlotsGenerator(this, size, height, baseId, surfaceId, pathId, wallLowerId, wallUpperId);
+		return new PlotsGenerator(size, height, baseId, surfaceId, pathId, wallLowerId, wallUpperId);
 	}
 	
 }

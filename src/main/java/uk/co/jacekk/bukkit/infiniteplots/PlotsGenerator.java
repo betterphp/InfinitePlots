@@ -25,7 +25,7 @@ public class PlotsGenerator extends ChunkGenerator {
 	private byte wallLowerId;
 	private byte wallUpperId;
 	
-	public PlotsGenerator(InfinitePlots instance, int size, int height, byte baseId, byte surfaceId, byte pathId, byte wallLowerId, byte wallUpperId){
+	public PlotsGenerator(int size, int height, byte baseId, byte surfaceId, byte pathId, byte wallLowerId, byte wallUpperId){
 		this.plotSize = size + 7;
 		this.plotSizeBy2 = this.plotSize / 2;
 		
@@ -91,35 +91,39 @@ public class PlotsGenerator extends ChunkGenerator {
 		return false;
 	}
 	
-	public byte[] generate(World world, Random random, int chunkX, int chunkZ){
-		byte[] blocks = new byte[32768];
-		int x, y, z;
+	private void setBlockAt(byte[][] chunk, int x, int y, int z, byte typeId){
+		chunk[y >> 4][((y & 0xF) << 8) | (z << 4) | x] = typeId;
+	}
+	
+	@Override
+	public byte[][] generateBlockSections(World world, Random random, int chunkX, int chunkZ, BiomeGrid biomes){
+		byte[][] chunk = new byte[(int) Math.ceil((this.plotHeight + 2.0d) / 16)][4096];
 		
 		int worldChunkX = chunkX * 16;
 		int worldChunkZ = chunkZ * 16;
 		
-		for (x = 0; x < 16; ++x){
-			for (z = 0; z < 16; ++z){
-				blocks[this.coordsToByte(x, 0, z)] = this.bedId;
+		for (int x = 0; x < 16; ++x){
+			for (int z = 0; z < 16; ++z){
+				this.setBlockAt(chunk, x, 0, z, this.bedId);
 				
-				for (y = 1; y < this.plotHeight; ++y){
-					blocks[this.coordsToByte(x, y, z)] = this.baseId;
+				for (int y = 1; y < this.plotHeight; ++y){
+					this.setBlockAt(chunk, x, y, z, this.baseId);
 				}
 				
 				if (this.isGateBlock(worldChunkX + x, worldChunkZ + z) || this.isPathBlock(worldChunkX + x, worldChunkZ + z)){
-					blocks[this.coordsToByte(x, this.plotHeight, z)] = this.hiddenId;
-					blocks[this.coordsToByte(x, this.plotHeight + 1, z)] = this.pathId;
+					this.setBlockAt(chunk, x, this.plotHeight, z, this.hiddenId);
+					this.setBlockAt(chunk, x, this.plotHeight + 1, z, this.pathId);
 				}else if (this.isWallBlock(worldChunkX + x, worldChunkZ + z)){
-					blocks[this.coordsToByte(x, this.plotHeight, z)] = (byte) ((this.surfaceId == Material.GRASS.getId()) ? Material.DIRT.getId() : this.surfaceId);
-					blocks[this.coordsToByte(x, this.plotHeight + 1, z)] = this.wallLowerId;
-					blocks[this.coordsToByte(x, this.plotHeight + 2, z)] = this.wallUpperId;
+					this.setBlockAt(chunk, x, this.plotHeight, z, (byte) ((this.surfaceId == Material.GRASS.getId()) ? Material.DIRT.getId() : this.surfaceId));
+					this.setBlockAt(chunk, x, this.plotHeight + 1, z, this.wallLowerId);
+					this.setBlockAt(chunk, x, this.plotHeight + 2, z, this.wallUpperId);
 				}else{
-					blocks[this.coordsToByte(x, this.plotHeight, z)] = this.surfaceId;
+					this.setBlockAt(chunk, x, this.plotHeight, z, this.surfaceId);
 				}
 			}
 		}
 		
-		return blocks;
+		return chunk;
 	}
-
+	
 }
