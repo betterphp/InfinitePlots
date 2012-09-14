@@ -2,6 +2,7 @@ package uk.co.jacekk.bukkit.infiniteplots;
 
 import java.io.File;
 
+import org.bukkit.block.Biome;
 import org.bukkit.generator.ChunkGenerator;
 
 import uk.co.jacekk.bukkit.baseplugin.v1.BasePlugin;
@@ -31,7 +32,14 @@ public class InfinitePlots extends BasePlugin {
 		byte wallLowerId = (byte) this.config.getInt(Config.BLOCKS_LOWER_WALL);
 		byte wallUpperId = (byte) this.config.getInt(Config.BLOCKS_UPPER_WALL);
 		
-		return new PlotsGenerator(size, height, baseId, surfaceId, pathId, wallLowerId, wallUpperId);
+		Biome plotBiome = Biome.valueOf(this.config.getString(Config.BIOMES_PLOTS).toUpperCase());
+		Biome pathBiome = Biome.valueOf(this.config.getString(Config.BIOMES_PATHS).toUpperCase());
+		
+		if (plotBiome == null || pathBiome == null){
+			this.log.warn("Invalid biome given in config.yml");
+		}
+		
+		return new PlotsGenerator(size, height, baseId, surfaceId, pathId, wallLowerId, wallUpperId, plotBiome, pathBiome);
 	}
 	
 }

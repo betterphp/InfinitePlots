@@ -14,7 +14,10 @@ public enum Config implements PluginConfigKey {
 	BLOCKS_SURFACE(		"blocks.surface",		Material.GRASS.getId()),
 	BLOCKS_PATH(		"blocks.path",			Material.STEP.getId()),
 	BLOCKS_LOWER_WALL(	"blocks.lower-wall",	Material.SMOOTH_BRICK.getId()),
-	BLOCKS_UPPER_WALL(	"blocks.upper-wall",	Material.FENCE.getId());
+	BLOCKS_UPPER_WALL(	"blocks.upper-wall",	Material.FENCE.getId()),
+	
+	BIOMES_PLOTS(		"biomes.plots",			"PLAINS"),
+	BIOMES_PATHS(		"biomes.paths",			"PLAINS");
 	
 	private String key;
 	private Object defaultValue;

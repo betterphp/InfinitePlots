@@ -7,6 +7,7 @@ import java.util.Random;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Biome;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 
@@ -25,7 +26,10 @@ public class PlotsGenerator extends ChunkGenerator {
 	private byte wallLowerId;
 	private byte wallUpperId;
 	
-	public PlotsGenerator(int size, int height, byte baseId, byte surfaceId, byte pathId, byte wallLowerId, byte wallUpperId){
+	private Biome plotBiome;
+	private Biome pathBiome;
+	
+	public PlotsGenerator(int size, int height, byte baseId, byte surfaceId, byte pathId, byte wallLowerId, byte wallUpperId, Biome plotBiome, Biome pathBiome){
 		this.plotSize = size + 7;
 		this.plotSizeBy2 = this.plotSize / 2;
 		
@@ -38,6 +42,9 @@ public class PlotsGenerator extends ChunkGenerator {
 		this.pathId = pathId;
 		this.wallLowerId = wallLowerId;
 		this.wallUpperId = wallUpperId;
+		
+		this.plotBiome = plotBiome;
+		this.pathBiome = pathBiome;
 	}
 	
 	public int getPlotSize(){
@@ -113,12 +120,18 @@ public class PlotsGenerator extends ChunkGenerator {
 				if (this.isGateBlock(worldChunkX + x, worldChunkZ + z) || this.isPathBlock(worldChunkX + x, worldChunkZ + z)){
 					this.setBlockAt(chunk, x, this.plotHeight, z, this.hiddenId);
 					this.setBlockAt(chunk, x, this.plotHeight + 1, z, this.pathId);
+					
+					biomes.setBiome(x, z, this.pathBiome);
 				}else if (this.isWallBlock(worldChunkX + x, worldChunkZ + z)){
 					this.setBlockAt(chunk, x, this.plotHeight, z, (byte) ((this.surfaceId == Material.GRASS.getId()) ? Material.DIRT.getId() : this.surfaceId));
 					this.setBlockAt(chunk, x, this.plotHeight + 1, z, this.wallLowerId);
 					this.setBlockAt(chunk, x, this.plotHeight + 2, z, this.wallUpperId);
+					
+					biomes.setBiome(x, z, this.pathBiome);
 				}else{
 					this.setBlockAt(chunk, x, this.plotHeight, z, this.surfaceId);
+					
+					biomes.setBiome(x, z, this.plotBiome);
 				}
 			}
 		}
