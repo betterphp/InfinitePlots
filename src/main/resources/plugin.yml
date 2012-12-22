@@ -1,4 +1,4 @@
 name: InfinitePlots
-version: 0.8
+version: 0.8.1
 main: uk.co.jacekk.bukkit.infiniteplots.InfinitePlots
 load: startup

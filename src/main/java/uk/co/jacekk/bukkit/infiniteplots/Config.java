@@ -2,7 +2,7 @@ package uk.co.jacekk.bukkit.infiniteplots;
 
 import org.bukkit.Material;
 
-import uk.co.jacekk.bukkit.baseplugin.v5.config.PluginConfigKey;
+import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfigKey;
 
 public class Config {
 	

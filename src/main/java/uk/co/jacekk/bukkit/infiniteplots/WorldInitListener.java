@@ -2,16 +2,16 @@ package uk.co.jacekk.bukkit.infiniteplots;
 
 import java.lang.reflect.Field;
 
-import net.minecraft.server.WorldServer;
-import net.minecraft.server.WorldType;
+import net.minecraft.server.v1_4_6.WorldServer;
+import net.minecraft.server.v1_4_6.WorldType;
 
 import org.bukkit.World;
-import org.bukkit.craftbukkit.CraftWorld;
+import org.bukkit.craftbukkit.v1_4_6.CraftWorld;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.world.WorldInitEvent;
 
-import uk.co.jacekk.bukkit.baseplugin.v5.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v6.event.BaseListener;
 
 public class WorldInitListener extends BaseListener<InfinitePlots> {
 	
