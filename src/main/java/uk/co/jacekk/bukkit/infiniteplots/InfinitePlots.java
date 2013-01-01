@@ -5,8 +5,8 @@ import java.io.File;
 import org.bukkit.block.Biome;
 import org.bukkit.generator.ChunkGenerator;
 
-import uk.co.jacekk.bukkit.baseplugin.v6.BasePlugin;
-import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v7.BasePlugin;
+import uk.co.jacekk.bukkit.baseplugin.v7.config.PluginConfig;
 
 public class InfinitePlots extends BasePlugin {
 	
