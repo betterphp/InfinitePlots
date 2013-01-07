@@ -1,7 +1,6 @@
 package uk.co.jacekk.bukkit.infiniteplots;
 
-import java.lang.reflect.Field;
-
+import net.minecraft.server.v1_4_6.WorldData;
 import net.minecraft.server.v1_4_6.WorldServer;
 import net.minecraft.server.v1_4_6.WorldType;
 
@@ -12,6 +11,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.world.WorldInitEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.v7.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v7.util.ReflectionUtils;
 
 public class WorldInitListener extends BaseListener<InfinitePlots> {
 	
@@ -27,12 +27,7 @@ public class WorldInitListener extends BaseListener<InfinitePlots> {
 			WorldServer worldServer = ((CraftWorld) world).getHandle();
 			
 			try{
-				Class<?> worldData = worldServer.worldData.getClass();
-				
-				Field type = worldData.getDeclaredField("type");
-				type.setAccessible(true);
-				
-				type.set(worldServer.worldData, WorldType.FLAT);
+				ReflectionUtils.setFieldValue(WorldData.class, "type", worldServer.worldData, WorldType.FLAT);
 				
 				plugin.log.info("Changed the world type of '" + world.getName() + "' to flat (this makes the void blue down to y = 0).");
 			}catch (Exception e){
