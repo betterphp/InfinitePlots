@@ -10,8 +10,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.world.WorldInitEvent;
 
-import uk.co.jacekk.bukkit.baseplugin.v7.event.BaseListener;
-import uk.co.jacekk.bukkit.baseplugin.v7.util.ReflectionUtils;
+import uk.co.jacekk.bukkit.baseplugin.v8.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v8.util.ReflectionUtils;
 
 public class WorldInitListener extends BaseListener<InfinitePlots> {
 	
