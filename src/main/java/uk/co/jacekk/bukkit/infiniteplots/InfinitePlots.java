@@ -2,11 +2,12 @@ package uk.co.jacekk.bukkit.infiniteplots;
 
 import java.io.File;
 
-import org.bukkit.block.Biome;
 import org.bukkit.generator.ChunkGenerator;
 
 import uk.co.jacekk.bukkit.baseplugin.v7.BasePlugin;
 import uk.co.jacekk.bukkit.baseplugin.v7.config.PluginConfig;
+import uk.co.jacekk.bukkit.infiniteplots.flag.RestrictSpawningListener;
+import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
 
 public class InfinitePlots extends BasePlugin {
 	
@@ -15,31 +16,15 @@ public class InfinitePlots extends BasePlugin {
 		
 		this.config = new PluginConfig(new File(this.baseDirPath + File.separator + "config.yml"), Config.class, this.log);
 		
-		if (this.config.getBoolean(Config.PLOTS_RESTRICT_SPAWNING)){
-			this.pluginManager.registerEvents(new RestrictSpawningListener(this), this);
-		}
-		
+		this.pluginManager.registerEvents(new RestrictSpawningListener(this), this);
 		this.pluginManager.registerEvents(new WorldInitListener(this), this);
 	}
 	
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
-		int size = (id != null && id.matches("[-+]?\\d+(\\.\\d+)?")) ? Integer.parseInt(id) : this.config.getInt(Config.PLOTS_SIZE);
-		int height = this.config.getInt(Config.PLOTS_HEIGHT);
+		int size = this.config.getInt(Config.GRID_SIZE);
+		int height = this.config.getInt(Config.GRID_HEIGHT);
 		
-		byte baseId = (byte) this.config.getInt(Config.BLOCKS_BASE);
-		byte surfaceId = (byte) this.config.getInt(Config.BLOCKS_SURFACE);
-		byte pathId = (byte) this.config.getInt(Config.BLOCKS_PATH);
-		byte wallLowerId = (byte) this.config.getInt(Config.BLOCKS_LOWER_WALL);
-		byte wallUpperId = (byte) this.config.getInt(Config.BLOCKS_UPPER_WALL);
-		
-		Biome plotBiome = Biome.valueOf(this.config.getString(Config.BIOMES_PLOTS).toUpperCase());
-		Biome pathBiome = Biome.valueOf(this.config.getString(Config.BIOMES_PATHS).toUpperCase());
-		
-		if (plotBiome == null || pathBiome == null){
-			this.log.warn("Invalid biome given in config.yml");
-		}
-		
-		return new PlotsGenerator(size, height, baseId, surfaceId, pathId, wallLowerId, wallUpperId, plotBiome, pathBiome);
+		return new PlotsGenerator(size, height);
 	}
 	
 }
