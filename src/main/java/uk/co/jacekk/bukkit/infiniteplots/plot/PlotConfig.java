@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.infiniteplots;
+package uk.co.jacekk.bukkit.infiniteplots.plot;
 
 import java.util.Arrays;
 

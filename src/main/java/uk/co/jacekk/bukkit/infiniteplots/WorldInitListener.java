@@ -12,6 +12,7 @@ import org.bukkit.event.world.WorldInitEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.v8.event.BaseListener;
 import uk.co.jacekk.bukkit.baseplugin.v8.util.ReflectionUtils;
+import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
 
 public class WorldInitListener extends BaseListener<InfinitePlots> {
 	
