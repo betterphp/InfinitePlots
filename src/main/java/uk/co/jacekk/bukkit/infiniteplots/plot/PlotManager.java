@@ -78,7 +78,11 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 		config.set(PlotConfig.LOCATION_X, x);
 		config.set(PlotConfig.LOCATION_Z, z);
 		
-		return this.plots.put(location, new Plot(plugin, config));
+		Plot plot = new Plot(plugin, config);
+		
+		this.plots.put(location, plot);
+		
+		return plot;
 	}
 	
 	/**
