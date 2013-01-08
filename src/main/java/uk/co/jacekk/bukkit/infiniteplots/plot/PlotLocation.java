@@ -1,5 +1,10 @@
 package uk.co.jacekk.bukkit.infiniteplots.plot;
 
+import org.bukkit.Location;
+
+import uk.co.jacekk.bukkit.infiniteplots.Config;
+import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
+
 public class PlotLocation {
 	
 	private String worldName;
@@ -11,25 +16,17 @@ public class PlotLocation {
 		this.z = z;
 	}
 	
-	@Override
-	public int hashCode(){
-		return (37 * this.worldName.hashCode()) + ((this.x * 29) ^  this.z);
-	}
-	
-	@Override
-	public boolean equals(Object object){
-		if (!(object instanceof PlotLocation)){
-			return false;
-		}
+	/**
+	 * Creates a new PlotLocation based on the location in block space.
+	 * 
+	 * @param worldLocation The {@link Location} in block space.
+	 * @return The {@link PlotLocation} in plot space.
+	 */
+	public static PlotLocation fromWorldLocation(Location worldLocation){
+		int x = worldLocation.getBlockX() / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE);
+		int z = worldLocation.getBlockZ() / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE);
 		
-		PlotLocation compare = (PlotLocation) object;
-		
-		return (this.x == compare.x && this.z == compare.z && this.worldName.equals(compare.worldName));
-	}
-	
-	@Override
-	public String toString(){
-		return "PlotLocation(worldName=" + this.worldName + ", x=" + this.x + ", z=" + this.z + ")";
+		return new PlotLocation(worldLocation.getWorld().getName(), x, z);
 	}
 	
 	/**
@@ -57,6 +54,27 @@ public class PlotLocation {
 	 */
 	public int getZ(){
 		return this.z;
+	}
+	
+	@Override
+	public int hashCode(){
+		return (37 * this.worldName.hashCode()) + ((this.x * 29) ^  this.z);
+	}
+	
+	@Override
+	public boolean equals(Object object){
+		if (!(object instanceof PlotLocation)){
+			return false;
+		}
+		
+		PlotLocation compare = (PlotLocation) object;
+		
+		return (this.x == compare.x && this.z == compare.z && this.worldName.equals(compare.worldName));
+	}
+	
+	@Override
+	public String toString(){
+		return "PlotLocation(worldName=" + this.worldName + ", x=" + this.x + ", z=" + this.z + ")";
 	}
 	
 }

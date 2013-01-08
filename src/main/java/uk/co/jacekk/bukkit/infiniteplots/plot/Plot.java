@@ -25,4 +25,22 @@ public class Plot extends BaseObject<InfinitePlots> {
 		return this.location;
 	}
 	
+	/**
+	 * Gets the player that is the admin of this plot.
+	 * 
+	 * @return The player name.
+	 */
+	public String getAdmin(){
+		return this.config.getString(PlotConfig.AUTH_ADMIN_NAME);
+	}
+	
+	/**
+	 * Sets the admin of this plot.
+	 * 
+	 * @param admin The name of the player.
+	 */
+	public void setAdmin(String admin){
+		this.config.set(PlotConfig.AUTH_ADMIN_NAME, admin);
+	}
+	
 }
