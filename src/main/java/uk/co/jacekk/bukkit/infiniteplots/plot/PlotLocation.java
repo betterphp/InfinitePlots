@@ -11,6 +11,27 @@ public class PlotLocation {
 		this.z = z;
 	}
 	
+	@Override
+	public int hashCode(){
+		return (37 * this.worldName.hashCode()) + ((this.x * 29) ^  this.z);
+	}
+	
+	@Override
+	public boolean equals(Object object){
+		if (!(object instanceof PlotLocation)){
+			return false;
+		}
+		
+		PlotLocation compare = (PlotLocation) object;
+		
+		return (this.x == compare.x && this.z == compare.z && this.worldName.equals(compare.worldName));
+	}
+	
+	@Override
+	public String toString(){
+		return "PlotLocation(worldName=" + this.worldName + ", x=" + this.x + ", z=" + this.z + ")";
+	}
+	
 	/**
 	 * Gets the name of the world that this location is in.
 	 * 

@@ -1,25 +1,19 @@
 package uk.co.jacekk.bukkit.infiniteplots.plot;
 
-import java.io.File;
-
 import uk.co.jacekk.bukkit.baseplugin.v8.BaseObject;
 import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 
 public class Plot extends BaseObject<InfinitePlots> {
 	
-	private PlotLocation location;
+	private final PluginConfig config;
+	private final PlotLocation location;
 	
-	private File configFile;
-	private PluginConfig config;
-	
-	public Plot(InfinitePlots plugin, PlotLocation location){
+	public Plot(InfinitePlots plugin, PluginConfig config){
 		super(plugin);
 		
-		this.location = location;
-		
-		this.configFile = new File(plugin.getBaseDirPath() + File.separator + "plots" + File.separator + location.getWorldName() + "_" + location.getX() + "_" + location.getZ() + ".yml");
-		this.config = new PluginConfig(this.configFile, PlotConfig.class, plugin.log);
+		this.config = config;
+		this.location = new PlotLocation(config.getString(PlotConfig.LOCATION_WORLD_NAME), config.getInt(PlotConfig.LOCATION_X), config.getInt(PlotConfig.LOCATION_Z));
 	}
 	
 	/**

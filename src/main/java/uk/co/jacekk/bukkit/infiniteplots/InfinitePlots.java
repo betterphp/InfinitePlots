@@ -12,15 +12,16 @@ import uk.co.jacekk.bukkit.infiniteplots.plot.PlotManager;
 
 public class InfinitePlots extends BasePlugin {
 	
+	private File plotsDir;
 	private PlotManager plotManager;
 	
 	public void onEnable(){
 		super.onEnable(true);
 		
-		File plotDir =  new File(this.baseDirPath + File.separator + "plots");
+		this.plotsDir =  new File(this.baseDirPath + File.separator + "plots");
 		
-		if (!plotDir.exists()){
-			plotDir.mkdirs();
+		if (!this.plotsDir.exists()){
+			this.plotsDir.mkdirs();
 		}
 		
 		this.config = new PluginConfig(new File(this.baseDirPath + File.separator + "config.yml"), Config.class, this.log);
@@ -36,6 +37,10 @@ public class InfinitePlots extends BasePlugin {
 		int height = this.config.getInt(Config.GRID_HEIGHT);
 		
 		return new PlotsGenerator(size, height);
+	}
+	
+	public File getPlotsDir(){
+		return this.plotsDir;
 	}
 	
 	public PlotManager getPlotManager(){
