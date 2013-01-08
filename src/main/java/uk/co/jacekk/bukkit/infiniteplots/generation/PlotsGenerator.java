@@ -7,6 +7,7 @@ import java.util.Random;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Biome;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 
@@ -23,7 +24,7 @@ public class PlotsGenerator extends ChunkGenerator {
 	public List<BlockPopulator> getDefaultPopulators(World world) {
 		ArrayList<BlockPopulator> populators = new ArrayList<BlockPopulator>();
 		
-		
+		populators.add(new PathPopulator(this.size, this.height));
 		
 		return populators;
 	}
@@ -38,7 +39,7 @@ public class PlotsGenerator extends ChunkGenerator {
 	
 	@Override
 	public byte[][] generateBlockSections(World world, Random random, int chunkX, int chunkZ, BiomeGrid biomes){
-		byte[][] chunk = new byte[(int) Math.ceil((this.height) / 16)][4096];
+		byte[][] chunk = new byte[8][4096];
 		
 		for (int x = 0; x < 16; ++x){
 			for (int z = 0; z < 16; ++z){
@@ -49,6 +50,8 @@ public class PlotsGenerator extends ChunkGenerator {
 				}
 				
 				this.setBlockAt(chunk, x, this.height, z, Material.GRASS);
+				
+				biomes.setBiome(x, z, Biome.PLAINS);
 			}
 		}
 		
