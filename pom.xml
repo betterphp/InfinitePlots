@@ -2,9 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.co.jacekk.bukkit</groupId>
 	<artifactId>infiniteplots</artifactId>
-	<version>0.8.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-	
+	<version>0.9-SNAPSHOT</version>
 	<name>InfinitePlots</name>
 	<url>http://dev.bukkit.org/server-mods/infiniteplots/</url>
 	
@@ -38,7 +36,7 @@
 		<dependency>
 			<groupId>org.bukkit</groupId>
 			<artifactId>craftbukkit</artifactId>
-			<version>1.4.6-R0.3</version>
+			<version>1.4.7-R0.1</version>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
@@ -86,7 +84,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.5.1</version>
+				<version>3.0</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
