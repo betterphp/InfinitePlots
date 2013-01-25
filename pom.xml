@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.co.jacekk.bukkit</groupId>
 	<artifactId>infiniteplots</artifactId>
-	<version>0.9-SNAPSHOT</version>
+	<version>0.8.2</version>
 	<name>InfinitePlots</name>
 	<url>http://dev.bukkit.org/server-mods/infiniteplots/</url>
 	
