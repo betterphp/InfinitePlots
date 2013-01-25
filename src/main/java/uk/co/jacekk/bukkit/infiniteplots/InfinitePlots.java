@@ -36,7 +36,9 @@ public class InfinitePlots extends BasePlugin {
 		this.pluginManager.registerEvents(new RestrictSpawningListener(this), this);
 		this.pluginManager.registerEvents(new WorldInitListener(this), this);
 		
-		this.commandManager.registerCommandExecutor(new ClaimCommandExecutor(this));
+		if (!this.config.getBoolean(Config.CLASSIC_MODE)){
+			this.commandManager.registerCommandExecutor(new ClaimCommandExecutor(this));
+		}
 	}
 	
 	public void onDisable(){
@@ -47,7 +49,11 @@ public class InfinitePlots extends BasePlugin {
 		int size = this.config.getInt(Config.GRID_SIZE);
 		int height = this.config.getInt(Config.GRID_HEIGHT);
 		
-		return new PlotsGenerator(size, height);
+		if (!this.config.getBoolean(Config.CLASSIC_MODE)){
+			return new PlotsGenerator(size, height);
+		}else{
+			return new PlotsGenerator(size, height, baseId, surfaceId, pathId, wallLowerId, wallUpperId, plotBiome, pathBiome);
+		}
 	}
 	
 	public static InfinitePlots getInstance(){
