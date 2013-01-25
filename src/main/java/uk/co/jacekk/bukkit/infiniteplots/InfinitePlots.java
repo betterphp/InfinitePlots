@@ -2,6 +2,7 @@ package uk.co.jacekk.bukkit.infiniteplots;
 
 import java.io.File;
 
+import org.bukkit.block.Biome;
 import org.bukkit.generator.ChunkGenerator;
 
 import uk.co.jacekk.bukkit.baseplugin.v8.BasePlugin;
@@ -9,6 +10,7 @@ import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
 import uk.co.jacekk.bukkit.infiniteplots.command.ClaimCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.flag.RestrictSpawningListener;
 import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
+import uk.co.jacekk.bukkit.infiniteplots.generation.classic.ClassicPlotsGenerator;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotManager;
 
 public class InfinitePlots extends BasePlugin {
@@ -49,10 +51,19 @@ public class InfinitePlots extends BasePlugin {
 		int size = this.config.getInt(Config.GRID_SIZE);
 		int height = this.config.getInt(Config.GRID_HEIGHT);
 		
+		byte baseId = (byte) this.config.getInt(Config.BLOCKS_BASE);
+		byte surfaceId = (byte) this.config.getInt(Config.BLOCKS_SURFACE);
+		byte pathId = (byte) this.config.getInt(Config.BLOCKS_PATH);
+		byte wallLowerId = (byte) this.config.getInt(Config.BLOCKS_LOWER_WALL);
+		byte wallUpperId = (byte) this.config.getInt(Config.BLOCKS_UPPER_WALL);
+
+		Biome plotBiome = Biome.valueOf(this.config.getString(Config.BIOMES_PLOTS).toUpperCase());
+		Biome pathBiome = Biome.valueOf(this.config.getString(Config.BIOMES_PATHS).toUpperCase());
+		
 		if (!this.config.getBoolean(Config.CLASSIC_MODE)){
 			return new PlotsGenerator(size, height);
 		}else{
-			return new PlotsGenerator(size, height, baseId, surfaceId, pathId, wallLowerId, wallUpperId, plotBiome, pathBiome);
+			return new ClassicPlotsGenerator(size, height, baseId, surfaceId, pathId, wallLowerId, wallUpperId, plotBiome, pathBiome);
 		}
 	}
 	
