@@ -71,10 +71,20 @@ public class InfinitePlots extends BasePlugin {
 		return instance;
 	}
 	
+	/**
+	 * Gets the folder used for plot data files.
+	 * 
+	 * @return The {@link File} for the folder.
+	 */
 	public File getPlotsDir(){
 		return this.plotsDir;
 	}
 	
+	/**
+	 * Gets the plot manager.
+	 * 
+	 * @return The {@link PlotManager}.
+	 */
 	public PlotManager getPlotManager(){
 		return this.plotManager;
 	}
