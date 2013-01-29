@@ -18,7 +18,7 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 		
 		for (File configFile : plugin.getPlotsDir().listFiles()){
 			if (configFile.isFile() && configFile.getName().endsWith(".yml")){
-				Plot plot = new Plot(plugin, new PluginConfig(configFile, PlotConfig.class, plugin.log));
+				Plot plot = new Plot(plugin, configFile, new PluginConfig(configFile, PlotConfig.class, plugin.log));
 				
 				this.plots.put(plot.getLocation(), plot);
 			}
@@ -78,7 +78,7 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 		config.set(PlotConfig.LOCATION_X, x);
 		config.set(PlotConfig.LOCATION_Z, z);
 		
-		Plot plot = new Plot(plugin, config);
+		Plot plot = new Plot(plugin, configFile, config);
 		
 		this.plots.put(location, plot);
 		
@@ -91,7 +91,12 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 	 * @param location The {@link PlotLocation} of the plot.
 	 */
 	public void removePlotAt(PlotLocation location){
-		this.plots.remove(location);
+		Plot plot = this.plots.get(location);
+		
+		if (plot != null){
+			plot.getConfigFile().delete();
+			this.plots.remove(location);
+		}
 	}
 	
 }

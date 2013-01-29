@@ -1,5 +1,6 @@
 package uk.co.jacekk.bukkit.infiniteplots.plot;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,14 +10,25 @@ import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 
 public class Plot extends BaseObject<InfinitePlots> {
 	
+	private final File configFile;
 	private final PluginConfig config;
 	private final PlotLocation location;
 	
-	public Plot(InfinitePlots plugin, PluginConfig config){
+	public Plot(InfinitePlots plugin, File configFile, PluginConfig config){
 		super(plugin);
 		
+		this.configFile = configFile;
 		this.config = config;
 		this.location = new PlotLocation(config.getString(PlotConfig.LOCATION_WORLD_NAME), config.getInt(PlotConfig.LOCATION_X), config.getInt(PlotConfig.LOCATION_Z));
+	}
+	
+	/**
+	 * Gets the file used to store this plots config.
+	 * 
+	 * @return The {@link File}
+	 */
+	public File getConfigFile(){
+		return this.configFile;
 	}
 	
 	/**
