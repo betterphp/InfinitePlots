@@ -11,6 +11,9 @@ import org.bukkit.block.Biome;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 
+/**
+ * @deprecated This will be replaced with the new version at the next major version.
+ */
 public class ClassicPlotsGenerator extends ChunkGenerator {
 	
 	private int plotSize;

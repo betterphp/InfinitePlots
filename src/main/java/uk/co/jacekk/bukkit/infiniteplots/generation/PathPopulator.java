@@ -7,6 +7,9 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.generator.BlockPopulator;
 
+/**
+ * Responsible for decorating a world with structures such as paths.
+ */
 public class PathPopulator extends BlockPopulator {
 	
 	private int size;

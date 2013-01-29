@@ -11,6 +11,9 @@ import org.bukkit.block.Biome;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 
+/**
+ * Responsible for building the ground of a world 
+ */
 public class PlotsGenerator extends ChunkGenerator {
 	
 	private int size;

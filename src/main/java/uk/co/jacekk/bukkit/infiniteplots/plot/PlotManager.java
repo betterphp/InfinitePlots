@@ -7,6 +7,9 @@ import uk.co.jacekk.bukkit.baseplugin.v8.BaseObject;
 import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 
+/**
+ * Used to manage the plots that are defined on the server.
+ */
 public class PlotManager extends BaseObject<InfinitePlots> {
 	
 	private HashMap<PlotLocation, Plot> plots;

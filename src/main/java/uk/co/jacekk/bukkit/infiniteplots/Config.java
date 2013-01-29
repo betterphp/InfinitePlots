@@ -4,6 +4,9 @@ import org.bukkit.Material;
 
 import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfigKey;
 
+/**
+ * the config options stored in the main plugin config file.
+ */
 public class Config {
 	
 	public static final PluginConfigKey CLASSIC_MODE		= new PluginConfigKey("classic-mode",		false);

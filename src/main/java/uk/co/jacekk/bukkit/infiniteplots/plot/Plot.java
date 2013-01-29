@@ -8,6 +8,9 @@ import uk.co.jacekk.bukkit.baseplugin.v8.BaseObject;
 import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 
+/**
+ * Represents a plot in the world.
+ */
 public class Plot extends BaseObject<InfinitePlots> {
 	
 	private final File configFile;

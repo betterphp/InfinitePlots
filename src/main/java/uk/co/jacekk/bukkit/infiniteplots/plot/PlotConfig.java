@@ -4,6 +4,9 @@ import java.util.Arrays;
 
 import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfigKey;
 
+/**
+ * The config options that are stored in each plots .yml file.
+ */
 public class PlotConfig {
 	
 	public static final PluginConfigKey LOCATION_WORLD_NAME	= new PluginConfigKey("location.world-name",	"");

@@ -5,6 +5,10 @@ import org.bukkit.Location;
 import uk.co.jacekk.bukkit.infiniteplots.Config;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 
+/**
+ * Represents the location of a plot in plot space, this start from 0,0
+ * at the 0,0 block coordinate and move out in all directions, 
+ */
 public class PlotLocation {
 	
 	private String worldName;

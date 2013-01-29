@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import uk.co.jacekk.bukkit.baseplugin.v8.command.BaseCommandExecutor;
 import uk.co.jacekk.bukkit.baseplugin.v8.command.CommandHandler;
+import uk.co.jacekk.bukkit.baseplugin.v8.command.CommandTabCompletion;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;
@@ -17,6 +18,7 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 	}
 	
 	@CommandHandler(names = {"claim"}, description = "Claims the plot you are standing in", usage = "[player_name]")
+	@CommandTabCompletion({"<online_player>"})
 	public void claim(CommandSender sender, String label, String[] args){
 		if (!(sender instanceof Player)){
 			sender.sendMessage(ChatColor.RED + "This command can only be used in game");
