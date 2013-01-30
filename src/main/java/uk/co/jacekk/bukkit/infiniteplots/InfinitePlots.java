@@ -13,6 +13,7 @@ import uk.co.jacekk.bukkit.infiniteplots.flag.RestrictSpawningListener;
 import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
 import uk.co.jacekk.bukkit.infiniteplots.generation.classic.ClassicPlotsGenerator;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotManager;
+import uk.co.jacekk.bukkit.infiniteplots.protection.BuildListener;
 
 public class InfinitePlots extends BasePlugin {
 	
@@ -45,6 +46,8 @@ public class InfinitePlots extends BasePlugin {
 		if (!this.config.getBoolean(Config.CLASSIC_MODE)){
 			this.commandManager.registerCommandExecutor(new ClaimCommandExecutor(this));
 			this.commandManager.registerCommandExecutor(new AddBuilderCommandExecutor(this));
+			
+			this.pluginManager.registerEvents(new BuildListener(this), this);
 		}
 	}
 	
