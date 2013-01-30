@@ -22,5 +22,6 @@ public class Config {
 	
 	public static final PluginConfigKey BIOMES_PLOTS		= new PluginConfigKey("biomes.plots",		"PLAINS");
 	public static final PluginConfigKey BIOMES_PATHS		= new PluginConfigKey("biomes.paths",		"PLAINS");
+	public static final PluginConfigKey RESTRICT_SPAWNING	= new PluginConfigKey("restrict-spawning",	false);
 	
 }
