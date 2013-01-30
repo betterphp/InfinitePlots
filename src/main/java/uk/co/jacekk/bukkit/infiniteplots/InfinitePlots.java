@@ -36,7 +36,10 @@ public class InfinitePlots extends BasePlugin {
 		
 		this.plotManager = new PlotManager(this);
 		
-		this.pluginManager.registerEvents(new RestrictSpawningListener(this), this);
+		if (this.config.getBoolean(Config.RESTRICT_SPAWNING)){
+			this.pluginManager.registerEvents(new RestrictSpawningListener(this), this);
+		}
+		
 		this.pluginManager.registerEvents(new WorldInitListener(this), this);
 		
 		if (!this.config.getBoolean(Config.CLASSIC_MODE)){

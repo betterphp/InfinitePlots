@@ -5,8 +5,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.v8.event.BaseListener;
-import uk.co.jacekk.bukkit.infiniteplots.Config;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
+import uk.co.jacekk.bukkit.infiniteplots.generation.classic.ClassicPlotsGenerator;
 
 public class RestrictSpawningListener extends BaseListener<InfinitePlots> {
 	
@@ -16,9 +16,9 @@ public class RestrictSpawningListener extends BaseListener<InfinitePlots> {
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onCreatureSpawn(CreatureSpawnEvent event){
-		if(InfinitePlots.getInstance().config.getBoolean(Config.RESTRICT_SPAWNING))
-		{
+		if (event.getLocation().getWorld().getGenerator() instanceof ClassicPlotsGenerator){
 			event.setCancelled(true);
 		}
 	}
+	
 }
