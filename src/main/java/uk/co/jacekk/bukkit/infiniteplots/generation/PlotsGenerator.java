@@ -18,16 +18,28 @@ public class PlotsGenerator extends ChunkGenerator {
 	
 	private int size;
 	private int height;
+	private byte pathId;
+	private byte pathData;
+	private byte wallLowerId;
+	private byte wallLowerData;
+	private byte wallUpperId;
+	private byte wallUpperData;
 	
-	public PlotsGenerator(int size, int height){
+	public PlotsGenerator(int size, int height, byte pathId, byte pathData, byte wallLowerId, byte wallLowerData, byte wallUpperId, byte wallUpperData){
 		this.size = size;
 		this.height = height;
+		this.pathId = pathId;
+		this.pathData = pathData;
+		this.wallLowerId = wallLowerId;
+		this.wallLowerData = wallLowerData;
+		this.wallUpperId = wallUpperId;
+		this.wallUpperData = wallUpperData;
 	}
-	
+
 	public List<BlockPopulator> getDefaultPopulators(World world) {
 		ArrayList<BlockPopulator> populators = new ArrayList<BlockPopulator>();
 		
-		populators.add(new PathPopulator(this.size, this.height));
+		populators.add(new PathPopulator(this.size, this.height, this.pathId, this.pathData, this.wallLowerId, this.wallLowerData, this.wallUpperId, this.wallUpperData));
 		
 		return populators;
 	}

@@ -56,14 +56,17 @@ public class InfinitePlots extends BasePlugin {
 		byte baseId = (byte) this.config.getInt(Config.BLOCKS_BASE);
 		byte surfaceId = (byte) this.config.getInt(Config.BLOCKS_SURFACE);
 		byte pathId = (byte) this.config.getInt(Config.BLOCKS_PATH);
+		byte pathData = (byte) this.config.getInt(Config.BLOCKS_PATH_DATA);
 		byte wallLowerId = (byte) this.config.getInt(Config.BLOCKS_LOWER_WALL);
+		byte wallLowerData = (byte) this.config.getInt(Config.BLOCKS_LOWER_WALL_DATA);
 		byte wallUpperId = (byte) this.config.getInt(Config.BLOCKS_UPPER_WALL);
+		byte wallUpperData = (byte) this.config.getInt(Config.BLOCKS_UPPER_WALL_DATA);
 
 		Biome plotBiome = Biome.valueOf(this.config.getString(Config.BIOMES_PLOTS).toUpperCase());
 		Biome pathBiome = Biome.valueOf(this.config.getString(Config.BIOMES_PATHS).toUpperCase());
 		
 		if (!this.config.getBoolean(Config.CLASSIC_MODE)){
-			return new PlotsGenerator(size, height);
+			return new PlotsGenerator(size, height, pathId, pathData, wallLowerId, wallLowerData, wallUpperId, wallUpperData);
 		}else{
 			return new ClassicPlotsGenerator(size, height, baseId, surfaceId, pathId, wallLowerId, wallUpperId, plotBiome, pathBiome);
 		}
