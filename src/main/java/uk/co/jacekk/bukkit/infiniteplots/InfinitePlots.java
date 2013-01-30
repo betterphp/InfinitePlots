@@ -7,6 +7,7 @@ import org.bukkit.generator.ChunkGenerator;
 
 import uk.co.jacekk.bukkit.baseplugin.v8.BasePlugin;
 import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
+import uk.co.jacekk.bukkit.infiniteplots.command.AddBuilderCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.ClaimCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.flag.RestrictSpawningListener;
 import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
@@ -40,6 +41,7 @@ public class InfinitePlots extends BasePlugin {
 		
 		if (!this.config.getBoolean(Config.CLASSIC_MODE)){
 			this.commandManager.registerCommandExecutor(new ClaimCommandExecutor(this));
+			this.commandManager.registerCommandExecutor(new AddBuilderCommandExecutor(this));
 		}
 	}
 	
