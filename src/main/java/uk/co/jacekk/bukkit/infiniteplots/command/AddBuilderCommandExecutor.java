@@ -25,7 +25,7 @@ public class AddBuilderCommandExecutor extends BaseCommandExecutor<InfinitePlots
 			return;
 		}
 		
-		if (!(args.length > 0)){
+		if (args.length == 0){
 			sender.sendMessage(ChatColor.RED + "Must supply a players name");
 			return;
 		}
@@ -33,12 +33,20 @@ public class AddBuilderCommandExecutor extends BaseCommandExecutor<InfinitePlots
 		Player player = (Player)sender;
 		
 		Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(player.getLocation()));
-		if(plot.getBuilders().contains(args[0])) {
-			player.sendMessage(args[0] + " is already a builder on your plot");
+		
+		if (plot == null){
+			player.sendMessage(ChatColor.RED + "There is no plot at this location");
 			return;
 		}
+		
+		if (plot.getBuilders().contains(args[0])){
+			player.sendMessage(ChatColor.RED + args[0] + " is already a builder on your plot");
+			return;
+		}
+		
 		plot.addBuilder(args[0]);
-		player.sendMessage("Added " + args[0] + " as a builder to your plot");
+		
+		player.sendMessage(ChatColor.GREEN + "Added " + args[0] + " as a builder to your plot");
 	}
 
 }
