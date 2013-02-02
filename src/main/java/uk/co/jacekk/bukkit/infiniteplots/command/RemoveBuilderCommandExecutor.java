@@ -11,15 +11,15 @@ import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;
 
-public class AddBuilderCommandExecutor extends BaseCommandExecutor<InfinitePlots>{
+public class RemoveBuilderCommandExecutor extends BaseCommandExecutor<InfinitePlots>{
 
-	public AddBuilderCommandExecutor(InfinitePlots plugin){
+	public RemoveBuilderCommandExecutor(InfinitePlots plugin) {
 		super(plugin);
 	}
 	
-	@CommandHandler(names = {"addmember"}, description = "Adds a member to the plot you are standing in.", usage = "[player_name]")
+	@CommandHandler(names = {"removemember"}, description = "Removes a member from the plot you are standing in.", usage = "[player_name]|[all]")
 	@CommandTabCompletion({"<online_player>"})
-	public void addbuilder(CommandSender sender, String label, String[] args){
+	public void removebuilder(CommandSender sender, String label, String[] args) {
 		if (!(sender instanceof Player)){
 			sender.sendMessage(ChatColor.RED + "This command can only be used in game");
 			return;
@@ -34,26 +34,28 @@ public class AddBuilderCommandExecutor extends BaseCommandExecutor<InfinitePlots
 		
 		Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(player.getLocation()));
 		
-		if (plot == null){
+		if (plot == null) {
 			player.sendMessage(ChatColor.RED + "There is no plot at this location");
 			return;
 		}
 		
-<<<<<<< HEAD
-=======
 		if (!(plot.getAdmin().equalsIgnoreCase(player.getName()))) {
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 		}
 		
->>>>>>> Add more plot commands (remove builder, and info), fix add builder
-		if (plot.getBuilders().contains(args[0])){
-			player.sendMessage(ChatColor.RED + args[0] + " is already a builder on your plot");
+		if (args[0].equalsIgnoreCase("all")) {
+			plot.removeAllBuilders();
+			player.sendMessage(ChatColor.GREEN + "Removed all builders from your plot");
 			return;
 		}
 		
-		plot.addBuilder(args[0]);
+		if (!(plot.getBuilders().contains(args[0]))) {
+			player.sendMessage(ChatColor.RED + args[0] + " is not a builder on your plot");
+			return;
+		}
 		
-		player.sendMessage(ChatColor.GREEN + "Added " + args[0] + " as a builder to your plot");
+		plot.removeBuilder(args[0]);
+		
+		player.sendMessage(ChatColor.GREEN + "Removed " + args[0] + " from your plot");
 	}
-
 }
