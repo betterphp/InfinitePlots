@@ -46,12 +46,8 @@ public class InfinitePlots extends BasePlugin {
 		
 		this.commandManager.registerCommandExecutor(new ClaimCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new AddBuilderCommandExecutor(this));
-<<<<<<< HEAD
-		
-=======
 		this.commandManager.registerCommandExecutor(new RemoveBuilderCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new PlotInfoCommandExecutor(this));
->>>>>>> Add more plot commands (remove builder, and info), fix add builder
 		this.pluginManager.registerEvents(new BuildListener(this), this);
 	}
 	
@@ -69,14 +65,8 @@ public class InfinitePlots extends BasePlugin {
 		byte wallLowerData = (byte) this.config.getInt(Config.BLOCKS_LOWER_WALL_DATA);
 		byte wallUpperId = (byte) this.config.getInt(Config.BLOCKS_UPPER_WALL);
 		byte wallUpperData = (byte) this.config.getInt(Config.BLOCKS_UPPER_WALL_DATA);
-<<<<<<< HEAD
 		
 		return new PlotsGenerator(size, height, pathId, pathData, wallLowerId, wallLowerData, wallUpperId, wallUpperData);
-=======
-
-		return new PlotsGenerator(size, height, pathId, pathData, wallLowerId, wallLowerData, wallUpperId, wallUpperData);
-
->>>>>>> Add more plot commands (remove builder, and info), fix add builder
 	}
 	
 	public static InfinitePlots getInstance(){

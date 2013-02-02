@@ -39,13 +39,10 @@ public class AddBuilderCommandExecutor extends BaseCommandExecutor<InfinitePlots
 			return;
 		}
 		
-<<<<<<< HEAD
-=======
 		if (!(plot.getAdmin().equalsIgnoreCase(player.getName()))) {
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 		}
 		
->>>>>>> Add more plot commands (remove builder, and info), fix add builder
 		if (plot.getBuilders().contains(args[0])){
 			player.sendMessage(ChatColor.RED + args[0] + " is already a builder on your plot");
 			return;
