@@ -12,6 +12,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.v8.event.BaseListener;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
+<<<<<<< HEAD
+=======
+import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
+>>>>>>> Fixed BuildListener
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;
 
@@ -23,24 +27,43 @@ public class BuildListener extends BaseListener<InfinitePlots> {
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onBlockPlace(BlockPlaceEvent event){
+<<<<<<< HEAD
 		Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(event.getBlock().getLocation()));
 		
 		if (plot != null && !plot.canBuild(event.getPlayer().getName())){
 			event.setCancelled(true);
+=======
+		if (event.getBlock().getLocation().getWorld().getGenerator() instanceof PlotsGenerator) {
+			Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(event.getBlock().getLocation()));
+			
+			if (plot == null || !plot.canBuild(event.getPlayer().getName())){
+				event.setCancelled(true);
+			}
+>>>>>>> Fixed BuildListener
 		}
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onBlockBreak(BlockBreakEvent event){
+<<<<<<< HEAD
 		Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(event.getBlock().getLocation()));
 		
 		if (plot != null && !plot.canBuild(event.getPlayer().getName())){
 			event.setCancelled(true);
+=======
+		if (event.getBlock().getLocation().getWorld().getGenerator() instanceof PlotsGenerator) {
+			Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(event.getBlock().getLocation()));
+			
+			if (plot == null || !plot.canBuild(event.getPlayer().getName())){
+				event.setCancelled(true);
+			}
+>>>>>>> Fixed BuildListener
 		}
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onInteractBlock(PlayerInteractEvent event){
+<<<<<<< HEAD
 		Player player = event.getPlayer();
 		Action action = event.getAction();
 		
@@ -55,12 +78,31 @@ public class BuildListener extends BaseListener<InfinitePlots> {
 			
 			if (plot != null && !plot.canBuild(player.getName())){
 				event.setCancelled(true);
+=======
+		if (event.getPlayer().getWorld().getGenerator() instanceof PlotsGenerator) {
+			Player player = event.getPlayer();
+			Action action = event.getAction();
+			
+			if (action == Action.LEFT_CLICK_BLOCK){
+				Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(event.getClickedBlock().getLocation()));
+				
+				if (plot == null || !plot.canBuild(player.getName())){
+					event.setCancelled(true);
+				}
+			}else if (action == Action.RIGHT_CLICK_AIR){
+				Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(player.getLocation()));
+				
+				if (plot == null || !plot.canBuild(player.getName())){
+					event.setCancelled(true);
+				}
+>>>>>>> Fixed BuildListener
 			}
 		}
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onInteractEntity(PlayerInteractEntityEvent event){
+<<<<<<< HEAD
 		Player player = event.getPlayer();
 		Entity target = event.getRightClicked();
 		
@@ -68,6 +110,17 @@ public class BuildListener extends BaseListener<InfinitePlots> {
 		
 		if (plot != null && !plot.canBuild(player.getName())){
 			event.setCancelled(true);
+=======
+		if (event.getPlayer().getLocation().getWorld().getGenerator() instanceof PlotsGenerator) {
+			Player player = event.getPlayer();
+			Entity target = event.getRightClicked();
+			
+			Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(target.getLocation()));
+			
+			if (plot == null || !plot.canBuild(player.getName())){
+				event.setCancelled(true);
+			}
+>>>>>>> Fixed BuildListener
 		}
 	}
 	
