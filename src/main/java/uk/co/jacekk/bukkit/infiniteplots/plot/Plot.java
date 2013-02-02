@@ -1,8 +1,11 @@
 package uk.co.jacekk.bukkit.infiniteplots.plot;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.bukkit.ChatColor;
 
 import uk.co.jacekk.bukkit.baseplugin.v8.BaseObject;
 import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
@@ -62,7 +65,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	}
 	
 	/**
-	 * Gets all of the players (not including the plot admin) that are allowed to build in tis plot.
+	 * Gets all of the players (not including the plot admin) that are allowed to build in this plot.
 	 * 
 	 * @return The list of player names.
 	 */
@@ -82,7 +85,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	}
 	
 	/**
-	 * Remvoed a builder from this plot.
+	 * Removes a builder from this plot.
 	 * 
 	 * @param playerName The name of the player to remove.
 	 */
@@ -115,4 +118,44 @@ public class Plot extends BaseObject<InfinitePlots> {
 		return this.getAdmin().equalsIgnoreCase(playerName) || this.getBuilders().contains(playerName);
 	}
 	
+	public boolean canSpawnMobs() {
+		return this.config.getBoolean(PlotConfig.FLAG_MOB_SPAWN);
+	}
+	
+	public boolean canBlocksFall() {
+		return this.config.getBoolean(PlotConfig.FLAG_BLOCK_FALL);
+	}
+	
+	public boolean canIceMelt() {
+		return this.config.getBoolean(PlotConfig.FLAG_ICE_MELT);
+	}
+	
+	public boolean canLavaFlow() {
+		return this.config.getBoolean(PlotConfig.FLAG_LAVA_FLOW);
+	}
+	
+	public boolean canRedstone() {
+		return this.config.getBoolean(PlotConfig.FLAG_REDSTONE);
+	}
+	
+	public boolean canWaterFlow() {
+		return this.config.getBoolean(PlotConfig.FLAG_WATER_FLOW);
+	}
+	
+	/**
+	 * Gets all of the flags and their status for the plot
+	 * 
+	 * @return The list of flags
+	 */
+	
+	public List<String> getFlags(){
+		List<String> flagList = new ArrayList<String>();
+		flagList.add(((this.config.getBoolean(PlotConfig.FLAG_BLOCK_FALL)) ? ChatColor.GREEN : ChatColor.RED) + "block-fall");
+		flagList.add(((this.config.getBoolean(PlotConfig.FLAG_ICE_MELT)) ? ChatColor.GREEN : ChatColor.RED) + "ice-melt");
+		flagList.add(((this.config.getBoolean(PlotConfig.FLAG_LAVA_FLOW)) ? ChatColor.GREEN : ChatColor.RED) + "lava-flow");
+		flagList.add(((this.config.getBoolean(PlotConfig.FLAG_MOB_SPAWN)) ? ChatColor.GREEN : ChatColor.RED) + "mob-spawn");
+		flagList.add(((this.config.getBoolean(PlotConfig.FLAG_REDSTONE)) ? ChatColor.GREEN : ChatColor.RED) + "redstone");
+		flagList.add(((this.config.getBoolean(PlotConfig.FLAG_WATER_FLOW)) ? ChatColor.GREEN : ChatColor.RED) + "water-flow");
+		return flagList;
+	}
 }
