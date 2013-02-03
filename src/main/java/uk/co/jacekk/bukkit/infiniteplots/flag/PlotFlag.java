@@ -28,7 +28,7 @@ public enum PlotFlag {
 		this.configKey = configKey;
 		
 		String key = this.configKey.getKey();
-		this.name = key.substring(key.lastIndexOf('.'));
+		this.name = key.substring(key.lastIndexOf('.') + 1);
 	}
 	
 	/**
