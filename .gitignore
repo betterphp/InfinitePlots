@@ -9,3 +9,5 @@
 *.prefs
 
 dependency-reduced-pom.xml
+
+*.class
