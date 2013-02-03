@@ -1,11 +1,8 @@
 package uk.co.jacekk.bukkit.infiniteplots.plot;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import org.bukkit.ChatColor;
 
 import uk.co.jacekk.bukkit.baseplugin.v8.BaseObject;
 import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
