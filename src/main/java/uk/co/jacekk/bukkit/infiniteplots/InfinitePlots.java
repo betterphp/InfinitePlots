@@ -13,6 +13,7 @@ import uk.co.jacekk.bukkit.infiniteplots.command.RemoveBuilderCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.flag.BlockFlowListener;
 import uk.co.jacekk.bukkit.infiniteplots.flag.IceListener;
 import uk.co.jacekk.bukkit.infiniteplots.flag.MobSpawnListener;
+import uk.co.jacekk.bukkit.infiniteplots.flag.PhysicsListener;
 import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotManager;
 import uk.co.jacekk.bukkit.infiniteplots.protection.BuildListener;
@@ -51,6 +52,7 @@ public class InfinitePlots extends BasePlugin {
 		this.pluginManager.registerEvents(new MobSpawnListener(this), this);
 		this.pluginManager.registerEvents(new BlockFlowListener(this), this);
 		this.pluginManager.registerEvents(new IceListener(this), this);
+		this.pluginManager.registerEvents(new PhysicsListener(this), this);
 	}
 	
 	public void onDisable(){
