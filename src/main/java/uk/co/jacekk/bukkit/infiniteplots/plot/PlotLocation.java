@@ -27,8 +27,8 @@ public class PlotLocation {
 	 * @return The {@link PlotLocation} in plot space.
 	 */
 	public static PlotLocation fromWorldLocation(Location worldLocation){
-		int x = worldLocation.getBlockX() / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE);
-		int z = worldLocation.getBlockZ() / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE);
+		int x = (int) Math.floor((double) worldLocation.getBlockX() / (double) InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE));
+		int z = (int) Math.floor((double) worldLocation.getBlockZ() / (double) InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE));
 		
 		return new PlotLocation(worldLocation.getWorld().getName(), x, z);
 	}
