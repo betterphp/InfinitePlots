@@ -56,19 +56,22 @@ public class MobSpawnListener extends BaseListener<InfinitePlots>{
 		if (event.getLocation().getWorld().getGenerator() instanceof PlotsGenerator){
 			Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(event.getLocation()));
 			
-			if (plot == null || event.getSpawnReason() != SpawnReason.NATURAL){
+			if (plot == null){
+				event.setCancelled(true);
 				return;
 			}
 			
-			EntityType type = event.getEntityType();
-			
-			if (this.monsterTypes.contains(type)){
-				if (!plot.isFlagEnabled(PlotFlag.MONSTER_SPAWN)){
-					event.setCancelled(true);
-				}
-			}else if (this.animalTypes.contains(type)){
-				if (!plot.isFlagEnabled(PlotFlag.ANIMAL_SPAWN)){
-					event.setCancelled(true);
+			if (event.getSpawnReason() == SpawnReason.NATURAL){
+				EntityType type = event.getEntityType();
+				
+				if (this.monsterTypes.contains(type)){
+					if (!plot.isFlagEnabled(PlotFlag.MONSTER_SPAWN)){
+						event.setCancelled(true);
+					}
+				}else if (this.animalTypes.contains(type)){
+					if (!plot.isFlagEnabled(PlotFlag.ANIMAL_SPAWN)){
+						event.setCancelled(true);
+					}
 				}
 			}
 		}

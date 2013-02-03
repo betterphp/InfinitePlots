@@ -27,6 +27,7 @@ public class IceListener extends BaseListener<InfinitePlots> {
 			Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(block.getLocation()));
 			
 			if (plot == null){
+				event.setCancelled(true);
 				return;
 			}
 			
@@ -44,6 +45,7 @@ public class IceListener extends BaseListener<InfinitePlots> {
 			Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(block.getLocation()));
 			
 			if (plot == null){
+				event.setCancelled(true);
 				return;
 			}
 			

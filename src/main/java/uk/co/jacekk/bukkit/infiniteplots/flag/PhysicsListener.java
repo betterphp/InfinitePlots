@@ -26,6 +26,7 @@ public class PhysicsListener extends BaseListener<InfinitePlots> {
 			Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(block.getLocation()));
 			
 			if (plot == null){
+				event.setNewCurrent(0);
 				return;
 			}
 			
@@ -43,6 +44,7 @@ public class PhysicsListener extends BaseListener<InfinitePlots> {
 			Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(block.getLocation()));
 			
 			if (plot == null){
+				event.setCancelled(true);
 				return;
 			}
 			

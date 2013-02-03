@@ -23,6 +23,7 @@ public class BlockFlowListener extends BaseListener<InfinitePlots> {
 			Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(event.getToBlock().getLocation()));
 			
 			if (plot == null){
+				event.setCancelled(true);
 				return;
 			}
 			
