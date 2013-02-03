@@ -35,8 +35,9 @@ public class PlotsGenerator extends ChunkGenerator {
 		this.wallUpperId = wallUpperId;
 		this.wallUpperData = wallUpperData;
 	}
-
-	public List<BlockPopulator> getDefaultPopulators(World world) {
+	
+	@Override
+	public List<BlockPopulator> getDefaultPopulators(World world){
 		ArrayList<BlockPopulator> populators = new ArrayList<BlockPopulator>();
 		
 		populators.add(new PathPopulator(this.size, this.height, this.pathId, this.pathData, this.wallLowerId, this.wallLowerData, this.wallUpperId, this.wallUpperData));
@@ -44,6 +45,7 @@ public class PlotsGenerator extends ChunkGenerator {
 		return populators;
 	}
 	
+	@Override
 	public Location getFixedSpawnLocation(World world, Random rand){
 		return new Location(world, 0, this.height + 1, 0);
 	}

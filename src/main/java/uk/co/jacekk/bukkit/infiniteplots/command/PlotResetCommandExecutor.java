@@ -43,6 +43,7 @@ public class PlotResetCommandExecutor extends BaseCommandExecutor<InfinitePlots>
 		int highest = player.getLocation().getWorld().getHighestBlockYAt(plot.getLocation().getX(), plot.getLocation().getZ());
 		
 		plugin.log.info("Highest Y is: " + highest);
+		
 		for (int y = highest; y > plugin.config.getInt(Config.GRID_HEIGHT); y--){
 			for (int x = 0; x < 16; x++){
 				for (int z = 0; z < 16; z++){
@@ -51,4 +52,5 @@ public class PlotResetCommandExecutor extends BaseCommandExecutor<InfinitePlots>
 			}
 		}
 	}
+	
 }

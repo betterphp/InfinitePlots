@@ -17,12 +17,11 @@ public class MobSpawnListener extends BaseListener<InfinitePlots>{
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-	public void onCreatureSpawn(CreatureSpawnEvent event) {
-		if (event.getLocation().getWorld().getGenerator() instanceof PlotsGenerator)
-		{
+	public void onCreatureSpawn(CreatureSpawnEvent event){
+		if (event.getLocation().getWorld().getGenerator() instanceof PlotsGenerator){
 			Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(event.getLocation()));
 			
-			if (plot == null) {
+			if (plot == null){
 				return;
 			}
 			
@@ -31,4 +30,5 @@ public class MobSpawnListener extends BaseListener<InfinitePlots>{
 			}
 		}
 	}
+	
 }

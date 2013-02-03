@@ -39,7 +39,7 @@ public class AddBuilderCommandExecutor extends BaseCommandExecutor<InfinitePlots
 			return;
 		}
 		
-		if (!(plot.getAdmin().equalsIgnoreCase(player.getName()))) {
+		if (!plot.getAdmin().equalsIgnoreCase(player.getName())){
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 		}
 		
@@ -52,5 +52,5 @@ public class AddBuilderCommandExecutor extends BaseCommandExecutor<InfinitePlots
 		
 		player.sendMessage(ChatColor.GREEN + "Added " + args[0] + " as a builder to your plot");
 	}
-
+	
 }

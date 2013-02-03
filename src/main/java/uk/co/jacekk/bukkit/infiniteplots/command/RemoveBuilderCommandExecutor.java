@@ -34,22 +34,22 @@ public class RemoveBuilderCommandExecutor extends BaseCommandExecutor<InfinitePl
 		
 		Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(player.getLocation()));
 		
-		if (plot == null) {
+		if (plot == null){
 			player.sendMessage(ChatColor.RED + "There is no plot at this location");
 			return;
 		}
 		
-		if (!(plot.getAdmin().equalsIgnoreCase(player.getName()))) {
+		if (!plot.getAdmin().equalsIgnoreCase(player.getName())){
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 		}
 		
-		if (args[0].equalsIgnoreCase("all")) {
+		if (args[0].equalsIgnoreCase("all")){
 			plot.removeAllBuilders();
 			player.sendMessage(ChatColor.GREEN + "Removed all builders from your plot");
 			return;
 		}
 		
-		if (!(plot.getBuilders().contains(args[0]))) {
+		if (!(plot.getBuilders().contains(args[0]))){
 			player.sendMessage(ChatColor.RED + args[0] + " is not a builder on your plot");
 			return;
 		}
@@ -58,4 +58,5 @@ public class RemoveBuilderCommandExecutor extends BaseCommandExecutor<InfinitePl
 		
 		player.sendMessage(ChatColor.GREEN + "Removed " + args[0] + " from your plot");
 	}
+	
 }

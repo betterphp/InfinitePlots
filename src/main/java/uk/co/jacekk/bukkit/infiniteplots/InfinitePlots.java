@@ -2,7 +2,6 @@ package uk.co.jacekk.bukkit.infiniteplots;
 
 import java.io.File;
 
-import org.bukkit.block.Biome;
 import org.bukkit.generator.ChunkGenerator;
 
 import uk.co.jacekk.bukkit.baseplugin.v8.BasePlugin;
@@ -48,6 +47,7 @@ public class InfinitePlots extends BasePlugin {
 		this.commandManager.registerCommandExecutor(new AddBuilderCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new RemoveBuilderCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new PlotInfoCommandExecutor(this));
+		
 		this.pluginManager.registerEvents(new BuildListener(this), this);
 	}
 	

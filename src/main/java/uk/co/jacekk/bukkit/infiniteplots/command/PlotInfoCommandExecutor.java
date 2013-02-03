@@ -17,7 +17,7 @@ public class PlotInfoCommandExecutor extends BaseCommandExecutor<InfinitePlots>{
 	}
 
 	@CommandHandler(names = {"info"}, description = "Gives you information about your plot", usage = "")
-	public void info(CommandSender sender, String label, String[] args) {
+	public void info(CommandSender sender, String label, String[] args){
 		if (!(sender instanceof Player)){
 			sender.sendMessage(ChatColor.RED + "This command can only be used in game");
 			return;
@@ -27,12 +27,12 @@ public class PlotInfoCommandExecutor extends BaseCommandExecutor<InfinitePlots>{
 		
 		Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(player.getLocation()));
 		
-		if (plot == null) {
+		if (plot == null){
 			player.sendMessage(ChatColor.RED + "There is no plot at this location");
 			return;
 		}
 		
-		if (!(plot.getAdmin().equalsIgnoreCase(player.getName()))) {
+		if (!plot.getAdmin().equalsIgnoreCase(player.getName())){
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 			return;
 		}
@@ -41,21 +41,24 @@ public class PlotInfoCommandExecutor extends BaseCommandExecutor<InfinitePlots>{
 		player.sendMessage(ChatColor.BLUE + "Location: " + ChatColor.RESET + plot.getLocation().getX() + ", " + plot.getLocation().getZ());
 
 		StringBuilder builders = new StringBuilder();
-		for(String builder : plot.getBuilders())
-		{
+		
+		for (String builder : plot.getBuilders()){
 			builders.append(builder + " ");
 		}
 		
-		if(builders.length() < 1) builders.append("None");
+		if (builders.length() < 1){
+			builders.append("None");
+		}
 		
 		player.sendMessage(ChatColor.LIGHT_PURPLE + "Builders: " + ChatColor.RESET + builders.toString());
 		
 		StringBuilder flags = new StringBuilder();
-		for(String flag : plot.getFlags())
-		{
+		
+		for (String flag : plot.getFlags()){
 			flags.append(flag + ChatColor.RESET + " ");
 		}
 		
 		player.sendMessage("Flags: " + flags.toString());
 	}
+	
 }

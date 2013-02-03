@@ -118,27 +118,27 @@ public class Plot extends BaseObject<InfinitePlots> {
 		return this.getAdmin().equalsIgnoreCase(playerName) || this.getBuilders().contains(playerName);
 	}
 	
-	public boolean canSpawnMobs() {
+	public boolean canSpawnMobs(){
 		return this.config.getBoolean(PlotConfig.FLAG_MOB_SPAWN);
 	}
 	
-	public boolean canBlocksFall() {
+	public boolean canBlocksFall(){
 		return this.config.getBoolean(PlotConfig.FLAG_BLOCK_FALL);
 	}
 	
-	public boolean canIceMelt() {
+	public boolean canIceMelt(){
 		return this.config.getBoolean(PlotConfig.FLAG_ICE_MELT);
 	}
 	
-	public boolean canLavaFlow() {
+	public boolean canLavaFlow(){
 		return this.config.getBoolean(PlotConfig.FLAG_LAVA_FLOW);
 	}
 	
-	public boolean canRedstone() {
+	public boolean canRedstone(){
 		return this.config.getBoolean(PlotConfig.FLAG_REDSTONE);
 	}
 	
-	public boolean canWaterFlow() {
+	public boolean canWaterFlow(){
 		return this.config.getBoolean(PlotConfig.FLAG_WATER_FLOW);
 	}
 	
@@ -147,15 +147,17 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * 
 	 * @return The list of flags
 	 */
-	
 	public List<String> getFlags(){
 		List<String> flagList = new ArrayList<String>();
+		
 		flagList.add(((this.config.getBoolean(PlotConfig.FLAG_BLOCK_FALL)) ? ChatColor.GREEN : ChatColor.RED) + "block-fall");
 		flagList.add(((this.config.getBoolean(PlotConfig.FLAG_ICE_MELT)) ? ChatColor.GREEN : ChatColor.RED) + "ice-melt");
 		flagList.add(((this.config.getBoolean(PlotConfig.FLAG_LAVA_FLOW)) ? ChatColor.GREEN : ChatColor.RED) + "lava-flow");
 		flagList.add(((this.config.getBoolean(PlotConfig.FLAG_MOB_SPAWN)) ? ChatColor.GREEN : ChatColor.RED) + "mob-spawn");
 		flagList.add(((this.config.getBoolean(PlotConfig.FLAG_REDSTONE)) ? ChatColor.GREEN : ChatColor.RED) + "redstone");
 		flagList.add(((this.config.getBoolean(PlotConfig.FLAG_WATER_FLOW)) ? ChatColor.GREEN : ChatColor.RED) + "water-flow");
+		
 		return flagList;
 	}
+	
 }
