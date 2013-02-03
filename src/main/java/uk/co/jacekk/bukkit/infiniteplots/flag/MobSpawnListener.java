@@ -6,6 +6,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import uk.co.jacekk.bukkit.baseplugin.v8.event.BaseListener;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
@@ -55,7 +56,7 @@ public class MobSpawnListener extends BaseListener<InfinitePlots>{
 		if (event.getLocation().getWorld().getGenerator() instanceof PlotsGenerator){
 			Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(event.getLocation()));
 			
-			if (plot == null){
+			if (plot == null || event.getSpawnReason() != SpawnReason.NATURAL){
 				return;
 			}
 			
