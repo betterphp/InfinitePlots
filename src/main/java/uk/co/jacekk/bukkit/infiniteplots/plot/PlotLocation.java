@@ -6,8 +6,8 @@ import uk.co.jacekk.bukkit.infiniteplots.Config;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 
 /**
- * Represents the location of a plot in plot space, this start from 0,0
- * at the 0,0 block coordinate and move out in all directions, 
+ * Represents the location of a plot in plot space, this start from 0,0 
+ * at the 0,0 block coordinate and move out in all directions,
  */
 public class PlotLocation {
 	
@@ -62,7 +62,7 @@ public class PlotLocation {
 	
 	@Override
 	public int hashCode(){
-		return (37 * this.worldName.hashCode()) + ((this.x * 29) ^  this.z);
+		return (37 * this.worldName.hashCode()) + ((this.x * 29) ^ this.z);
 	}
 	
 	@Override
