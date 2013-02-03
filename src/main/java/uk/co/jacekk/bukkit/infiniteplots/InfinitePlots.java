@@ -10,7 +10,6 @@ import uk.co.jacekk.bukkit.infiniteplots.command.AddBuilderCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.ClaimCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.PlotInfoCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.RemoveBuilderCommandExecutor;
-import uk.co.jacekk.bukkit.infiniteplots.flag.RestrictSpawningListener;
 import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotManager;
 import uk.co.jacekk.bukkit.infiniteplots.protection.BuildListener;
@@ -36,10 +35,6 @@ public class InfinitePlots extends BasePlugin {
 		this.config = new PluginConfig(new File(this.baseDirPath + File.separator + "config.yml"), Config.class, this.log);
 		
 		this.plotManager = new PlotManager(this);
-		
-		if (this.config.getBoolean(Config.RESTRICT_SPAWNING)){
-			this.pluginManager.registerEvents(new RestrictSpawningListener(this), this);
-		}
 		
 		this.pluginManager.registerEvents(new WorldInitListener(this), this);
 		
