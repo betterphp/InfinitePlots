@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import uk.co.jacekk.bukkit.baseplugin.v8.command.BaseCommandExecutor;
 import uk.co.jacekk.bukkit.baseplugin.v8.command.CommandHandler;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
+import uk.co.jacekk.bukkit.infiniteplots.flag.PlotFlag;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;
 
@@ -54,8 +55,8 @@ public class PlotInfoCommandExecutor extends BaseCommandExecutor<InfinitePlots>{
 		
 		StringBuilder flags = new StringBuilder();
 		
-		for (String flag : plot.getFlags()){
-			flags.append(flag + ChatColor.RESET + " ");
+		for (PlotFlag flag : PlotFlag.values()){
+			flags.append((plot.isFlagEnabled(flag) ? ChatColor.GREEN : ChatColor.RED) + flag.getName() + ChatColor.RESET + " ");
 		}
 		
 		player.sendMessage("Flags: " + flags.toString());
