@@ -1,11 +1,13 @@
 package uk.co.jacekk.bukkit.infiniteplots.plot;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import uk.co.jacekk.bukkit.baseplugin.v8.BaseObject;
 import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
+import uk.co.jacekk.bukkit.infiniteplots.Config;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.flag.PlotFlag;
 
@@ -42,6 +44,28 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 */
 	public PlotLocation getLocation(){
 		return this.location;
+	}
+	
+	public List<Double> getCornerX(){
+		double cornerX = Math.floor(((this.location.getZ() * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) - 4;
+		double cornerZ = Math.abs(Math.floor(((this.location.getX() * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) + 4);
+		double cornerY = InfinitePlots.getInstance().config.getInt(Config.GRID_HEIGHT) + 1;
+		List<Double> location = new ArrayList<Double>();
+		location.add(cornerX);
+		location.add(cornerY);
+		location.add(cornerZ);
+		return location;
+	}
+	
+	public List<Double> getCornerZ(){
+		double cornerX = Math.floor(((this.location.getX() * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) + 4;
+		double cornerZ = Math.floor(((this.location.getZ() * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) + 4;
+		double cornerY = InfinitePlots.getInstance().config.getInt(Config.GRID_HEIGHT) + 1;
+		List<Double> location = new ArrayList<Double>();
+		location.add(cornerX);
+		location.add(cornerY);
+		location.add(cornerZ);
+		return location;
 	}
 	
 	/**
