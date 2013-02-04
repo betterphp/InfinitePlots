@@ -28,7 +28,15 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		Player player = (Player) sender;
 		
 		Plot plot = plugin.getPlotManager().createPlotAt(PlotLocation.fromWorldLocation(player.getLocation()), true);
+		
+		if (plot == null){
+			player.sendMessage(ChatColor.RED + "This plot has already been claimed.");
+			return;
+		}
+		
 		plot.setAdmin(player.getName());
+		
+		player.sendMessage(ChatColor.GREEN + "Plot claimed");
 	}
 	
 }
