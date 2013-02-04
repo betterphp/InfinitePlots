@@ -8,6 +8,7 @@ import uk.co.jacekk.bukkit.baseplugin.v8.BasePlugin;
 import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
 import uk.co.jacekk.bukkit.infiniteplots.command.AddBuilderCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.ClaimCommandExecutor;
+import uk.co.jacekk.bukkit.infiniteplots.command.PlotFlagCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.PlotInfoCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.PlotResetCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.RemoveBuilderCommandExecutor;
@@ -32,7 +33,7 @@ public class InfinitePlots extends BasePlugin {
 		
 		instance = this;
 		
-		this.plotsDir =  new File(this.baseDirPath + File.separator + "plots");
+		this.plotsDir = new File(this.baseDirPath + File.separator + "plots");
 		
 		if (!this.plotsDir.exists()){
 			this.plotsDir.mkdirs();
@@ -50,6 +51,7 @@ public class InfinitePlots extends BasePlugin {
 		this.commandManager.registerCommandExecutor(new PlotInfoCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new PlotResetCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new UnclaimCommandExecutor(this));
+		this.commandManager.registerCommandExecutor(new PlotFlagCommandExecutor(this));
 		
 		this.pluginManager.registerEvents(new BuildListener(this), this);
 		

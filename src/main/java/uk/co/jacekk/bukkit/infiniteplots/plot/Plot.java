@@ -7,6 +7,7 @@ import java.util.List;
 
 import uk.co.jacekk.bukkit.baseplugin.v8.BaseObject;
 import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfigKey;
 import uk.co.jacekk.bukkit.infiniteplots.Config;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.flag.PlotFlag;
@@ -87,7 +88,8 @@ public class Plot extends BaseObject<InfinitePlots> {
 	}
 	
 	/**
-	 * Gets all of the players (not including the plot admin) that are allowed to build in this plot.
+	 * Gets all of the players (not including the plot admin) that are allowed
+	 * to build in this plot.
 	 * 
 	 * @return The list of player names.
 	 */
@@ -128,9 +130,8 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * Checks to see if a player can build in this plot.
 	 * 
 	 * <p>
-	 * 	A player that is not able to build should not be able to
-	 * 	interact with the environment in any way at all inside
-	 * 	the plot area.
+	 * A player that is not able to build should not be able to interact with
+	 * the environment in any way at all inside the plot area.
 	 * <p>
 	 * 
 	 * @param playerName The name of the player to test.
@@ -144,7 +145,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * Checks to see if a specific flag is enabled for this plot.
 	 * 
 	 * <p>
-	 * 	An enabled flag will allow the event it describes to take place,
+	 *  An enabled flag will allow the event it describes to take place,
 	 * </p>
 	 * 
 	 * @param flag
@@ -154,4 +155,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 		return this.config.getBoolean(flag.getConfigKey());
 	}
 	
+	public void setFlag(PlotFlag flag, boolean value){
+		this.config.set(flag.getConfigKey(), value);
+	}
 }

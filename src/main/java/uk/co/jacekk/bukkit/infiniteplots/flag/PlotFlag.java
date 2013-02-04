@@ -4,22 +4,20 @@ import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfigKey;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotConfig;
 
 /**
- * A list of flags that can be applied to a plot, each of this is a boolean value only. An enabled flag will allow the event it describes to take place,
+ * A list of flags that can be applied to a plot, each of this is a boolean
+ * value only. An enabled flag will allow the event it describes to take place,
  */
 public enum PlotFlag {
 	
-	WATER_FLOW(PlotConfig.FLAG_WATER_FLOW),
-	LAVA_FLOW(PlotConfig.FLAG_LAVA_FLOW),
+	WATER_FLOW(PlotConfig.FLAG_WATER_FLOW), LAVA_FLOW(PlotConfig.FLAG_LAVA_FLOW),
 	
-	ICE_MELT(PlotConfig.FLAG_ICE_MELT),
-	SNOW_FORM(PlotConfig.FLAG_SNOW_FORM),
+	ICE_MELT(PlotConfig.FLAG_ICE_MELT), SNOW_FORM(PlotConfig.FLAG_SNOW_FORM),
 	
 	REDSTONE(PlotConfig.FLAG_REDSTONE),
 	
 	BLOCK_PHYSICS(PlotConfig.FLAG_BLOCK_PHYSICS),
 	
-	MONSTER_SPAWN(PlotConfig.FLAG_MONSTER_SPAWN),
-	ANIMAL_SPAWN(PlotConfig.FLAG_ANIMAL_SPAWN);
+	MONSTER_SPAWN(PlotConfig.FLAG_MONSTER_SPAWN), ANIMAL_SPAWN(PlotConfig.FLAG_ANIMAL_SPAWN);
 	
 	private PluginConfigKey configKey;
 	private String name;
@@ -49,4 +47,13 @@ public enum PlotFlag {
 		return this.name;
 	}
 	
+	public static PlotFlag fromString(String flag){
+		for (PlotFlag pflag : PlotFlag.values()){
+			if (pflag.name.equalsIgnoreCase(flag)){
+				return pflag;
+			}
+		}
+		
+		return null;
+	}
 }
