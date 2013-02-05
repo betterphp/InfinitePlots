@@ -36,9 +36,11 @@ public class PlotResetCommandExecutor extends BaseCommandExecutor<InfinitePlots>
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 		}
 		
+		long start = System.currentTimeMillis();
+		
 		plot.regenerate();
 		
-		player.sendMessage(ChatColor.GREEN + "Plot regnerated");
+		player.sendMessage(ChatColor.GREEN + "Plot regnerated in " + (System.currentTimeMillis() - start) + " ms");
 	}
 	
 }
