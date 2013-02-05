@@ -3,8 +3,8 @@ package uk.co.jacekk.bukkit.infiniteplots.plot;
 import java.io.File;
 import java.util.HashMap;
 
-import uk.co.jacekk.bukkit.baseplugin.v8.BaseObject;
-import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v9.BaseObject;
+import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfig;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 
 /**

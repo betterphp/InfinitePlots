@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-import uk.co.jacekk.bukkit.baseplugin.v8.BaseObject;
-import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v9.BaseObject;
+import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfig;
 import uk.co.jacekk.bukkit.infiniteplots.Config;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.flag.PlotFlag;
@@ -71,8 +71,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	/**
 	 * Sets the admin of this plot.
 	 * 
-	 * @param admin
-	 *            The name of the player.
+	 * @param admin The name of the player.
 	 */
 	public void setAdmin(String admin){
 		this.config.set(PlotConfig.AUTH_ADMIN_NAME, admin);
@@ -91,8 +90,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	/**
 	 * Adds a builder to this plot.
 	 * 
-	 * @param playerName
-	 *            The name of the player to add.
+	 * @param playerName The name of the player to add.
 	 */
 	public void addBuilder(String playerName){
 		List<String> builders = this.getBuilders();
@@ -103,8 +101,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	/**
 	 * Removes a builder from this plot.
 	 * 
-	 * @param playerName
-	 *            The name of the player to remove.
+	 * @param playerName The name of the player to remove.
 	 */
 	public void removeBuilder(String playerName){
 		List<String> builders = this.getBuilders();
@@ -127,8 +124,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * the environment in any way at all inside the plot area.
 	 * <p>
 	 * 
-	 * @param playerName
-	 *            The name of the player to test.
+	 * @param playerName The name of the player to test.
 	 * @return True if the player can build, false if not.
 	 */
 	public boolean canBuild(String playerName){
@@ -139,17 +135,28 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * Checks to see if a specific flag is enabled for this plot.
 	 * 
 	 * <p>
-	 * An enabled flag will allow the event it describes to take place,
+	 *  An enabled flag will allow the event it describes to take place,
 	 * </p>
 	 * 
-	 * @param flag
-	 * @return
+	 * @param flag The flag to check
+	 * @return The value of the flag for this plot
 	 */
 	public boolean isFlagEnabled(PlotFlag flag){
 		return this.config.getBoolean(flag.getConfigKey());
 	}
 	
+	/**
+	 * Sets a flag for this plot.
+	 * 
+	 * <p>
+	 *  An enabled flag will allow the event it describes to take place,
+	 * </p>
+	 * 
+	 * @param flag The flag to set.
+	 * @param value The value to set this flag to.
+	 */
 	public void setFlag(PlotFlag flag, boolean value){
 		this.config.set(flag.getConfigKey(), value);
 	}
+	
 }

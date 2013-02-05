@@ -1,6 +1,6 @@
 package uk.co.jacekk.bukkit.infiniteplots.flag;
 
-import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfigKey;
+import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfigKey;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotConfig;
 
 /**
@@ -9,15 +9,18 @@ import uk.co.jacekk.bukkit.infiniteplots.plot.PlotConfig;
  */
 public enum PlotFlag {
 	
-	WATER_FLOW(PlotConfig.FLAG_WATER_FLOW), LAVA_FLOW(PlotConfig.FLAG_LAVA_FLOW),
+	WATER_FLOW(PlotConfig.FLAG_WATER_FLOW),
+	LAVA_FLOW(PlotConfig.FLAG_LAVA_FLOW),
 	
-	ICE_MELT(PlotConfig.FLAG_ICE_MELT), SNOW_FORM(PlotConfig.FLAG_SNOW_FORM),
+	ICE_MELT(PlotConfig.FLAG_ICE_MELT),
+	SNOW_FORM(PlotConfig.FLAG_SNOW_FORM),
 	
 	REDSTONE(PlotConfig.FLAG_REDSTONE),
 	
 	BLOCK_PHYSICS(PlotConfig.FLAG_BLOCK_PHYSICS),
 	
-	MONSTER_SPAWN(PlotConfig.FLAG_MONSTER_SPAWN), ANIMAL_SPAWN(PlotConfig.FLAG_ANIMAL_SPAWN);
+	MONSTER_SPAWN(PlotConfig.FLAG_MONSTER_SPAWN),
+	ANIMAL_SPAWN(PlotConfig.FLAG_ANIMAL_SPAWN);
 	
 	private PluginConfigKey configKey;
 	private String name;

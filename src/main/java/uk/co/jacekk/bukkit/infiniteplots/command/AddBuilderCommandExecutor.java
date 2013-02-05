@@ -4,9 +4,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import uk.co.jacekk.bukkit.baseplugin.v8.command.BaseCommandExecutor;
-import uk.co.jacekk.bukkit.baseplugin.v8.command.CommandHandler;
-import uk.co.jacekk.bukkit.baseplugin.v8.command.CommandTabCompletion;
+import uk.co.jacekk.bukkit.baseplugin.v9.command.BaseCommandExecutor;
+import uk.co.jacekk.bukkit.baseplugin.v9.command.CommandHandler;
+import uk.co.jacekk.bukkit.baseplugin.v9.command.CommandTabCompletion;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;

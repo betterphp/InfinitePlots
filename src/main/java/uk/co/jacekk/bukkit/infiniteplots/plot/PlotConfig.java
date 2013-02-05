@@ -2,7 +2,7 @@ package uk.co.jacekk.bukkit.infiniteplots.plot;
 
 import java.util.Arrays;
 
-import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfigKey;
+import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfigKey;
 
 /**
  * The config options that are stored in each plots .yml file.
