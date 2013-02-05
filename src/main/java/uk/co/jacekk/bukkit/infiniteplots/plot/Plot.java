@@ -4,6 +4,10 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.block.Block;
+
 import uk.co.jacekk.bukkit.baseplugin.v9.BaseObject;
 import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfig;
 import uk.co.jacekk.bukkit.infiniteplots.Config;
@@ -157,6 +161,40 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 */
 	public void setFlag(PlotFlag flag, boolean value){
 		this.config.set(flag.getConfigKey(), value);
+	}
+	
+	private void setBlockType(Block block, Material type){
+		if (block.getType() != type){
+			block.setType(type);
+		}
+	}
+	
+	/**
+	 * Regenerates the buildable region of this plot.
+	 */
+	public void regenerate(){
+		World world = plugin.server.getWorld(this.location.getWorldName());
+		
+		int worldHeight = world.getMaxHeight();
+		int gridHeight = plugin.config.getInt(Config.GRID_HEIGHT);
+		
+		int[] buildLimits = this.getBuildLimits();
+		
+		for (int x = buildLimits[0]; x <= buildLimits[2]; ++x){
+			for (int z = buildLimits[1]; z <= buildLimits[3]; ++z){
+				this.setBlockType(world.getBlockAt(x, 0, z), Material.BEDROCK);
+				
+				for (int y = 1; y < gridHeight; ++y){
+					this.setBlockType(world.getBlockAt(x, y, z), Material.DIRT);
+				}
+				
+				this.setBlockType(world.getBlockAt(x, gridHeight, z), Material.GRASS);
+				
+				for (int y = gridHeight + 1; y < worldHeight; ++y){
+					this.setBlockType(world.getBlockAt(x, y, z), Material.AIR);
+				}
+			}
+		}
 	}
 	
 }
