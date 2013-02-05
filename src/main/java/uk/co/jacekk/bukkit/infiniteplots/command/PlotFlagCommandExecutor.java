@@ -1,10 +1,14 @@
 package uk.co.jacekk.bukkit.infiniteplots.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import uk.co.jacekk.bukkit.baseplugin.v9.command.BaseCommandExecutor;
+import uk.co.jacekk.bukkit.baseplugin.v9.command.CommandTabCompletion;
 import uk.co.jacekk.bukkit.baseplugin.v9.command.SubCommandHandler;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.flag.PlotFlag;
@@ -17,7 +21,18 @@ public class PlotFlagCommandExecutor extends BaseCommandExecutor<InfinitePlots> 
 		super(plugin);
 	}
 	
+	public List<String> getFlagList(CommandSender sender, String[] args){
+		ArrayList<String> flags = new ArrayList<String>();
+		
+		for (PlotFlag flag : PlotFlag.values()){
+			flags.add(flag.getName());
+		}
+		
+		return flags;
+	}
+	
 	@SubCommandHandler(parent = "iplot", name = "flag")
+	@CommandTabCompletion({"[getFlagList]", "true|false"})
 	public void plotFlag(CommandSender sender, String label, String[] args){
 		if (!(sender instanceof Player)){
 			sender.sendMessage(ChatColor.RED + "This command can only be used in game");

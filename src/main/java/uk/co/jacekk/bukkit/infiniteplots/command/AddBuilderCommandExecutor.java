@@ -5,6 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import uk.co.jacekk.bukkit.baseplugin.v9.command.BaseCommandExecutor;
+import uk.co.jacekk.bukkit.baseplugin.v9.command.CommandTabCompletion;
 import uk.co.jacekk.bukkit.baseplugin.v9.command.SubCommandHandler;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
@@ -17,6 +18,7 @@ public class AddBuilderCommandExecutor extends BaseCommandExecutor<InfinitePlots
 	}
 	
 	@SubCommandHandler(parent = "iplot", name = "addbuilder")
+	@CommandTabCompletion("<online_player>")
 	public void plotAddbuilder(CommandSender sender, String label, String[] args){
 		if (!(sender instanceof Player)){
 			sender.sendMessage(ChatColor.RED + "This command can only be used in game");
@@ -52,6 +54,7 @@ public class AddBuilderCommandExecutor extends BaseCommandExecutor<InfinitePlots
 	}
 	
 	@SubCommandHandler(parent = "iplot", name = "removebuilder")
+	@CommandTabCompletion("<online_player>")
 	public void plotRemovebuilder(CommandSender sender, String label, String[] args) {
 		if (!(sender instanceof Player)){
 			sender.sendMessage(ChatColor.RED + "This command can only be used in game");
