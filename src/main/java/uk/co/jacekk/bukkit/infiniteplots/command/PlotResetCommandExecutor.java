@@ -2,6 +2,8 @@ package uk.co.jacekk.bukkit.infiniteplots.command;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -16,6 +18,12 @@ public class PlotResetCommandExecutor extends BaseCommandExecutor<InfinitePlots>
 	
 	public PlotResetCommandExecutor(InfinitePlots plugin){
 		super(plugin);
+	}
+	
+	private void setBlockType(Block block, Material type){
+		if (block.getType() != type){
+			block.setType(type);
+		}
 	}
 	
 	@SubCommandHandler(parent = "iplot", name = "reset")
@@ -34,27 +42,29 @@ public class PlotResetCommandExecutor extends BaseCommandExecutor<InfinitePlots>
 			return;
 		}
 		
-		if (!(plot.getAdmin().equalsIgnoreCase(player.getName()))){
+		if (!plot.getAdmin().equalsIgnoreCase(player.getName())){
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 		}
 		
-		for (int x = plot.getBuildLimits()[0]; x <= plot.getBuildLimits()[2]; ++x){
-			for (int z = plot.getBuildLimits()[1]; z <= plot.getBuildLimits()[3]; ++z){
-				player.getLocation().getWorld().getBlockAt(x, 0, z).setType(Material.BEDROCK);
+		World world = player.getWorld();
+		
+		int worldHeight = world.getMaxHeight();
+		int gridHeight = plugin.config.getInt(Config.GRID_HEIGHT);
+		
+		int[] buildLimits = plot.getBuildLimits();
+		
+		for (int x = buildLimits[0]; x <= buildLimits[2]; ++x){
+			for (int z = buildLimits[1]; z <= buildLimits[3]; ++z){
+				this.setBlockType(world.getBlockAt(x, 0, z), Material.BEDROCK);
 				
-				for (int y = 1; y <= plugin.config.getInt(Config.GRID_HEIGHT); ++y){
-					player.getLocation().getWorld().getBlockAt(x, y, z).setType(Material.DIRT);
-					if (y == plugin.config.getInt(Config.GRID_HEIGHT)){
-						player.getLocation().getWorld().getBlockAt(x, y, z).setType(Material.GRASS);
-					}
+				for (int y = 1; y < gridHeight; ++y){
+					this.setBlockType(world.getBlockAt(x, y, z), Material.DIRT);
 				}
 				
-				for (int y = plugin.config.getInt(Config.GRID_HEIGHT) + 1; y < player.getLocation().getWorld().getMaxHeight(); ++y){
-					if (player.getLocation().getWorld().getBlockAt(x, y, z).getType() == Material.AIR){
-						continue;
-					}
-					
-					player.getLocation().getWorld().getBlockAt(x, y, z).setType(Material.AIR);
+				this.setBlockType(world.getBlockAt(x, gridHeight, z), Material.GRASS);
+				
+				for (int y = gridHeight + 1; y < worldHeight; ++y){
+					this.setBlockType(world.getBlockAt(x, y, z), Material.AIR);
 				}
 			}
 		}

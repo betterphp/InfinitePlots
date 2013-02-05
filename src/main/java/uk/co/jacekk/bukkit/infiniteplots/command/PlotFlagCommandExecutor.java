@@ -38,7 +38,7 @@ public class PlotFlagCommandExecutor extends BaseCommandExecutor<InfinitePlots> 
 			return;
 		}
 		
-		if (!(args.length > 0)){
+		if (args.length == 0){
 			StringBuilder flags = new StringBuilder();
 			
 			for (PlotFlag flag : PlotFlag.values()){
@@ -49,12 +49,12 @@ public class PlotFlagCommandExecutor extends BaseCommandExecutor<InfinitePlots> 
 			return;
 		}
 		
-		if(PlotFlag.fromString(args[0]) == null) {
+		if (PlotFlag.fromString(args[0]) == null){
 			player.sendMessage(ChatColor.RED + args[0] + " is not a valid plot flag");
 			return;
 		}
 		
-		if (!(args.length > 1)){
+		if (args.length <= 1){
 			player.sendMessage(ChatColor.RED + "You must provide a value to set the flag");
 			return;
 		}
