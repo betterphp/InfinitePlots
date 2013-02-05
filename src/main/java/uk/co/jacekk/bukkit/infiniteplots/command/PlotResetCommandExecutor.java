@@ -40,24 +40,25 @@ public class PlotResetCommandExecutor extends BaseCommandExecutor<InfinitePlots>
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 		}
 		
-		int highest = player.getLocation().getWorld().getHighestBlockYAt(plot.getLocation().getX(), plot.getLocation().getZ());
-		
-		plugin.log.info("Highest Y is: " + highest);
-		for (double coord : plot.getCornerX()){
-			plugin.log.info("coordX: " + coord);
-		}
-		
-		for (double coord : plot.getCornerZ()){
-			plugin.log.info("coordZ: " + coord);
-		}
-		
-		for (int y = highest; y > plugin.config.getInt(Config.GRID_HEIGHT); y--){
-			for (int x = 0; x < 16; x++){
-				for (int z = 0; z < 16; z++){
+		for (int x = plot.getBuildLimits()[0]; x <= plot.getBuildLimits()[2]; ++x){
+			for (int z = plot.getBuildLimits()[1]; z <= plot.getBuildLimits()[3]; ++z){
+				player.getLocation().getWorld().getBlockAt(x, 0, z).setType(Material.BEDROCK);
+				
+				for (int y = 1; y <= plugin.config.getInt(Config.GRID_HEIGHT); ++y){
+					player.getLocation().getWorld().getBlockAt(x, y, z).setType(Material.DIRT);
+					if (y == plugin.config.getInt(Config.GRID_HEIGHT)){
+						player.getLocation().getWorld().getBlockAt(x, y, z).setType(Material.GRASS);
+					}
+				}
+				
+				for (int y = plugin.config.getInt(Config.GRID_HEIGHT) + 1; y < player.getLocation().getWorld().getMaxHeight(); ++y){
+					if (player.getLocation().getWorld().getBlockAt(x, y, z).getType() == Material.AIR){
+						continue;
+					}
+					
 					player.getLocation().getWorld().getBlockAt(x, y, z).setType(Material.AIR);
 				}
 			}
 		}
 	}
-	
 }

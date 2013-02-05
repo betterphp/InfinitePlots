@@ -1,13 +1,11 @@
 package uk.co.jacekk.bukkit.infiniteplots.plot;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import uk.co.jacekk.bukkit.baseplugin.v8.BaseObject;
 import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
-import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfigKey;
 import uk.co.jacekk.bukkit.infiniteplots.Config;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.flag.PlotFlag;
@@ -47,26 +45,18 @@ public class Plot extends BaseObject<InfinitePlots> {
 		return this.location;
 	}
 	
-	public List<Double> getCornerX(){
-		double cornerX = Math.floor(((this.location.getZ() * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) - 4;
-		double cornerZ = Math.abs(Math.floor(((this.location.getX() * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) + 4);
-		double cornerY = InfinitePlots.getInstance().config.getInt(Config.GRID_HEIGHT) + 1;
-		List<Double> location = new ArrayList<Double>();
-		location.add(cornerX);
-		location.add(cornerY);
-		location.add(cornerZ);
-		return location;
-	}
-	
-	public List<Double> getCornerZ(){
-		double cornerX = Math.floor(((this.location.getX() * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) + 4;
-		double cornerZ = Math.floor(((this.location.getZ() * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) + 4;
-		double cornerY = InfinitePlots.getInstance().config.getInt(Config.GRID_HEIGHT) + 1;
-		List<Double> location = new ArrayList<Double>();
-		location.add(cornerX);
-		location.add(cornerY);
-		location.add(cornerZ);
-		return location;
+	/**
+	 * Gets the limits of the plot.
+	 * 
+	 * @return An array of X,Z coordinates [x1, z1, x2, z2]
+	 */
+	public int[] getBuildLimits(){
+		int x1 = (int) (Math.floor(((this.location.getX() * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) + 4);
+		int z1 = (int) (Math.floor(((this.location.getZ() * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) + 4);
+		int x2 = x1 + InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE) - 8;
+		int z2 = z1 + InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE) - 8;
+		int[] ret = {x1, z1, x2, z2};
+		return ret;
 	}
 	
 	/**
@@ -81,7 +71,8 @@ public class Plot extends BaseObject<InfinitePlots> {
 	/**
 	 * Sets the admin of this plot.
 	 * 
-	 * @param admin The name of the player.
+	 * @param admin
+	 *            The name of the player.
 	 */
 	public void setAdmin(String admin){
 		this.config.set(PlotConfig.AUTH_ADMIN_NAME, admin);
@@ -100,7 +91,8 @@ public class Plot extends BaseObject<InfinitePlots> {
 	/**
 	 * Adds a builder to this plot.
 	 * 
-	 * @param playerName The name of the player to add.
+	 * @param playerName
+	 *            The name of the player to add.
 	 */
 	public void addBuilder(String playerName){
 		List<String> builders = this.getBuilders();
@@ -111,7 +103,8 @@ public class Plot extends BaseObject<InfinitePlots> {
 	/**
 	 * Removes a builder from this plot.
 	 * 
-	 * @param playerName The name of the player to remove.
+	 * @param playerName
+	 *            The name of the player to remove.
 	 */
 	public void removeBuilder(String playerName){
 		List<String> builders = this.getBuilders();
@@ -134,7 +127,8 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * the environment in any way at all inside the plot area.
 	 * <p>
 	 * 
-	 * @param playerName The name of the player to test.
+	 * @param playerName
+	 *            The name of the player to test.
 	 * @return True if the player can build, false if not.
 	 */
 	public boolean canBuild(String playerName){
@@ -145,7 +139,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * Checks to see if a specific flag is enabled for this plot.
 	 * 
 	 * <p>
-	 *  An enabled flag will allow the event it describes to take place,
+	 * An enabled flag will allow the event it describes to take place,
 	 * </p>
 	 * 
 	 * @param flag
