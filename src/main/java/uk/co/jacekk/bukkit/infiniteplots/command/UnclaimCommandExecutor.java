@@ -5,7 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import uk.co.jacekk.bukkit.baseplugin.v9.command.BaseCommandExecutor;
-import uk.co.jacekk.bukkit.baseplugin.v9.command.CommandHandler;
+import uk.co.jacekk.bukkit.baseplugin.v9.command.SubCommandHandler;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;
@@ -16,8 +16,8 @@ public class UnclaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		super(plugin);
 	}
 	
-	@CommandHandler(names = {"unclaim"}, description = "Unclaims the plot you are standing in.", usage = "")
-	public void unclaim(CommandSender sender, String label, String args[]){
+	@SubCommandHandler(parent = "iplot", name = "unclaim")
+	public void plotUnclaim(CommandSender sender, String label, String args[]){
 		if (!(sender instanceof Player)){
 			sender.sendMessage(ChatColor.RED + "This command can only be used in game");
 			return;
@@ -39,4 +39,5 @@ public class UnclaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		plugin.getPlotManager().removePlotAt(PlotLocation.fromWorldLocation(player.getLocation()));
 		player.sendMessage(ChatColor.GREEN + "Successfully unclaimed plot");
 	}
+	
 }

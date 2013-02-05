@@ -5,8 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import uk.co.jacekk.bukkit.baseplugin.v9.command.BaseCommandExecutor;
-import uk.co.jacekk.bukkit.baseplugin.v9.command.CommandHandler;
-import uk.co.jacekk.bukkit.baseplugin.v9.command.CommandTabCompletion;
+import uk.co.jacekk.bukkit.baseplugin.v9.command.SubCommandHandler;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;
@@ -17,9 +16,8 @@ public class AddBuilderCommandExecutor extends BaseCommandExecutor<InfinitePlots
 		super(plugin);
 	}
 	
-	@CommandHandler(names = {"addmember"}, description = "Adds a member to the plot you are standing in.", usage = "[player_name]")
-	@CommandTabCompletion({"<online_player>"})
-	public void addbuilder(CommandSender sender, String label, String[] args){
+	@SubCommandHandler(parent = "iplot", name = "addbuilder")
+	public void plotAddbuilder(CommandSender sender, String label, String[] args){
 		if (!(sender instanceof Player)){
 			sender.sendMessage(ChatColor.RED + "This command can only be used in game");
 			return;

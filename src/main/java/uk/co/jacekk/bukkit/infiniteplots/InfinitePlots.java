@@ -8,6 +8,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9.BasePlugin;
 import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfig;
 import uk.co.jacekk.bukkit.infiniteplots.command.AddBuilderCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.ClaimCommandExecutor;
+import uk.co.jacekk.bukkit.infiniteplots.command.PlotCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.PlotFlagCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.PlotInfoCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.PlotResetCommandExecutor;
@@ -45,20 +46,20 @@ public class InfinitePlots extends BasePlugin {
 		
 		this.pluginManager.registerEvents(new WorldInitListener(this), this);
 		
-		this.commandManager.registerCommandExecutor(new ClaimCommandExecutor(this));
-		this.commandManager.registerCommandExecutor(new AddBuilderCommandExecutor(this));
-		this.commandManager.registerCommandExecutor(new RemoveBuilderCommandExecutor(this));
-		this.commandManager.registerCommandExecutor(new PlotInfoCommandExecutor(this));
-		this.commandManager.registerCommandExecutor(new PlotResetCommandExecutor(this));
-		this.commandManager.registerCommandExecutor(new UnclaimCommandExecutor(this));
-		this.commandManager.registerCommandExecutor(new PlotFlagCommandExecutor(this));
-		
 		this.pluginManager.registerEvents(new BuildListener(this), this);
-		
 		this.pluginManager.registerEvents(new MobSpawnListener(this), this);
 		this.pluginManager.registerEvents(new BlockFlowListener(this), this);
 		this.pluginManager.registerEvents(new IceListener(this), this);
 		this.pluginManager.registerEvents(new PhysicsListener(this), this);
+		
+		this.commandManager.registerCommandExecutor(new PlotCommandExecutor(this));
+		this.commandManager.registerCommandExecutor(new PlotInfoCommandExecutor(this));
+		this.commandManager.registerCommandExecutor(new ClaimCommandExecutor(this));
+		this.commandManager.registerCommandExecutor(new UnclaimCommandExecutor(this));
+		this.commandManager.registerCommandExecutor(new AddBuilderCommandExecutor(this));
+		this.commandManager.registerCommandExecutor(new RemoveBuilderCommandExecutor(this));
+		this.commandManager.registerCommandExecutor(new PlotFlagCommandExecutor(this));
+		this.commandManager.registerCommandExecutor(new PlotResetCommandExecutor(this));
 	}
 	
 	public void onDisable(){

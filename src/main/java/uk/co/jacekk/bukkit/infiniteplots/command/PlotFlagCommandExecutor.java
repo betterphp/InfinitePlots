@@ -5,7 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import uk.co.jacekk.bukkit.baseplugin.v9.command.BaseCommandExecutor;
-import uk.co.jacekk.bukkit.baseplugin.v9.command.CommandHandler;
+import uk.co.jacekk.bukkit.baseplugin.v9.command.SubCommandHandler;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.flag.PlotFlag;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
@@ -17,8 +17,8 @@ public class PlotFlagCommandExecutor extends BaseCommandExecutor<InfinitePlots> 
 		super(plugin);
 	}
 	
-	@CommandHandler(names = {"flag"}, description = "Modify the flags on your plot")
-	public void flag(CommandSender sender, String label, String[] args){
+	@SubCommandHandler(parent = "iplot", name = "flag")
+	public void plotFlag(CommandSender sender, String label, String[] args){
 		if (!(sender instanceof Player)){
 			sender.sendMessage(ChatColor.RED + "This command can only be used in game");
 			return;
