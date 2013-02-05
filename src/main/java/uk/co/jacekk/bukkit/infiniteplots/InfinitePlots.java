@@ -12,8 +12,6 @@ import uk.co.jacekk.bukkit.infiniteplots.command.PlotCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.PlotFlagCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.PlotInfoCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.PlotResetCommandExecutor;
-import uk.co.jacekk.bukkit.infiniteplots.command.RemoveBuilderCommandExecutor;
-import uk.co.jacekk.bukkit.infiniteplots.command.UnclaimCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.flag.BlockFlowListener;
 import uk.co.jacekk.bukkit.infiniteplots.flag.IceListener;
 import uk.co.jacekk.bukkit.infiniteplots.flag.MobSpawnListener;
@@ -55,9 +53,7 @@ public class InfinitePlots extends BasePlugin {
 		this.commandManager.registerCommandExecutor(new PlotCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new PlotInfoCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new ClaimCommandExecutor(this));
-		this.commandManager.registerCommandExecutor(new UnclaimCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new AddBuilderCommandExecutor(this));
-		this.commandManager.registerCommandExecutor(new RemoveBuilderCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new PlotFlagCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new PlotResetCommandExecutor(this));
 	}

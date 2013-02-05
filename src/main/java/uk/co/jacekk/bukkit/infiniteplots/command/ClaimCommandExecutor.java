@@ -37,4 +37,28 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		player.sendMessage(ChatColor.GREEN + "Plot claimed");
 	}
 	
+	@SubCommandHandler(parent = "iplot", name = "unclaim")
+	public void plotUnclaim(CommandSender sender, String label, String args[]){
+		if (!(sender instanceof Player)){
+			sender.sendMessage(ChatColor.RED + "This command can only be used in game");
+			return;
+		}
+		
+		Player player = (Player) sender;
+		
+		Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(player.getLocation()));
+		
+		if (plot == null){
+			player.sendMessage(ChatColor.RED + "There is no plot at this location");
+			return;
+		}
+		
+		if (!(plot.getAdmin().equalsIgnoreCase(player.getName()))){
+			player.sendMessage(ChatColor.RED + "You do not own this plot");
+		}
+		
+		plugin.getPlotManager().removePlotAt(PlotLocation.fromWorldLocation(player.getLocation()));
+		player.sendMessage(ChatColor.GREEN + "Successfully unclaimed plot");
+	}
+	
 }

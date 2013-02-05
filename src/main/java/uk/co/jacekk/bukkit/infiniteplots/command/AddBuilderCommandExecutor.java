@@ -51,4 +51,45 @@ public class AddBuilderCommandExecutor extends BaseCommandExecutor<InfinitePlots
 		player.sendMessage(ChatColor.GREEN + "Added " + args[0] + " as a builder to your plot");
 	}
 	
+	@SubCommandHandler(parent = "iplot", name = "removebuilder")
+	public void plotRemovebuilder(CommandSender sender, String label, String[] args) {
+		if (!(sender instanceof Player)){
+			sender.sendMessage(ChatColor.RED + "This command can only be used in game");
+			return;
+		}
+		
+		if (args.length == 0){
+			sender.sendMessage(ChatColor.RED + "Must supply a players name");
+			return;
+		}
+		
+		Player player = (Player)sender;
+		
+		Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(player.getLocation()));
+		
+		if (plot == null){
+			player.sendMessage(ChatColor.RED + "There is no plot at this location");
+			return;
+		}
+		
+		if (!plot.getAdmin().equalsIgnoreCase(player.getName())){
+			player.sendMessage(ChatColor.RED + "You do not own this plot");
+		}
+		
+		if (args[0].equalsIgnoreCase("all")){
+			plot.removeAllBuilders();
+			player.sendMessage(ChatColor.GREEN + "Removed all builders from your plot");
+			return;
+		}
+		
+		if (!(plot.getBuilders().contains(args[0]))){
+			player.sendMessage(ChatColor.RED + args[0] + " is not a builder on your plot");
+			return;
+		}
+		
+		plot.removeBuilder(args[0]);
+		
+		player.sendMessage(ChatColor.GREEN + "Removed " + args[0] + " from your plot");
+	}
+	
 }
