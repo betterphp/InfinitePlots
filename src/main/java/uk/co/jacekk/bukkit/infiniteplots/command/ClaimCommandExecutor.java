@@ -33,6 +33,7 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		}
 		
 		plot.setAdmin(player.getName());
+		plot.createSigns();
 		
 		player.sendMessage(ChatColor.GREEN + "Plot claimed");
 	}
@@ -57,6 +58,8 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 		}
 		
+		plot.removeSigns();
+		plot.regenerate();
 		plugin.getPlotManager().removePlotAt(PlotLocation.fromWorldLocation(player.getLocation()));
 		
 		player.sendMessage(ChatColor.GREEN + "Successfully unclaimed plot");

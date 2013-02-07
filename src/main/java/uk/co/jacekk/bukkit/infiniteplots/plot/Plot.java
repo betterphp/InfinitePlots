@@ -7,6 +7,7 @@ import java.util.List;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.Sign;
 
 import uk.co.jacekk.bukkit.baseplugin.v9.BaseObject;
 import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfig;
@@ -197,4 +198,73 @@ public class Plot extends BaseObject<InfinitePlots> {
 		}
 	}
 	
+	
+	public void createSigns()
+	{
+		int[] buildLimits = this.getBuildLimits();
+		int x3 = buildLimits[0];
+		int z3 = buildLimits[1] + (InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE) - 7);
+		int x4 = buildLimits[2];
+		int z4 = buildLimits[3] - (InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE) - 7);
+		int y = plugin.config.getInt(Config.GRID_HEIGHT);
+		World world = plugin.getServer().getWorld(this.getLocation().getWorldName());
+		
+		Block cornerOne = world.getBlockAt(buildLimits[0] - 1, y+2, buildLimits[1] - 1);
+		Block cornerTwo = world.getBlockAt(buildLimits[2] + 1, y+2, buildLimits[3] + 1);
+		Block cornerThree = world.getBlockAt(x3 - 1, y+2, z3);
+		Block cornerFour = world.getBlockAt(x4 + 1, y+2, z4);
+
+		cornerOne.setType(Material.SIGN_POST);
+		cornerTwo.setType(Material.SIGN_POST);
+		cornerThree.setType(Material.SIGN_POST);
+		cornerFour.setType(Material.SIGN_POST);
+		
+		//north west
+		Sign signOne = (Sign)cornerOne.getState();
+		//south east
+		Sign signTwo = (Sign)cornerTwo.getState();
+		//north east
+		Sign signThree = (Sign)cornerThree.getState();
+		//south west
+		Sign signFour = (Sign)cornerFour.getState();
+		
+		signOne.setRawData((byte) 0x6);
+		signTwo.setRawData((byte) 0xE);
+		signThree.setRawData((byte) 0x2);
+		signFour.setRawData((byte) 0xA);
+		
+		signOne.setLine(1, plugin.config.getString(Config.OWNER_STRING));
+		signOne.setLine(2, this.getAdmin());
+		signTwo.setLine(1, plugin.config.getString(Config.OWNER_STRING));
+		signTwo.setLine(2, this.getAdmin());
+		signThree.setLine(1, plugin.config.getString(Config.OWNER_STRING));
+		signThree.setLine(2, this.getAdmin());
+		signFour.setLine(1, plugin.config.getString(Config.OWNER_STRING));
+		signFour.setLine(2, this.getAdmin());
+		
+		signOne.update();
+		signTwo.update();
+		signThree.update();
+		signFour.update();
+	}
+	
+	public void removeSigns() {
+		int[] buildLimits = this.getBuildLimits();
+		int x3 = buildLimits[0];
+		int z3 = buildLimits[1] + (InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE) - 7);
+		int x4 = buildLimits[2];
+		int z4 = buildLimits[3] - (InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE) - 7);
+		int y = plugin.config.getInt(Config.GRID_HEIGHT);
+		World world = plugin.getServer().getWorld(this.getLocation().getWorldName());
+		
+		Block cornerOne = world.getBlockAt(buildLimits[0] - 1, y+2, buildLimits[1] - 1);
+		Block cornerTwo = world.getBlockAt(buildLimits[2] + 1, y+2, buildLimits[3] + 1);
+		Block cornerThree = world.getBlockAt(x3 - 1, y+2, z3);
+		Block cornerFour = world.getBlockAt(x4 + 1, y+2, z4);
+
+		cornerOne.setType(Material.AIR);
+		cornerTwo.setType(Material.AIR);
+		cornerThree.setType(Material.AIR);
+		cornerFour.setType(Material.AIR);
+	}
 }

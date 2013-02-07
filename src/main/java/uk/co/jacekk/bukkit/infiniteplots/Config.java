@@ -11,6 +11,8 @@ public class Config {
 	
 	public static final PluginConfigKey GRID_SIZE				= new PluginConfigKey("plots.size",				32);
 	public static final PluginConfigKey GRID_HEIGHT				= new PluginConfigKey("plots.height",			20);
+	public static final PluginConfigKey USE_SIGNS				= new PluginConfigKey("plots.signs",			true);
+	public static final PluginConfigKey OWNER_STRING			= new PluginConfigKey("plots.owner-prefix",		"Plot Owner");
 	
 	public static final PluginConfigKey BLOCKS_PATH				= new PluginConfigKey("blocks.path",			Material.DOUBLE_STEP.getId());
 	public static final PluginConfigKey BLOCKS_PATH_DATA		= new PluginConfigKey("blocks.path-data", 		0);
