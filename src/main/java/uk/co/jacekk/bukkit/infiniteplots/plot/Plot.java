@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
+import org.bukkit.entity.Player;
 
 import uk.co.jacekk.bukkit.baseplugin.v9.BaseObject;
 import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfig;
@@ -133,14 +134,14 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * @return True if the player can build, false if not.
 	 */
 	public boolean canBuild(String playerName){
-		return this.getAdmin().equalsIgnoreCase(playerName) || this.getBuilders().contains(playerName);
+		return (this.getAdmin().equalsIgnoreCase(playerName) || this.getBuilders().contains(playerName)) && this.withinPlot(playerName);
 	}
 	
 	/**
 	 * Checks to see if a specific flag is enabled for this plot.
 	 * 
 	 * <p>
-	 *  An enabled flag will allow the event it describes to take place,
+	 * An enabled flag will allow the event it describes to take place,
 	 * </p>
 	 * 
 	 * @param flag The flag to check
@@ -154,7 +155,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * Sets a flag for this plot.
 	 * 
 	 * <p>
-	 *  An enabled flag will allow the event it describes to take place,
+	 * An enabled flag will allow the event it describes to take place,
 	 * </p>
 	 * 
 	 * @param flag The flag to set.
@@ -198,9 +199,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 		}
 	}
 	
-	
-	public void createSigns()
-	{
+	public void createSigns(){
 		int[] buildLimits = this.getBuildLimits();
 		int x3 = buildLimits[0];
 		int z3 = buildLimits[1] + (InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE) - 7);
@@ -209,24 +208,24 @@ public class Plot extends BaseObject<InfinitePlots> {
 		int y = plugin.config.getInt(Config.GRID_HEIGHT);
 		World world = plugin.getServer().getWorld(this.getLocation().getWorldName());
 		
-		Block cornerOne = world.getBlockAt(buildLimits[0] - 1, y+2, buildLimits[1] - 1);
-		Block cornerTwo = world.getBlockAt(buildLimits[2] + 1, y+2, buildLimits[3] + 1);
-		Block cornerThree = world.getBlockAt(x3 - 1, y+2, z3);
-		Block cornerFour = world.getBlockAt(x4 + 1, y+2, z4);
-
+		Block cornerOne = world.getBlockAt(buildLimits[0] - 1, y + 2, buildLimits[1] - 1);
+		Block cornerTwo = world.getBlockAt(buildLimits[2] + 1, y + 2, buildLimits[3] + 1);
+		Block cornerThree = world.getBlockAt(x3 - 1, y + 2, z3);
+		Block cornerFour = world.getBlockAt(x4 + 1, y + 2, z4);
+		
 		cornerOne.setType(Material.SIGN_POST);
 		cornerTwo.setType(Material.SIGN_POST);
 		cornerThree.setType(Material.SIGN_POST);
 		cornerFour.setType(Material.SIGN_POST);
 		
-		//north west
-		Sign signOne = (Sign)cornerOne.getState();
-		//south east
-		Sign signTwo = (Sign)cornerTwo.getState();
-		//north east
-		Sign signThree = (Sign)cornerThree.getState();
-		//south west
-		Sign signFour = (Sign)cornerFour.getState();
+		// north west
+		Sign signOne = (Sign) cornerOne.getState();
+		// south east
+		Sign signTwo = (Sign) cornerTwo.getState();
+		// north east
+		Sign signThree = (Sign) cornerThree.getState();
+		// south west
+		Sign signFour = (Sign) cornerFour.getState();
 		
 		signOne.setRawData((byte) 0x6);
 		signTwo.setRawData((byte) 0xE);
@@ -248,7 +247,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 		signFour.update();
 	}
 	
-	public void removeSigns() {
+	public void removeSigns(){
 		int[] buildLimits = this.getBuildLimits();
 		int x3 = buildLimits[0];
 		int z3 = buildLimits[1] + (InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE) - 7);
@@ -257,14 +256,26 @@ public class Plot extends BaseObject<InfinitePlots> {
 		int y = plugin.config.getInt(Config.GRID_HEIGHT);
 		World world = plugin.getServer().getWorld(this.getLocation().getWorldName());
 		
-		Block cornerOne = world.getBlockAt(buildLimits[0] - 1, y+2, buildLimits[1] - 1);
-		Block cornerTwo = world.getBlockAt(buildLimits[2] + 1, y+2, buildLimits[3] + 1);
-		Block cornerThree = world.getBlockAt(x3 - 1, y+2, z3);
-		Block cornerFour = world.getBlockAt(x4 + 1, y+2, z4);
-
+		Block cornerOne = world.getBlockAt(buildLimits[0] - 1, y + 2, buildLimits[1] - 1);
+		Block cornerTwo = world.getBlockAt(buildLimits[2] + 1, y + 2, buildLimits[3] + 1);
+		Block cornerThree = world.getBlockAt(x3 - 1, y + 2, z3);
+		Block cornerFour = world.getBlockAt(x4 + 1, y + 2, z4);
+		
 		cornerOne.setType(Material.AIR);
 		cornerTwo.setType(Material.AIR);
 		cornerThree.setType(Material.AIR);
 		cornerFour.setType(Material.AIR);
+	}
+	
+	private boolean withinPlot(String playerName){
+		Player player = plugin.getServer().getPlayer(playerName);
+		int x = player.getLocation().getBlockX();
+		int z = player.getLocation().getBlockZ();
+		
+		if ((x >= this.getBuildLimits()[0] && x <= this.getBuildLimits()[2]) && (z >= this.getBuildLimits()[1] && z <= this.getBuildLimits()[3])){
+			return true;
+		}
+		
+		return false;
 	}
 }
