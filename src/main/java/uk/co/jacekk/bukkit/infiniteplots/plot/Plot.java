@@ -25,12 +25,16 @@ public class Plot extends BaseObject<InfinitePlots> {
 	private final PluginConfig config;
 	private final PlotLocation location;
 	
+	private int[] buildLimits;
+	
 	public Plot(InfinitePlots plugin, File configFile, PluginConfig config){
 		super(plugin);
 		
 		this.configFile = configFile;
 		this.config = config;
 		this.location = new PlotLocation(config.getString(PlotConfig.LOCATION_WORLD_NAME), config.getInt(PlotConfig.LOCATION_X), config.getInt(PlotConfig.LOCATION_Z));
+		
+		this.buildLimits = null;
 	}
 	
 	/**
@@ -57,12 +61,16 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * @return An array of X,Z coordinates [x1, z1, x2, z2]
 	 */
 	public int[] getBuildLimits(){
-		int x1 = (int) (Math.floor(((this.location.getX() * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) + 4);
-		int z1 = (int) (Math.floor(((this.location.getZ() * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) + 4);
-		int x2 = x1 + InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE) - 8;
-		int z2 = z1 + InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE) - 8;
-		int[] ret = {x1, z1, x2, z2};
-		return ret;
+		if (this.buildLimits == null){
+			int x1 = (int) (Math.floor(((this.location.getX() * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) + 4);
+			int z1 = (int) (Math.floor(((this.location.getZ() * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) / InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) * InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE)) + 4);
+			int x2 = x1 + InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE) - 8;
+			int z2 = z1 + InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE) - 8;
+			
+			this.buildLimits = new int[]{x1, z1, x2, z2};
+		}
+		
+		return this.buildLimits;
 	}
 	
 	/**
