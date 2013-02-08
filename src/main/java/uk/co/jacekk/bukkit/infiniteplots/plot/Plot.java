@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -131,6 +132,21 @@ public class Plot extends BaseObject<InfinitePlots> {
 	}
 	
 	/**
+	 * Checks to see if a player is within the buildable area of a plot.
+	 * 
+	 * @param location The {@link Location} to check.
+	 * @return True if the player is in the area false if not.
+	 */
+	public boolean withinBuildableArea(Location location){
+		int x = location.getBlockX();
+		int z = location.getBlockZ();
+		
+		int[] buildLimits = this.getBuildLimits();
+		
+		return (x >= buildLimits[0] && x <= buildLimits[2] && z >= buildLimits[1] && z <= buildLimits[3]);
+	}
+	
+	/**
 	 * Checks to see if a player can build in this plot.
 	 * 
 	 * <p>
@@ -142,7 +158,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * @return True if the player can build, false if not.
 	 */
 	public boolean canBuild(String playerName){
-		return (this.getAdmin().equalsIgnoreCase(playerName) || this.getBuilders().contains(playerName)) && this.withinPlot(playerName);
+		return (this.getAdmin().equalsIgnoreCase(playerName) || this.getBuilders().contains(playerName.toLowerCase()));
 	}
 	
 	/**
@@ -280,24 +296,6 @@ public class Plot extends BaseObject<InfinitePlots> {
 		cornerTwo.setType(Material.AIR);
 		cornerThree.setType(Material.AIR);
 		cornerFour.setType(Material.AIR);
-	}
-	
-	/**
-	 * Checks to see if a player is within the buildable area of a plot.
-	 * 
-	 * @param playerName The name of the player.
-	 * @return True if the player is in the area false if not.
-	 */
-	private boolean withinPlot(String playerName){
-		Player player = plugin.getServer().getPlayer(playerName);
-		int x = player.getLocation().getBlockX();
-		int z = player.getLocation().getBlockZ();
-		
-		if ((x >= this.getBuildLimits()[0] && x <= this.getBuildLimits()[2]) && (z >= this.getBuildLimits()[1] && z <= this.getBuildLimits()[3])){
-			return true;
-		}
-		
-		return false;
 	}
 	
 }
