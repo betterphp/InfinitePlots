@@ -65,7 +65,7 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			return;
 		}
 		
-		if (!Permission.PLOT_UNCLAIM_OTHERS.has(sender) || !plot.getAdmin().equalsIgnoreCase(player.getName())){
+		if (!Permission.PLOT_UNCLAIM_OTHERS.has(sender) && !plot.getAdmin().equalsIgnoreCase(player.getName())){
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 			return;
 		}
