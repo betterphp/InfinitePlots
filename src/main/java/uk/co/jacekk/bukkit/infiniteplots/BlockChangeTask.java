@@ -76,7 +76,6 @@ public class BlockChangeTask extends BaseTask<InfinitePlots> {
 		
 		if (this.changes.isEmpty()){
 			plugin.scheduler.cancelTask(this.taskID);
-			plugin.log.info("Task cancelled");
 		}
 	}
 	
