@@ -207,8 +207,12 @@ public class Plot extends BaseObject<InfinitePlots> {
 		}
 	}
 	
+	/**
+	 * Places a sign at all corners of the plot with the owners name.
+	 */
 	public void createSigns(){
 		int[] buildLimits = this.getBuildLimits();
+		
 		int x3 = buildLimits[0];
 		int z3 = buildLimits[1] + (InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE) - 7);
 		int x4 = buildLimits[2];
@@ -255,6 +259,9 @@ public class Plot extends BaseObject<InfinitePlots> {
 		signFour.update();
 	}
 	
+	/**
+	 * Removes the signs from the plot corners.
+	 */
 	public void removeSigns(){
 		int[] buildLimits = this.getBuildLimits();
 		int x3 = buildLimits[0];
@@ -275,6 +282,12 @@ public class Plot extends BaseObject<InfinitePlots> {
 		cornerFour.setType(Material.AIR);
 	}
 	
+	/**
+	 * Checks to see if a player is within the buildable area of a plot.
+	 * 
+	 * @param playerName The name of the player.
+	 * @return True if the player is in the area false if not.
+	 */
 	private boolean withinPlot(String playerName){
 		Player player = plugin.getServer().getPlayer(playerName);
 		int x = player.getLocation().getBlockX();
@@ -286,4 +299,5 @@ public class Plot extends BaseObject<InfinitePlots> {
 		
 		return false;
 	}
+	
 }
