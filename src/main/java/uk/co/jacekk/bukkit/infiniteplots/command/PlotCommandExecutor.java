@@ -19,6 +19,7 @@ public class PlotCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 	public void iplot(CommandSender sender, String label, String[] args){
 		sender.sendMessage(ChatColor.RED + "Usage: /" + label + " [action] <args>");
 		sender.sendMessage(ChatColor.RED + "Actions:");
+		
 		sender.sendMessage(ChatColor.RED + "  info - View the plots info");
 		sender.sendMessage(ChatColor.RED + "  claim - Claims this plot");
 		sender.sendMessage(ChatColor.RED + "  unclaim - Releases this plot");

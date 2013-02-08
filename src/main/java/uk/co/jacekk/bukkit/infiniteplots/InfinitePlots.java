@@ -42,6 +42,8 @@ public class InfinitePlots extends BasePlugin {
 		
 		this.plotManager = new PlotManager(this);
 		
+		this.permissionManager.registerPermissions(Permission.class);
+		
 		this.pluginManager.registerEvents(new WorldInitListener(this), this);
 		
 		this.pluginManager.registerEvents(new BuildListener(this), this);

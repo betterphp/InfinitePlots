@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.v9.event.BaseListener;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
+import uk.co.jacekk.bukkit.infiniteplots.Permission;
 import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;
@@ -22,14 +23,18 @@ public class BuildListener extends BaseListener<InfinitePlots> {
 		super(plugin);
 	}
 	
-	private boolean canBuild(String playerName, Location location){
+	private boolean canBuild(Player player, Location location){
 		if (!(location.getWorld().getGenerator() instanceof PlotsGenerator)){
+			return true;
+		}
+		
+		if (Permission.PLOT_BUILD_ALL.has(player)){
 			return true;
 		}
 		
 		Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(location));
 		
-		if (plot == null || !plot.canBuild(playerName)){
+		if (plot == null || !plot.canBuild(player.getName())){
 			return false;
 		}
 		
@@ -38,14 +43,14 @@ public class BuildListener extends BaseListener<InfinitePlots> {
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onBlockPlace(BlockPlaceEvent event){
-		if (!this.canBuild(event.getPlayer().getName(), event.getBlock().getLocation())){
+		if (!this.canBuild(event.getPlayer(), event.getBlock().getLocation())){
 			event.setCancelled(true);
 		}
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onBlockBreak(BlockBreakEvent event){
-		if (!this.canBuild(event.getPlayer().getName(), event.getBlock().getLocation())){
+		if (!this.canBuild(event.getPlayer(), event.getBlock().getLocation())){
 			event.setCancelled(true);
 		}
 	}
@@ -56,14 +61,14 @@ public class BuildListener extends BaseListener<InfinitePlots> {
 		Action action = event.getAction();
 		Location location = (action == Action.LEFT_CLICK_BLOCK || action == Action.RIGHT_CLICK_BLOCK) ? event.getClickedBlock().getLocation() : player.getLocation();
 		
-		if (!this.canBuild(event.getPlayer().getName(), location)){
+		if (!this.canBuild(event.getPlayer(), location)){
 			event.setCancelled(true);
 		}
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onInteractEntity(PlayerInteractEntityEvent event){
-		if (!this.canBuild(event.getPlayer().getName(), event.getRightClicked().getLocation())){
+		if (!this.canBuild(event.getPlayer(), event.getRightClicked().getLocation())){
 			event.setCancelled(true);
 		}
 	}

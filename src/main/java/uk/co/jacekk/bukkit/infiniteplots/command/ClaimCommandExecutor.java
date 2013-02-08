@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import uk.co.jacekk.bukkit.baseplugin.v9.command.BaseCommandExecutor;
 import uk.co.jacekk.bukkit.baseplugin.v9.command.SubCommandHandler;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
+import uk.co.jacekk.bukkit.infiniteplots.Permission;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;
 
@@ -18,6 +19,11 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 	
 	@SubCommandHandler(parent = "iplot", name = "claim")
 	public void plotClaim(CommandSender sender, String label, String[] args){
+		if (!Permission.PLOT_CLAIM.has(sender)){
+			sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
+			return;
+		}
+		
 		if (!(sender instanceof Player)){
 			sender.sendMessage(ChatColor.RED + "This command can only be used in game");
 			return;
@@ -40,6 +46,11 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 	
 	@SubCommandHandler(parent = "iplot", name = "unclaim")
 	public void plotUnclaim(CommandSender sender, String label, String args[]){
+		if (!Permission.PLOT_UNCLAIM.has(sender)){
+			sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
+			return;
+		}
+		
 		if (!(sender instanceof Player)){
 			sender.sendMessage(ChatColor.RED + "This command can only be used in game");
 			return;
@@ -56,6 +67,7 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		
 		if (!plot.getAdmin().equalsIgnoreCase(player.getName())){
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
+			return;
 		}
 		
 		plot.removeSigns();

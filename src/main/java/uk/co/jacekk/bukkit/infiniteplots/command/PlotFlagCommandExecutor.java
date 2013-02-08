@@ -11,6 +11,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9.command.BaseCommandExecutor;
 import uk.co.jacekk.bukkit.baseplugin.v9.command.CommandTabCompletion;
 import uk.co.jacekk.bukkit.baseplugin.v9.command.SubCommandHandler;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
+import uk.co.jacekk.bukkit.infiniteplots.Permission;
 import uk.co.jacekk.bukkit.infiniteplots.flag.PlotFlag;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;
@@ -34,6 +35,11 @@ public class PlotFlagCommandExecutor extends BaseCommandExecutor<InfinitePlots> 
 	@SubCommandHandler(parent = "iplot", name = "flag")
 	@CommandTabCompletion({"[getFlagList]", "true|false"})
 	public void plotFlag(CommandSender sender, String label, String[] args){
+		if (!Permission.PLOT_FLAG.has(sender)){
+			sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
+			return;
+		}
+		
 		if (!(sender instanceof Player)){
 			sender.sendMessage(ChatColor.RED + "This command can only be used in game");
 			return;
@@ -48,7 +54,7 @@ public class PlotFlagCommandExecutor extends BaseCommandExecutor<InfinitePlots> 
 			return;
 		}
 		
-		if (!plot.getAdmin().equalsIgnoreCase(player.getName())){
+		if (!Permission.PLOT_FLAG_OTHER.has(sender) && !plot.getAdmin().equalsIgnoreCase(player.getName())){
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 			return;
 		}
