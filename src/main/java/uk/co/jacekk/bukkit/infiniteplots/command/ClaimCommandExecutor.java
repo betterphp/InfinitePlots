@@ -72,6 +72,7 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		
 		plot.removeSigns();
 		plot.regenerate();
+		
 		plugin.getPlotManager().removePlotAt(PlotLocation.fromWorldLocation(player.getLocation()));
 		
 		player.sendMessage(ChatColor.GREEN + "Successfully unclaimed plot");
