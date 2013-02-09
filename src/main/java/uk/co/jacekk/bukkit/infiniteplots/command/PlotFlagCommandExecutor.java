@@ -70,7 +70,9 @@ public class PlotFlagCommandExecutor extends BaseCommandExecutor<InfinitePlots> 
 			return;
 		}
 		
-		if (PlotFlag.fromString(args[0]) == null){
+		PlotFlag flag = PlotFlag.getFromName(args[0]);
+		
+		if (flag == null){
 			player.sendMessage(ChatColor.RED + args[0] + " is not a valid plot flag");
 			return;
 		}
@@ -80,6 +82,7 @@ public class PlotFlagCommandExecutor extends BaseCommandExecutor<InfinitePlots> 
 			return;
 		}
 		
-		plot.setFlag(PlotFlag.fromString(args[0]), Boolean.valueOf(args[1]));
+		plot.setFlag(flag, (args[1].equalsIgnoreCase("true") || args[1].equalsIgnoreCase("allow") || args[1].equalsIgnoreCase("yes")));
 	}
+	
 }

@@ -4,6 +4,9 @@ import org.bukkit.permissions.PermissionDefault;
 
 import uk.co.jacekk.bukkit.baseplugin.v9.permissions.PluginPermission;
 
+/**
+ * The {@link PluginPermission} used to control access to various features.
+ */
 public class Permission {
 	
 	public static final PluginPermission PLOT_CLAIM				= new PluginPermission("infiniteplots.plot.claim",			PermissionDefault.TRUE,	"Allows the player to claim plots");

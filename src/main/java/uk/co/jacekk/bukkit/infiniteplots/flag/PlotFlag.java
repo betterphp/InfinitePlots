@@ -1,5 +1,7 @@
 package uk.co.jacekk.bukkit.infiniteplots.flag;
 
+import java.util.HashMap;
+
 import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfigKey;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotConfig;
 
@@ -25,11 +27,21 @@ public enum PlotFlag {
 	private PluginConfigKey configKey;
 	private String name;
 	
+	private static final HashMap<String, PlotFlag> nameMap;
+	
 	private PlotFlag(PluginConfigKey configKey){
 		this.configKey = configKey;
 		
 		String key = this.configKey.getKey();
 		this.name = key.substring(key.lastIndexOf('.') + 1);
+	}
+	
+	static{
+		nameMap = new HashMap<String, PlotFlag>();
+		
+		for (PlotFlag flag : values()){
+			nameMap.put(flag.getName(), flag);
+		}
 	}
 	
 	/**
@@ -50,13 +62,14 @@ public enum PlotFlag {
 		return this.name;
 	}
 	
-	public static PlotFlag fromString(String flag){
-		for (PlotFlag pflag : PlotFlag.values()){
-			if (pflag.name.equalsIgnoreCase(flag)){
-				return pflag;
-			}
-		}
-		
-		return null;
+	/**
+	 * Gets the plot flag from its name.
+	 * 
+	 * @param flag The name of the flag
+	 * @return The flag or null if an invalid name was used.
+	 */
+	public static PlotFlag getFromName(String name){
+		return nameMap.get(name);
 	}
+	
 }

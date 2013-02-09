@@ -50,10 +50,9 @@ public class PathPopulator extends BlockPopulator {
 					world.getBlockAt(x, y, z).setTypeIdAndData(this.pathId, this.pathData, false);
 					world.getBlockAt(x + 1, y, z).setTypeIdAndData(this.pathId, this.pathData, false);
 					world.getBlockAt(x + 2, y, z).setTypeIdAndData(this.pathId, this.pathData, false);
-					//Lower wall
+					
 					world.getBlockAt(x - 3, y, z).setTypeIdAndData(this.wallLowerId, this.wallLowerData, false);
 					world.getBlockAt(x + 3, y, z).setTypeIdAndData(this.wallLowerId, this.wallLowerData, false);
-					//Upper wall
 					world.getBlockAt(x - 3, y + 1, z).setTypeIdAndData(this.wallUpperId, this.wallUpperData, false);
 					world.getBlockAt(x + 3, y + 1, z).setTypeIdAndData(this.wallUpperId, this.wallUpperData, false);
 				}
@@ -65,10 +64,9 @@ public class PathPopulator extends BlockPopulator {
 					world.getBlockAt(x, y, z).setTypeIdAndData(this.pathId, this.pathData, false);
 					world.getBlockAt(x, y, z + 1).setTypeIdAndData(this.pathId, this.pathData, false);
 					world.getBlockAt(x, y, z + 2).setTypeIdAndData(this.pathId, this.pathData, false);
-					//Lower wall
+					
 					world.getBlockAt(x, y, z - 3).setTypeIdAndData(this.wallLowerId, this.wallLowerData, false);
 					world.getBlockAt(x, y, z + 3).setTypeIdAndData(this.wallLowerId, this.wallLowerData, false);
-					//Upper wall
 					world.getBlockAt(x, y + 1, z - 3).setTypeIdAndData(this.wallUpperId, this.wallUpperData, false);
 					world.getBlockAt(x, y + 1, z + 3).setTypeIdAndData(this.wallUpperId, this.wallUpperData, false);
 				}

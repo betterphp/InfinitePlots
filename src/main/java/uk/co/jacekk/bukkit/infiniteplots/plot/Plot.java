@@ -103,6 +103,21 @@ public class Plot extends BaseObject<InfinitePlots> {
 	}
 	
 	/**
+	 * Checks to see if a player can build in this plot.
+	 * 
+	 * <p>
+	 * A player that is not able to build should not be able to interact with
+	 * the environment in any way at all inside the plot area.
+	 * <p>
+	 * 
+	 * @param playerName The name of the player to test.
+	 * @return True if the player can build, false if not.
+	 */
+	public boolean canBuild(String playerName){
+		return (this.getAdmin().equalsIgnoreCase(playerName) || this.getBuilders().contains(playerName.toLowerCase()));
+	}
+	
+	/**
 	 * Adds a builder to this plot.
 	 * 
 	 * @param playerName The name of the player to add.
@@ -144,21 +159,6 @@ public class Plot extends BaseObject<InfinitePlots> {
 		int[] buildLimits = this.getBuildLimits();
 		
 		return (x >= buildLimits[0] && x <= buildLimits[2] && z >= buildLimits[1] && z <= buildLimits[3]);
-	}
-	
-	/**
-	 * Checks to see if a player can build in this plot.
-	 * 
-	 * <p>
-	 * A player that is not able to build should not be able to interact with
-	 * the environment in any way at all inside the plot area.
-	 * <p>
-	 * 
-	 * @param playerName The name of the player to test.
-	 * @return True if the player can build, false if not.
-	 */
-	public boolean canBuild(String playerName){
-		return (this.getAdmin().equalsIgnoreCase(playerName) || this.getBuilders().contains(playerName.toLowerCase()));
 	}
 	
 	/**
