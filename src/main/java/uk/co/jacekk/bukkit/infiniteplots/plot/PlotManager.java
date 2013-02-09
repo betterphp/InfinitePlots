@@ -1,7 +1,9 @@
 package uk.co.jacekk.bukkit.infiniteplots.plot;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import uk.co.jacekk.bukkit.baseplugin.v9.BaseObject;
 import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfig;
@@ -55,6 +57,42 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 	 */
 	public Plot getPlotAt(PlotLocation location){
 		return this.plots.get(location);
+	}
+	
+	/**
+	 * Gets all of the plots that a player is the owner of.
+	 * 
+	 * @param playerName The name of the player.
+	 * @return The list of plots they own.
+	 */
+	public List<Plot> getOwnedPlots(String playerName){
+		ArrayList<Plot> plots = new ArrayList<Plot>();
+		
+		for (Plot plot : this.plots.values()){
+			if (plot.getAdmin().equalsIgnoreCase(playerName)){
+				plots.add(plot);
+			}
+		}
+		
+		return plots;
+	}
+	
+	/**
+	 * Gets all of the plots that a player can build in.
+	 * 
+	 * @param playerName The name of the player.
+	 * @return The list of plots where they can build.
+	 */
+	public List<Plot> getBuildablePlots(String playerName){
+		ArrayList<Plot> plots = new ArrayList<Plot>();
+		
+		for (Plot plot : this.plots.values()){
+			if (plot.canBuild(playerName)){
+				plots.add(plot);
+			}
+		}
+		
+		return plots;
 	}
 	
 	/**
