@@ -48,6 +48,10 @@ public class PlotCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		if (Permission.PLOT_RESET.has(sender)){
 			sender.sendMessage(ChatColor.RED + "  reset - Resets the plot");
 		}
+		
+		if (Permission.PLOT_LIST.has(sender)){
+			sender.sendMessage(ChatColor.RED + "  list - Lists all owned plots");
+		}
 	}
 	
 }

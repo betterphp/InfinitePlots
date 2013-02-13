@@ -19,6 +19,8 @@ public class Permission {
 	public static final PluginPermission PLOT_INFO				= new PluginPermission("infiniteplots.plot.info",			PermissionDefault.TRUE,	"Allows the player to view plot info");
 	public static final PluginPermission PLOT_RESET				= new PluginPermission("infiniteplots.plot.reset",			PermissionDefault.TRUE,	"Allows the player to regenerate their plots");
 	public static final PluginPermission PLOT_RESET_OTHER		= new PluginPermission("infiniteplots.plot.reset.others",	PermissionDefault.OP,	"Allows the player to regenerate other players plots");
+	public static final PluginPermission PLOT_LIST				= new PluginPermission("infiniteplots.plot.list",			PermissionDefault.TRUE,	"Allows the player to list their plots");
+	public static final PluginPermission PLOT_LIST_OTHER		= new PluginPermission("infiniteplots.plot.list.others",	PermissionDefault.OP,	"Allows the player to list another players plots");
 	
 	public static final PluginPermission PLOT_BUILD_ALL			= new PluginPermission("infiniteplots.plot.build-all",		PermissionDefault.OP,	"Allows the player to build in plots they do not own");
 	

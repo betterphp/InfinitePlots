@@ -78,6 +78,25 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 	}
 	
 	/**
+	 * Gets all of the plots that a player is the owner of in a world.
+	 * 
+	 * @param playerName The name of the player.
+	 * @param worldName The name of the world.
+	 * @return The list of plots they own in that world.
+	 */
+	public List<Plot> getOwnedPlots(String playerName, String worldName){
+		ArrayList<Plot> plots = new ArrayList<Plot>();
+		
+		for (Plot plot : this.plots.values()){
+			if (plot.getAdmin().equalsIgnoreCase(playerName) && plot.getLocation().getWorldName().equals(worldName)){
+				plots.add(plot);
+			}
+		}
+		
+		return plots;
+	}
+	
+	/**
 	 * Gets all of the plots that a player can build in.
 	 * 
 	 * @param playerName The name of the player.

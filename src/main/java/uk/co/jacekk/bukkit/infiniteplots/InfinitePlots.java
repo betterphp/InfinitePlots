@@ -8,6 +8,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9.BasePlugin;
 import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfig;
 import uk.co.jacekk.bukkit.infiniteplots.command.AddBuilderCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.ClaimCommandExecutor;
+import uk.co.jacekk.bukkit.infiniteplots.command.ListCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.PlotCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.PlotFlagCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.PlotInfoCommandExecutor;
@@ -58,6 +59,7 @@ public class InfinitePlots extends BasePlugin {
 		this.commandManager.registerCommandExecutor(new AddBuilderCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new PlotFlagCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new PlotResetCommandExecutor(this));
+		this.commandManager.registerCommandExecutor(new ListCommandExecutor(this));
 	}
 	
 	public void onDisable(){
