@@ -41,6 +41,10 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		plot.setAdmin(player.getName());
 		plot.createSigns();
 		
+		if (args.length == 1){
+			plot.setName(args[0]);
+		}
+		
 		player.sendMessage(ChatColor.GREEN + "Plot claimed");
 	}
 	

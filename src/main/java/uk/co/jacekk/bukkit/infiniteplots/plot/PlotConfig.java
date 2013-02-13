@@ -13,6 +13,8 @@ public class PlotConfig {
 	public static final PluginConfigKey LOCATION_X			= new PluginConfigKey("location.x",				0);
 	public static final PluginConfigKey LOCATION_Z			= new PluginConfigKey("location.z",				0);
 	
+	public static final PluginConfigKey INFO_NAME			= new PluginConfigKey("info.name",				"plot");
+	
 	public static final PluginConfigKey AUTH_ADMIN_NAME		= new PluginConfigKey("auth.admin-name", 		"");
 	public static final PluginConfigKey AUTH_BUILDER_NAMES	= new PluginConfigKey("auth.builder-names", 	Arrays.asList());
 	

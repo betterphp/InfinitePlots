@@ -13,11 +13,11 @@ import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;
 
 public class InfoCommandExecutor extends BaseCommandExecutor<InfinitePlots>{
-
+	
 	public InfoCommandExecutor(InfinitePlots plugin) {
 		super(plugin);
 	}
-
+	
 	@SubCommandHandler(parent = "iplot", name = "info")
 	public void plotInfo(CommandSender sender, String label, String[] args){
 		if (!Permission.PLOT_INFO.has(sender)){
@@ -40,6 +40,7 @@ public class InfoCommandExecutor extends BaseCommandExecutor<InfinitePlots>{
 		}
 		
 		player.sendMessage(ChatColor.YELLOW + "Plot Information");
+		player.sendMessage(ChatColor.BLUE + "Name: " + ChatColor.RESET + plot.getName());
 		player.sendMessage(ChatColor.BLUE + "Location: " + ChatColor.RESET + plot.getLocation().getX() + ", " + plot.getLocation().getZ());
 
 		StringBuilder builders = new StringBuilder();

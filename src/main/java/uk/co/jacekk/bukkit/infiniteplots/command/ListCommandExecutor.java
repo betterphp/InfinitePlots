@@ -35,7 +35,7 @@ public class ListCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		player.sendMessage(ChatColor.GREEN + "Owned Plots:");
 		
 		for (Plot plot : plugin.getPlotManager().getOwnedPlots(playerName, worldName)){
-			player.sendMessage(ChatColor.GREEN + "  " + plot.getLocation().getX() + "," + plot.getLocation().getZ());
+			player.sendMessage(ChatColor.GREEN + "  " + plot.getLocation().getX() + "," + plot.getLocation().getZ() + " - " + plot.getName());
 		}
 	}
 	

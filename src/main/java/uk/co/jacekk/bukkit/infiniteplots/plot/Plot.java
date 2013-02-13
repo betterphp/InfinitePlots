@@ -57,6 +57,24 @@ public class Plot extends BaseObject<InfinitePlots> {
 	}
 	
 	/**
+	 * Gets the name of this plot
+	 * 
+	 * @return The plot name
+	 */
+	public String getName(){
+		return this.config.getString(PlotConfig.INFO_NAME);
+	}
+	
+	/**
+	 * Sets the name of this plot
+	 * 
+	 * @param name The new name for the plot
+	 */
+	public void setName(String name){
+		this.config.set(PlotConfig.INFO_NAME, name);
+	}
+	
+	/**
 	 * Gets the limits of the plot.
 	 * 
 	 * @return An array of X,Z coordinates [x1, z1, x2, z2]
