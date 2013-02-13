@@ -26,6 +26,7 @@ public class PlotCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		}
 		
 		if (Permission.PLOT_CLAIM.has(sender)){
+			sender.sendMessage(ChatColor.RED + "  name - Sets the name of a plot");
 			sender.sendMessage(ChatColor.RED + "  claim - Claims this plot");
 		}
 		
