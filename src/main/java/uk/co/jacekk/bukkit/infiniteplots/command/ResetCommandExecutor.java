@@ -11,9 +11,9 @@ import uk.co.jacekk.bukkit.infiniteplots.Permission;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;
 
-public class PlotResetCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
+public class ResetCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 	
-	public PlotResetCommandExecutor(InfinitePlots plugin){
+	public ResetCommandExecutor(InfinitePlots plugin){
 		super(plugin);
 	}
 	

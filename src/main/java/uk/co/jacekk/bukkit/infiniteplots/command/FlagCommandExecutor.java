@@ -16,9 +16,9 @@ import uk.co.jacekk.bukkit.infiniteplots.flag.PlotFlag;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;
 
-public class PlotFlagCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
+public class FlagCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 	
-	public PlotFlagCommandExecutor(InfinitePlots plugin){
+	public FlagCommandExecutor(InfinitePlots plugin){
 		super(plugin);
 	}
 	
