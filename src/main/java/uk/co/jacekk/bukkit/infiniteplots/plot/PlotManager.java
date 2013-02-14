@@ -115,6 +115,23 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 	}
 	
 	/**
+	 * Gets a plot by its name
+	 * 
+	 * @param playerName The name of the player owning the plot
+	 * @param plotName The name of the plot
+	 * @return The {@link Plot} or null if one was not found
+	 */
+	public Plot getPlotByName(String playerName, String plotName){
+		for (Plot plot : this.plots.values()){
+			if (plot.getAdmin().equalsIgnoreCase(playerName) && plot.getName().equals(plotName)){
+				return plot;
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
 	 * Creates a new plot, note that this is not a physical plot in
 	 * the world but rather an interface to the claim system.
 	 * 

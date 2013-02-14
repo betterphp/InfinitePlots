@@ -1,5 +1,6 @@
 package uk.co.jacekk.bukkit.infiniteplots.plot;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import uk.co.jacekk.bukkit.infiniteplots.Config;
@@ -31,6 +32,18 @@ public class PlotLocation {
 		int z = (int) Math.floor((double) worldLocation.getBlockZ() / (double) InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE));
 		
 		return new PlotLocation(worldLocation.getWorld().getName(), x, z);
+	}
+	
+	/**
+	 * Gets the location in the world.
+	 * 
+	 * @return The {@link Location}
+	 */
+	public Location getWorldLocation(){
+		int x = (int) Math.floor((double) this.x * (double) InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE));
+		int z = (int) Math.floor((double) this.z * (double) InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE));
+		
+		return new Location(Bukkit.getWorld(this.worldName), x, InfinitePlots.getInstance().config.getInt(Config.GRID_HEIGHT) + 2, z);
 	}
 	
 	/**
