@@ -48,9 +48,9 @@ public class NameCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			return;
 		}
 		
-		plot.setAdmin(args[0]);
+		plot.setName(args[0]);
 		
-		sender.sendMessage(ChatColor.GREEN + "NAme set to '" + args[0] + "'");
+		sender.sendMessage(ChatColor.GREEN + "Name set to '" + args[0] + "'");
 	}
 	
 }
