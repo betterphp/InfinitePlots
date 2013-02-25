@@ -16,6 +16,10 @@
 			<id>bukkit-repo</id>
 			<url>http://repo.bukkit.org/content/groups/public/</url>
 		</repository>
+		<repository>
+        		<id>sk89q</id>
+        		<url>http://maven.sk89q.com/repo/com</url>
+        </repository>
 	</repositories>
 	
 	<dependencies>
@@ -39,6 +43,13 @@
 			<version>1.5-R0.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
+		
+		 <dependency>
+		    	<groupId>sk89q</groupId>
+		    	<artifactId>worldguard</artifactId>
+		    	<version>5.7.2-SNAPSHOT</version>
+		    	<type>jar</type>
+	    </dependency>
 	</dependencies>
 	
 	<build>
