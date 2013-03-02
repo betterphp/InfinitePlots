@@ -9,6 +9,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9.command.SubCommandHandler;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.Permission;
 import uk.co.jacekk.bukkit.infiniteplots.flag.PlotFlag;
+import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;
 
@@ -31,6 +32,11 @@ public class InfoCommandExecutor extends BaseCommandExecutor<InfinitePlots>{
 		}
 		
 		Player player = (Player)sender;
+		
+		if (!(player.getWorld().getGenerator() instanceof PlotsGenerator)){
+			player.sendMessage(ChatColor.RED + "You must be in a plot world");
+			return;
+		}
 		
 		Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(player.getLocation()));
 		
