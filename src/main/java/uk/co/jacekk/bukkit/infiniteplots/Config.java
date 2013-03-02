@@ -16,6 +16,8 @@ public class Config {
 	public static final PluginConfigKey RESET_BLOCK_DELAY		= new PluginConfigKey("plots.reset.delay",		5);
 	public static final PluginConfigKey RESET_BLOCK_PERTICK		= new PluginConfigKey("plots.reset.pertick",	2000);
 	
+	public static final PluginConfigKey MAX_CLAIMS				= new PluginConfigKey("claim.max",				25);
+	
 	public static final PluginConfigKey BLOCKS_PATH				= new PluginConfigKey("blocks.path",			Material.DOUBLE_STEP.getId());
 	public static final PluginConfigKey BLOCKS_PATH_DATA		= new PluginConfigKey("blocks.path-data", 		0);
 	public static final PluginConfigKey BLOCKS_LOWER_WALL		= new PluginConfigKey("blocks.lower-wall",		Material.SMOOTH_BRICK.getId());

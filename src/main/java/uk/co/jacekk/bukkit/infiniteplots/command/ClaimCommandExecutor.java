@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import uk.co.jacekk.bukkit.baseplugin.v9.command.BaseCommandExecutor;
 import uk.co.jacekk.bukkit.baseplugin.v9.command.SubCommandHandler;
+import uk.co.jacekk.bukkit.infiniteplots.Config;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.Permission;
 import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
@@ -34,6 +35,11 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		
 		if (!(player.getWorld().getGenerator() instanceof PlotsGenerator)){
 			player.sendMessage(ChatColor.RED + "You must be in a plot world");
+			return;
+		}
+		
+		if (!Permission.PLOT_BYPASS_CLAIM_LIMIT.has(player) && plugin.getPlotManager().getOwnedPlots(player.getName()).size() >= plugin.config.getInt(Config.MAX_CLAIMS)){
+			player.sendMessage(ChatColor.RED + "You have already claimed the maximum number of plots");
 			return;
 		}
 		
