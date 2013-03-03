@@ -16,6 +16,7 @@ public class Config {
 	public static final PluginConfigKey RESET_BLOCK_DELAY		= new PluginConfigKey("plots.reset.delay",		5);
 	public static final PluginConfigKey RESET_BLOCK_PERTICK		= new PluginConfigKey("plots.reset.pertick",	2000);
 	
+	public static final PluginConfigKey PROTECT_PATHS			= new PluginConfigKey("claim.protect-paths",	false);
 	public static final PluginConfigKey MAX_CLAIMS				= new PluginConfigKey("claim.max",				25);
 	
 	public static final PluginConfigKey BLOCKS_PATH				= new PluginConfigKey("blocks.path",			Material.DOUBLE_STEP.getId());

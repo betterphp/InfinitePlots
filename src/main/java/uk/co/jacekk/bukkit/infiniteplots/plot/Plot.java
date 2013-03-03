@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
+import org.bukkit.entity.Player;
 
 import uk.co.jacekk.bukkit.baseplugin.v9.BaseObject;
 import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfig;
@@ -16,6 +17,7 @@ import uk.co.jacekk.bukkit.infiniteplots.BlockChangeTask;
 import uk.co.jacekk.bukkit.infiniteplots.Config;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.flag.PlotFlag;
+import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation.Direction;
 
 /**
  * Represents a plot in the world.
@@ -26,6 +28,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	private final PluginConfig config;
 	private final PlotLocation location;
 	
+	private int[] plotLimits;
 	private int[] buildLimits;
 	
 	public Plot(InfinitePlots plugin, File configFile, PluginConfig config){
@@ -35,12 +38,13 @@ public class Plot extends BaseObject<InfinitePlots> {
 		this.config = config;
 		this.location = new PlotLocation(config.getString(PlotConfig.LOCATION_WORLD_NAME), config.getInt(PlotConfig.LOCATION_X), config.getInt(PlotConfig.LOCATION_Z));
 		
-		int x1 = (int) (Math.floor(((this.location.getX() * plugin.config.getInt(Config.GRID_SIZE)) / plugin.config.getInt(Config.GRID_SIZE)) * plugin.config.getInt(Config.GRID_SIZE)) + 4);
-		int z1 = (int) (Math.floor(((this.location.getZ() * plugin.config.getInt(Config.GRID_SIZE)) / plugin.config.getInt(Config.GRID_SIZE)) * plugin.config.getInt(Config.GRID_SIZE)) + 4);
-		int x2 = x1 + plugin.config.getInt(Config.GRID_SIZE) - 8;
-		int z2 = z1 + plugin.config.getInt(Config.GRID_SIZE) - 8;
+		int x1 = (int) Math.floor(((this.location.getX() * plugin.config.getInt(Config.GRID_SIZE)) / plugin.config.getInt(Config.GRID_SIZE)) * plugin.config.getInt(Config.GRID_SIZE));
+		int z1 = (int) Math.floor(((this.location.getZ() * plugin.config.getInt(Config.GRID_SIZE)) / plugin.config.getInt(Config.GRID_SIZE)) * plugin.config.getInt(Config.GRID_SIZE));
+		int x2 = x1 + plugin.config.getInt(Config.GRID_SIZE);
+		int z2 = z1 + plugin.config.getInt(Config.GRID_SIZE);
 		
-		this.buildLimits = new int[]{x1, z1, x2, z2};
+		this.plotLimits = new int[]{x1, z1, x2, z2};
+		this.buildLimits = new int[]{x1 + 4, z1 + 4, x2 - 4, z2 - 4};
 	}
 	
 	/**
@@ -162,17 +166,46 @@ public class Plot extends BaseObject<InfinitePlots> {
 	
 	/**
 	 * Checks to see if a player is within the buildable area of a plot.
-	 * 
+	 *
+	 * @param player The {@link Player} to check.
 	 * @param location The {@link Location} to check.
 	 * @return True if the player is in the area false if not.
 	 */
-	public boolean withinBuildableArea(Location location){
+	public boolean withinBuildableArea(Player player, Location location){
+		String playerName = player.getName();
 		int x = location.getBlockX();
 		int z = location.getBlockZ();
 		
-		int[] buildLimits = this.getBuildLimits();
+		if (plugin.config.getBoolean(Config.PROTECT_PATHS)){
+			return (x < this.buildLimits[0] || z < this.buildLimits[1] || x > this.buildLimits[2] || z > this.buildLimits[3]);
+		}
 		
-		return (x >= buildLimits[0] && x <= buildLimits[2] && z >= buildLimits[1] && z <= buildLimits[3]);
+		if (x < this.plotLimits[0] || z < this.plotLimits[1] || x > this.plotLimits[2] || z > this.plotLimits[3]){
+			return false;
+		}
+		
+		Plot plot0 = plugin.getPlotManager().getPlotAt(this.location.getRelative(Direction.SOUTH));
+		Plot plot1 = plugin.getPlotManager().getPlotAt(this.location.getRelative(Direction.WEST));
+		Plot plot2 = plugin.getPlotManager().getPlotAt(this.location.getRelative(Direction.NORTH));
+		Plot plot3 = plugin.getPlotManager().getPlotAt(this.location.getRelative(Direction.EAST));
+		
+		if ((plot0 == null || !plot0.canBuild(playerName)) && x < this.buildLimits[0]){
+			return false;
+		}
+		
+		if ((plot1 == null || !plot1.canBuild(playerName)) && z < this.buildLimits[1]){
+			return false;
+		}
+		
+		if ((plot2 == null || !plot2.canBuild(playerName)) && x > this.buildLimits[2]){
+			return false;
+		}
+		
+		if ((plot3 == null || !plot3.canBuild(playerName)) && z > this.buildLimits[3]){
+			return false;
+		}
+		
+		return true;
 	}
 	
 	/**

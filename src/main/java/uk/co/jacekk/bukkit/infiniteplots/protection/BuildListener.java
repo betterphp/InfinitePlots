@@ -38,7 +38,7 @@ public class BuildListener extends BaseListener<InfinitePlots> {
 			return false;
 		}
 		
-		return plot.withinBuildableArea(location);
+		return plot.withinBuildableArea(player, location);
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)

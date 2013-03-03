@@ -12,6 +12,34 @@ import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
  */
 public class PlotLocation {
 	
+	/**
+	 * Represents a direction in plot space, north is the +x direction.
+	 */
+	public enum Direction {
+		
+		NORTH(1, 0),
+		EAST(0, 1),
+		SOUTH(-1, 0),
+		WEST(0, -1);
+		
+		private int dx;
+		private int dz;
+		
+		private Direction(int dx, int dz){
+			this.dx = dx;
+			this.dz = dz;
+		}
+		
+		public int getDx(){
+			return this.dx;
+		}
+		
+		public int getDz(){
+			return this.dz;
+		}
+		
+	}
+	
 	private String worldName;
 	private int x, z;
 	
@@ -71,6 +99,27 @@ public class PlotLocation {
 	 */
 	public int getZ(){
 		return this.z;
+	}
+	
+	/**
+	 * Gets a new plot location relative to this one.
+	 * 
+	 * @param direction The direction, north is the +x direction
+	 * @param distance The number of plots away from this one to get the location for
+	 * @return The new {@link PlotLocation}
+	 */
+	public PlotLocation getRelative(Direction direction, int distance){
+		return new PlotLocation(this.worldName, this.x + direction.getDx() * distance, this.z + direction.getDz() * distance);
+	}
+	
+	/**
+	 * Gets a new plot location relative to this one.
+	 * 
+	 * @param direction The direction, north is the +x direction
+	 * @return The new {@link PlotLocation}
+	 */
+	public PlotLocation getRelative(Direction direction){
+		return this.getRelative(direction, 1);
 	}
 	
 	@Override
