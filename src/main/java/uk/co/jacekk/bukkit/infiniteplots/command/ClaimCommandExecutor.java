@@ -38,7 +38,7 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			return;
 		}
 		
-		if (!Permission.PLOT_BYPASS_CLAIM_LIMIT.has(player) && plugin.getPlotManager().getOwnedPlots(player.getName()).size() >= plugin.config.getInt(Config.MAX_CLAIMS)){
+		if (!Permission.PLOT_BYPASS_CLAIM_LIMIT.has(player) && plugin.getPlotManager().getOwnedPlots(player.getName()).size() >= plugin.config.getInt(Config.CLAIM_MAX)){
 			player.sendMessage(ChatColor.RED + "You have already claimed the maximum number of plots");
 			return;
 		}

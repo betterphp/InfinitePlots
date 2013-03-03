@@ -176,7 +176,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 		int x = location.getBlockX();
 		int z = location.getBlockZ();
 		
-		if (plugin.config.getBoolean(Config.PROTECT_PATHS)){
+		if (plugin.config.getBoolean(Config.CLAIM_PROTECT_PATHS)){
 			return (x < this.buildLimits[0] || z < this.buildLimits[1] || x > this.buildLimits[2] || z > this.buildLimits[3]);
 		}
 		
@@ -265,7 +265,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 			}
 		}
 		
-		task.start(plugin.config.getInt(Config.RESET_BLOCK_DELAY), plugin.config.getInt(Config.RESET_BLOCK_PERTICK));
+		task.start(plugin.config.getInt(Config.RESET_DELAY), plugin.config.getInt(Config.RESET_PERTICK));
 	}
 	
 	/**
@@ -305,13 +305,13 @@ public class Plot extends BaseObject<InfinitePlots> {
 		signThree.setRawData((byte) 0x2);
 		signFour.setRawData((byte) 0xA);
 		
-		signOne.setLine(1, plugin.config.getString(Config.OWNER_STRING));
+		signOne.setLine(1, plugin.config.getString(Config.OWNER_PREFIX));
 		signOne.setLine(2, this.getAdmin());
-		signTwo.setLine(1, plugin.config.getString(Config.OWNER_STRING));
+		signTwo.setLine(1, plugin.config.getString(Config.OWNER_PREFIX));
 		signTwo.setLine(2, this.getAdmin());
-		signThree.setLine(1, plugin.config.getString(Config.OWNER_STRING));
+		signThree.setLine(1, plugin.config.getString(Config.OWNER_PREFIX));
 		signThree.setLine(2, this.getAdmin());
-		signFour.setLine(1, plugin.config.getString(Config.OWNER_STRING));
+		signFour.setLine(1, plugin.config.getString(Config.OWNER_PREFIX));
 		signFour.setLine(2, this.getAdmin());
 		
 		signOne.update();
