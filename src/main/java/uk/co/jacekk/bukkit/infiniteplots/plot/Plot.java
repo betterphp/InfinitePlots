@@ -177,7 +177,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 		int z = location.getBlockZ();
 		
 		if (plugin.config.getBoolean(Config.CLAIM_PROTECT_PATHS)){
-			return (x < this.buildLimits[0] || z < this.buildLimits[1] || x > this.buildLimits[2] || z > this.buildLimits[3]);
+			return (x > this.buildLimits[0] && z > this.buildLimits[1] && x < this.buildLimits[2] && z < this.buildLimits[3]);
 		}
 		
 		if (x < this.plotLimits[0] || z < this.plotLimits[1] || x > this.plotLimits[2] || z > this.plotLimits[3]){
