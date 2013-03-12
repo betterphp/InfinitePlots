@@ -18,22 +18,28 @@ public class PlotsGenerator extends ChunkGenerator {
 	
 	private int size;
 	private int height;
+	
 	private byte pathId;
 	private byte pathData;
 	private byte wallLowerId;
 	private byte wallLowerData;
 	private byte wallUpperId;
 	private byte wallUpperData;
+	private byte surfaceId;
+	private byte groundId;
 	
-	public PlotsGenerator(int size, int height, byte pathId, byte pathData, byte wallLowerId, byte wallLowerData, byte wallUpperId, byte wallUpperData){
+	public PlotsGenerator(int size, int height, byte pathId, byte pathData, byte wallLowerId, byte wallLowerData, byte wallUpperId, byte wallUpperData, byte surfaceId, byte groundId){
 		this.size = size;
 		this.height = height;
+		
 		this.pathId = pathId;
 		this.pathData = pathData;
 		this.wallLowerId = wallLowerId;
 		this.wallLowerData = wallLowerData;
 		this.wallUpperId = wallUpperId;
 		this.wallUpperData = wallUpperData;
+		this.surfaceId = surfaceId;
+		this.groundId = groundId;
 	}
 	
 	@Override
@@ -50,8 +56,8 @@ public class PlotsGenerator extends ChunkGenerator {
 		return new Location(world, 0, this.height + 1, 0);
 	}
 	
-	private void setBlockAt(byte[][] chunk, int x, int y, int z, Material type){
-		chunk[y >> 4][((y & 0xF) << 8) | (z << 4) | x] = (byte) type.getId();
+	private void setBlockAt(byte[][] chunk, int x, int y, int z, byte typeId){
+		chunk[y >> 4][((y & 0xF) << 8) | (z << 4) | x] = typeId;
 	}
 	
 	@Override
@@ -60,13 +66,13 @@ public class PlotsGenerator extends ChunkGenerator {
 		
 		for (int x = 0; x < 16; ++x){
 			for (int z = 0; z < 16; ++z){
-				this.setBlockAt(chunk, x, 0, z, Material.BEDROCK);
+				this.setBlockAt(chunk, x, 0, z, (byte) Material.BEDROCK.getId());
 				
 				for (int y = 1; y < this.height; ++y){
-					this.setBlockAt(chunk, x, y, z, Material.DIRT);
+					this.setBlockAt(chunk, x, y, z, this.groundId);
 				}
 				
-				this.setBlockAt(chunk, x, this.height, z, Material.GRASS);
+				this.setBlockAt(chunk, x, this.height, z, this.surfaceId);
 				
 				biomes.setBiome(x, z, Biome.PLAINS);
 			}

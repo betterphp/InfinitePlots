@@ -2,6 +2,7 @@ package uk.co.jacekk.bukkit.infiniteplots;
 
 import java.io.File;
 
+import org.bukkit.Material;
 import org.bukkit.generator.ChunkGenerator;
 
 import uk.co.jacekk.bukkit.baseplugin.v9.BasePlugin;
@@ -80,8 +81,10 @@ public class InfinitePlots extends BasePlugin {
 		byte wallLowerData = (byte) this.config.getInt(Config.BLOCKS_LOWER_WALL_DATA);
 		byte wallUpperId = (byte) this.config.getInt(Config.BLOCKS_UPPER_WALL);
 		byte wallUpperData = (byte) this.config.getInt(Config.BLOCKS_UPPER_WALL_DATA);
+		byte surfaceId = (byte) this.config.getInt(Config.BLOCKS_SURFACE);
+		byte groundId = (byte) this.config.getInt(Config.BLOCKS_GROUND);
 		
-		return new PlotsGenerator(size, height, pathId, pathData, wallLowerId, wallLowerData, wallUpperId, wallUpperData);
+		return new PlotsGenerator(size, height, pathId, pathData, wallLowerId, wallLowerData, wallUpperId, wallUpperData, surfaceId, groundId);
 	}
 	
 	public static InfinitePlots getInstance(){

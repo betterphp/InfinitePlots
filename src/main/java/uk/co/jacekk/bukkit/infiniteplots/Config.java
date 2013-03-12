@@ -24,5 +24,7 @@ public class Config {
 	public static final PluginConfigKey BLOCKS_LOWER_WALL_DATA	= new PluginConfigKey("blocks.lower-wall-data",		0);
 	public static final PluginConfigKey BLOCKS_UPPER_WALL		= new PluginConfigKey("blocks.upper-wall",			Material.FENCE.getId());
 	public static final PluginConfigKey BLOCKS_UPPER_WALL_DATA	= new PluginConfigKey("blocks.upper-wall-data",		0);
+	public static final PluginConfigKey BLOCKS_SURFACE			= new PluginConfigKey("blocks.surface",				Material.GRASS.getId());
+	public static final PluginConfigKey BLOCKS_GROUND			= new PluginConfigKey("blocks.ground",				Material.DIRT.getId());
 	
 }

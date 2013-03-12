@@ -245,19 +245,20 @@ public class Plot extends BaseObject<InfinitePlots> {
 		int worldHeight = world.getMaxHeight();
 		int gridHeight = plugin.config.getInt(Config.GRID_HEIGHT);
 		
-		int[] buildLimits = this.getBuildLimits();
-		
 		BlockChangeTask task = new BlockChangeTask(plugin);
 		
-		for (int x = buildLimits[0]; x <= buildLimits[2]; ++x){
-			for (int z = buildLimits[1]; z <= buildLimits[3]; ++z){
+		Material surface = Material.getMaterial(plugin.config.getInt(Config.BLOCKS_SURFACE));
+		Material ground = Material.getMaterial(plugin.config.getInt(Config.BLOCKS_GROUND));
+		
+		for (int x = this.buildLimits[0]; x <= this.buildLimits[2]; ++x){
+			for (int z = this.buildLimits[1]; z <= this.buildLimits[3]; ++z){
 				task.setBlockType(world.getBlockAt(x, 0, z), Material.BEDROCK);
 				
 				for (int y = 1; y < gridHeight; ++y){
-					task.setBlockType(world.getBlockAt(x, y, z), Material.DIRT);
+					task.setBlockType(world.getBlockAt(x, y, z), ground);
 				}
 				
-				task.setBlockType(world.getBlockAt(x, gridHeight, z), Material.GRASS);
+				task.setBlockType(world.getBlockAt(x, gridHeight, z), surface);
 				
 				for (int y = gridHeight + 1; y < worldHeight; ++y){
 					task.setBlockType(world.getBlockAt(x, y, z), Material.AIR);
