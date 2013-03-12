@@ -7,6 +7,7 @@ import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
@@ -237,6 +238,21 @@ public class Plot extends BaseObject<InfinitePlots> {
 	}
 	
 	/**
+	 * Sets the biome for the plot.
+	 * 
+	 * @param biome The biome to set.
+	 */
+	public void setBiome(Biome biome){
+		World world = plugin.server.getWorld(this.location.getWorldName());
+		
+		for (int x = this.buildLimits[0]; x <= this.buildLimits[2]; ++x){
+			for (int z = this.buildLimits[1]; z <= this.buildLimits[3]; ++z){
+				world.setBiome(x, z, biome);
+			}
+		}
+	}
+	
+	/**
 	 * Regenerates the buildable region of this plot.
 	 */
 	public void regenerate(){
@@ -263,6 +279,8 @@ public class Plot extends BaseObject<InfinitePlots> {
 				for (int y = gridHeight + 1; y < worldHeight; ++y){
 					task.setBlockType(world.getBlockAt(x, y, z), Material.AIR);
 				}
+				
+				world.setBiome(x, z, Biome.PLAINS);
 			}
 		}
 		

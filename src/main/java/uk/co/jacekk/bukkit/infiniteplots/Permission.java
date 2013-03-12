@@ -16,6 +16,8 @@ public class Permission {
 	public static final PluginPermission PLOT_REMOVE_BUILDER		= new PluginPermission("infiniteplots.plot.remove-builder",		PermissionDefault.TRUE,	"Allows the player to remove builders from their plots");
 	public static final PluginPermission PLOT_FLAG					= new PluginPermission("infiniteplots.plot.flag",				PermissionDefault.TRUE,	"Allows the player to modify their plots flags");
 	public static final PluginPermission PLOT_FLAG_OTHER			= new PluginPermission("infiniteplots.plot.flag.others",		PermissionDefault.OP,	"Allows the player to modify other players plot flags");
+	public static final PluginPermission PLOT_SET_BIOME				= new PluginPermission("infiniteplots.plot.set-biome",			PermissionDefault.TRUE,	"Allows the player to set their plots biome");
+	public static final PluginPermission PLOT_SET_BIOME_OTHERS		= new PluginPermission("infiniteplots.plot.set-biome.others",	PermissionDefault.OP,	"Allows the player to set biome of other player plots");
 	public static final PluginPermission PLOT_INFO					= new PluginPermission("infiniteplots.plot.info",				PermissionDefault.TRUE,	"Allows the player to view plot info");
 	public static final PluginPermission PLOT_RESET					= new PluginPermission("infiniteplots.plot.reset",				PermissionDefault.TRUE,	"Allows the player to regenerate their plots");
 	public static final PluginPermission PLOT_RESET_OTHER			= new PluginPermission("infiniteplots.plot.reset.others",		PermissionDefault.OP,	"Allows the player to regenerate other players plots");

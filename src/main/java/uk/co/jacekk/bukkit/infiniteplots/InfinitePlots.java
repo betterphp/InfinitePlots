@@ -15,6 +15,7 @@ import uk.co.jacekk.bukkit.infiniteplots.command.PlotCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.FlagCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.InfoCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.ResetCommandExecutor;
+import uk.co.jacekk.bukkit.infiniteplots.command.SetBiomeCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.TeleportCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.flag.BlockFlowListener;
 import uk.co.jacekk.bukkit.infiniteplots.flag.IceListener;
@@ -61,6 +62,7 @@ public class InfinitePlots extends BasePlugin {
 		this.commandManager.registerCommandExecutor(new ClaimCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new AddBuilderCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new FlagCommandExecutor(this));
+		this.commandManager.registerCommandExecutor(new SetBiomeCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new ResetCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new ListCommandExecutor(this));
 		this.commandManager.registerCommandExecutor(new NameCommandExecutor(this));

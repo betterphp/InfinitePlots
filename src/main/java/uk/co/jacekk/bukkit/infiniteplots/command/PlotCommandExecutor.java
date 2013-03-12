@@ -46,6 +46,10 @@ public class PlotCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			sender.sendMessage(ChatColor.RED + "  flag - Manage the plot flags");
 		}
 		
+		if (Permission.PLOT_SET_BIOME.has(sender)){
+			sender.sendMessage(ChatColor.RED + "  setbiome - Sets the plot biome");
+		}
+		
 		if (Permission.PLOT_RESET.has(sender)){
 			sender.sendMessage(ChatColor.RED + "  reset - Resets the plot");
 		}
