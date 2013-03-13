@@ -253,6 +253,16 @@ public class Plot extends BaseObject<InfinitePlots> {
 	}
 	
 	/**
+	 * Gets the biome for this plot
+	 * 
+	 * @return The {@link Biome} used
+	 */
+	public Biome getBiome(){
+		World world = plugin.server.getWorld(this.location.getWorldName());
+		return world.getBiome(this.buildLimits[0], this.buildLimits[1]);
+	}
+	
+	/**
 	 * Regenerates the buildable region of this plot.
 	 */
 	public void regenerate(){
