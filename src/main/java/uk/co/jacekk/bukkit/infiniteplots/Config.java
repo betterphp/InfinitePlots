@@ -2,7 +2,7 @@ package uk.co.jacekk.bukkit.infiniteplots;
 
 import org.bukkit.Material;
 
-import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfigKey;
+import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfigKey;
 
 /**
  * The config options stored in the main plugin config file.

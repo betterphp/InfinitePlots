@@ -3,9 +3,9 @@ package uk.co.jacekk.bukkit.infiniteplots.command;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
-import uk.co.jacekk.bukkit.baseplugin.v9.command.BaseCommandExecutor;
-import uk.co.jacekk.bukkit.baseplugin.v9.command.CommandHandler;
-import uk.co.jacekk.bukkit.baseplugin.v9.command.CommandTabCompletion;
+import uk.co.jacekk.bukkit.baseplugin.v9_1.command.BaseCommandExecutor;
+import uk.co.jacekk.bukkit.baseplugin.v9_1.command.CommandHandler;
+import uk.co.jacekk.bukkit.baseplugin.v9_1.command.CommandTabCompletion;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.Permission;
 
