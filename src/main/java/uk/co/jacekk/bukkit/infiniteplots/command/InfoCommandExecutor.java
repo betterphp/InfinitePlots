@@ -13,9 +13,9 @@ import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;
 
-public class InfoCommandExecutor extends BaseCommandExecutor<InfinitePlots>{
+public class InfoCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 	
-	public InfoCommandExecutor(InfinitePlots plugin) {
+	public InfoCommandExecutor(InfinitePlots plugin){
 		super(plugin);
 	}
 	
@@ -31,7 +31,7 @@ public class InfoCommandExecutor extends BaseCommandExecutor<InfinitePlots>{
 			return;
 		}
 		
-		Player player = (Player)sender;
+		Player player = (Player) sender;
 		
 		if (!(player.getWorld().getGenerator() instanceof PlotsGenerator)){
 			player.sendMessage(ChatColor.RED + "You must be in a plot world");
@@ -46,9 +46,11 @@ public class InfoCommandExecutor extends BaseCommandExecutor<InfinitePlots>{
 		}
 		
 		player.sendMessage(ChatColor.YELLOW + "Plot Information");
+		if (plot.getAdmin() != player.getName())
+			player.sendMessage(ChatColor.BLUE + "Name: " + ChatColor.RESET + plot.getAdmin());
 		player.sendMessage(ChatColor.BLUE + "Name: " + ChatColor.RESET + plot.getName());
 		player.sendMessage(ChatColor.BLUE + "Location: " + ChatColor.RESET + plot.getLocation().getX() + ", " + plot.getLocation().getZ());
-
+		
 		StringBuilder builders = new StringBuilder();
 		
 		for (String builder : plot.getBuilders()){
