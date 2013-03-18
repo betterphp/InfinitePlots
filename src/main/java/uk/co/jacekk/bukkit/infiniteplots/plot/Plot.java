@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.server.v1_5_R1.Direction;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -168,12 +166,13 @@ public class Plot extends BaseObject<InfinitePlots> {
 	}
 	
 	/**
-	 * Checks to see if a player is within the buildable area of a plot.
-<<<<<<< HEAD
-	 *
-=======
+	 * Checks to see if a player is within the buildable area of a plot. <<<<<<<
+	 * HEAD
 	 * 
->>>>>>> Generic update commit
+	 * =======
+	 * 
+	 * >>>>>>> Generic update commit
+	 * 
 	 * @param player The {@link Player} to check.
 	 * @param location The {@link Location} to check.
 	 * @return True if the player is in the area false if not.

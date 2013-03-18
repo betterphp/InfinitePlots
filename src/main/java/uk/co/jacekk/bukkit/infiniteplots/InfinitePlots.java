@@ -8,10 +8,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.BasePlugin;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.infiniteplots.command.AddBuilderCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.ClaimCommandExecutor;
-<<<<<<< HEAD
-=======
 import uk.co.jacekk.bukkit.infiniteplots.command.ConvertCommandExecutor;
->>>>>>> First commit of InfiniteClaims plot converter
 import uk.co.jacekk.bukkit.infiniteplots.command.FlagCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.InfoCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.ListCommandExecutor;
