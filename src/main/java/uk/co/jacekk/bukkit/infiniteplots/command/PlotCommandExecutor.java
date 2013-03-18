@@ -57,6 +57,10 @@ public class PlotCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		if (Permission.PLOT_LIST.has(sender)){
 			sender.sendMessage(ChatColor.RED + "  list - Lists all owned plots");
 		}
+		
+		if (Permission.CONVERT.has(sender)){
+			sender.sendMessage(ChatColor.RED + "  convert - Convert InfiniteClaims plots");
+		}
 	}
 	
 }
