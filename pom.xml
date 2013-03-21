@@ -4,12 +4,10 @@
 	<artifactId>infiniteplots</artifactId>
 	<version>0.9-SNAPSHOT</version>
 	<name>InfinitePlots</name>
-	<url>http://dev.bukkit.org/server-mods/infiniteplots/</url>
-	
+	<url>http://dev.bukkit.org/server-mods/infiniteplots/</url>	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-	
+	</properties>	
 	<repositories>
 		<repository>
 			<name>Bukkit</name>
@@ -20,8 +18,7 @@
         		<id>sk89q</id>
         		<url>http://maven.sk89q.com/repo/com</url>
         </repository>
-	</repositories>
-	
+	</repositories>	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -29,21 +26,18 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
-		
 		<dependency>
 			<groupId>uk.co.jacekk.bukkit</groupId>
 			<artifactId>baseplugin</artifactId>
 			<version>9.1</version>
 			<scope>compile</scope>
-		</dependency>
-		
+		</dependency>	
 		<dependency>
 			<groupId>org.bukkit</groupId>
 			<artifactId>craftbukkit</artifactId>
-			<version>1.5-R0.1-SNAPSHOT</version>
+			<version>1.5.1-R0.1-SNAPSHOT</version>
 			<scope>compile</scope>
-		</dependency>
-		
+		</dependency>	
 		 <dependency>
 		    	<groupId>sk89q</groupId>
 		    	<artifactId>worldguard</artifactId>
@@ -51,12 +45,10 @@
 		    	<type>jar</type>
 	    </dependency>
 	</dependencies>
-	
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<directory>${basedir}/target</directory>
-		<finalName>${project.name}</finalName>
-		
+		<finalName>${project.name}</finalName>	
 		<resources>
 			<resource>
 				<targetPath>.</targetPath>
@@ -67,8 +59,7 @@
 					<include>README</include>
 				</includes>
 			</resource>
-		</resources>
-		
+		</resources>	
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -90,8 +81,7 @@
 						</includes>
 					</artifactSet>
 				</configuration>
-			</plugin>
-			
+			</plugin>		
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
