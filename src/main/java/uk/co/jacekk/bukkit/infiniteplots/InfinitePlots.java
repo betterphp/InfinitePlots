@@ -45,30 +45,31 @@ public class InfinitePlots extends BasePlugin {
 		
 		this.config = new PluginConfig(new File(this.baseDirPath + File.separator + "config.yml"), Config.class, this.log);
 		
-		this.plotManager = new PlotManager(this);
-		
-		this.permissionManager.registerPermissions(Permission.class);
-		
-		this.pluginManager.registerEvents(new WorldInitListener(this), this);
-		
-		this.pluginManager.registerEvents(new BuildListener(this), this);
-		this.pluginManager.registerEvents(new MobSpawnListener(this), this);
-		this.pluginManager.registerEvents(new BlockFlowListener(this), this);
-		this.pluginManager.registerEvents(new IceListener(this), this);
-		this.pluginManager.registerEvents(new PhysicsListener(this), this);
-		
-		this.commandManager.registerCommandExecutor(new PlotCommandExecutor(this));
-		this.commandManager.registerCommandExecutor(new InfoCommandExecutor(this));
-		this.commandManager.registerCommandExecutor(new ClaimCommandExecutor(this));
-		this.commandManager.registerCommandExecutor(new AddBuilderCommandExecutor(this));
-		this.commandManager.registerCommandExecutor(new FlagCommandExecutor(this));
-		this.commandManager.registerCommandExecutor(new SetBiomeCommandExecutor(this));
-		this.commandManager.registerCommandExecutor(new ResetCommandExecutor(this));
-		this.commandManager.registerCommandExecutor(new ListCommandExecutor(this));
-		this.commandManager.registerCommandExecutor(new NameCommandExecutor(this));
-		this.commandManager.registerCommandExecutor(new TeleportCommandExecutor(this));
-		
-		this.commandManager.registerCommandExecutor(new ConvertCommandExecutor(this));
+		if (!this.config.getBoolean(Config.GENERATOR_ONLY)){
+			this.plotManager = new PlotManager(this);
+			
+			this.permissionManager.registerPermissions(Permission.class);
+			
+			this.pluginManager.registerEvents(new WorldInitListener(this), this);
+			
+			this.pluginManager.registerEvents(new BuildListener(this), this);
+			this.pluginManager.registerEvents(new MobSpawnListener(this), this);
+			this.pluginManager.registerEvents(new BlockFlowListener(this), this);
+			this.pluginManager.registerEvents(new IceListener(this), this);
+			this.pluginManager.registerEvents(new PhysicsListener(this), this);
+			
+			this.commandManager.registerCommandExecutor(new PlotCommandExecutor(this));
+			this.commandManager.registerCommandExecutor(new InfoCommandExecutor(this));
+			this.commandManager.registerCommandExecutor(new ClaimCommandExecutor(this));
+			this.commandManager.registerCommandExecutor(new AddBuilderCommandExecutor(this));
+			this.commandManager.registerCommandExecutor(new FlagCommandExecutor(this));
+			this.commandManager.registerCommandExecutor(new SetBiomeCommandExecutor(this));
+			this.commandManager.registerCommandExecutor(new ResetCommandExecutor(this));
+			this.commandManager.registerCommandExecutor(new ListCommandExecutor(this));
+			this.commandManager.registerCommandExecutor(new NameCommandExecutor(this));
+			this.commandManager.registerCommandExecutor(new TeleportCommandExecutor(this));
+			this.commandManager.registerCommandExecutor(new ConvertCommandExecutor(this));
+		}
 	}
 	
 	public void onDisable(){

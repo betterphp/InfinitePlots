@@ -9,6 +9,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfigKey;
  */
 public class Config {
 	
+	public static final PluginConfigKey GENERATOR_ONLY			= new PluginConfigKey("generator-only",			false);
 	public static final PluginConfigKey GRID_SIZE				= new PluginConfigKey("grid-size",				32);
 	public static final PluginConfigKey GRID_HEIGHT				= new PluginConfigKey("grid-height",			20);
 	public static final PluginConfigKey USE_SIGNS				= new PluginConfigKey("use-signs",				true);
