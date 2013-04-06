@@ -42,6 +42,15 @@ public class PlotsGenerator extends ChunkGenerator {
 		this.groundId = groundId;
 	}
 	
+	/**
+	 * Gets the grid size used by this generator
+	 * 
+	 * @return The grid size
+	 */
+	public int getGridSize(){
+		return this.size;
+	}
+	
 	@Override
 	public List<BlockPopulator> getDefaultPopulators(World world){
 		ArrayList<BlockPopulator> populators = new ArrayList<BlockPopulator>();

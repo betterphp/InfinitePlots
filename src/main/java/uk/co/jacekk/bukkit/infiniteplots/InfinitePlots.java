@@ -78,6 +78,13 @@ public class InfinitePlots extends BasePlugin {
 	
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
 		int size = this.config.getInt(Config.GRID_SIZE);
+		
+		if (id != null && !id.isEmpty()){
+			try{
+				size = Integer.parseInt(id);
+			}catch(NumberFormatException e){  }
+		}
+		
 		int height = this.config.getInt(Config.GRID_HEIGHT);
 		
 		byte pathId = (byte) this.config.getInt(Config.BLOCKS_PATH);

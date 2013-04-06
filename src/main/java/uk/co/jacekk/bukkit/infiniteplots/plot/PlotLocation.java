@@ -2,9 +2,12 @@ package uk.co.jacekk.bukkit.infiniteplots.plot;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.generator.ChunkGenerator;
 
 import uk.co.jacekk.bukkit.infiniteplots.Config;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
+import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
 
 /**
  * Represents the location of a plot in plot space, this start from 0,0 
@@ -54,10 +57,19 @@ public class PlotLocation {
 	 * 
 	 * @param worldLocation The {@link Location} in block space.
 	 * @return The {@link PlotLocation} in plot space.
+	 * @throws IllegalArgumentException if the location is not in a world using the plot generator
 	 */
 	public static PlotLocation fromWorldLocation(Location worldLocation){
-		int x = (int) Math.floor((double) worldLocation.getBlockX() / (double) InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE));
-		int z = (int) Math.floor((double) worldLocation.getBlockZ() / (double) InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE));
+		ChunkGenerator generator = worldLocation.getWorld().getGenerator();
+		
+		if (!(generator instanceof PlotsGenerator)){
+			throw new IllegalArgumentException("Location is not in a plot world");
+		}
+		
+		int size = ((PlotsGenerator) generator).getGridSize();
+		
+		int x = (int) Math.floor((double) worldLocation.getBlockX() / (double) size);
+		int z = (int) Math.floor((double) worldLocation.getBlockZ() / (double) size);
 		
 		return new PlotLocation(worldLocation.getWorld().getName(), x, z);
 	}
@@ -66,12 +78,22 @@ public class PlotLocation {
 	 * Gets the location in the world.
 	 * 
 	 * @return The {@link Location}
+	 * @throws IllegalArgumentException if the location is not in a world using the plot generator
 	 */
 	public Location getWorldLocation(){
-		int x = (int) Math.floor((double) this.x * (double) InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE));
-		int z = (int) Math.floor((double) this.z * (double) InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE));
+		World world = this.getWorld();
+		ChunkGenerator generator = world.getGenerator();
 		
-		return new Location(Bukkit.getWorld(this.worldName), x, InfinitePlots.getInstance().config.getInt(Config.GRID_HEIGHT) + 2, z);
+		if (!(generator instanceof PlotsGenerator)){
+			throw new IllegalArgumentException("Location is not in a plot world");
+		}
+		
+		int size = ((PlotsGenerator) generator).getGridSize();
+		
+		int x = (int) Math.floor((double) this.x * (double) size);
+		int z = (int) Math.floor((double) this.z * (double) size);
+		
+		return new Location(world, x, InfinitePlots.getInstance().config.getInt(Config.GRID_HEIGHT) + 2, z);
 	}
 	
 	/**
@@ -81,6 +103,15 @@ public class PlotLocation {
 	 */
 	public String getWorldName(){
 		return this.worldName;
+	}
+	
+	/**
+	 * Gets the world that this plot is in
+	 * 
+	 * @return The world
+	 */
+	public World getWorld(){
+		return Bukkit.getWorld(this.worldName);
 	}
 	
 	/**

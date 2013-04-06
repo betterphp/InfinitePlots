@@ -18,6 +18,7 @@ import uk.co.jacekk.bukkit.infiniteplots.BlockChangeTask;
 import uk.co.jacekk.bukkit.infiniteplots.Config;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.flag.PlotFlag;
+import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation.Direction;
 
 /**
@@ -28,6 +29,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	private final File configFile;
 	private final PluginConfig config;
 	private final PlotLocation location;
+	private final int size;
 	
 	private int[] plotLimits;
 	private int[] buildLimits;
@@ -38,11 +40,12 @@ public class Plot extends BaseObject<InfinitePlots> {
 		this.configFile = configFile;
 		this.config = config;
 		this.location = new PlotLocation(config.getString(PlotConfig.LOCATION_WORLD_NAME), config.getInt(PlotConfig.LOCATION_X), config.getInt(PlotConfig.LOCATION_Z));
+		this.size = ((PlotsGenerator) this.location.getWorld().getGenerator()).getGridSize();
 		
-		int x1 = (int) Math.floor(((this.location.getX() * plugin.config.getInt(Config.GRID_SIZE)) / plugin.config.getInt(Config.GRID_SIZE)) * plugin.config.getInt(Config.GRID_SIZE));
-		int z1 = (int) Math.floor(((this.location.getZ() * plugin.config.getInt(Config.GRID_SIZE)) / plugin.config.getInt(Config.GRID_SIZE)) * plugin.config.getInt(Config.GRID_SIZE));
-		int x2 = x1 + plugin.config.getInt(Config.GRID_SIZE);
-		int z2 = z1 + plugin.config.getInt(Config.GRID_SIZE);
+		int x1 = (int) Math.floor(((this.location.getX() * this.size) / this.size) * this.size);
+		int z1 = (int) Math.floor(((this.location.getZ() * this.size) / this.size) * this.size);
+		int x2 = x1 + this.size;
+		int z2 = z1 + this.size;
 		
 		this.plotLimits = new int[]{x1, z1, x2, z2};
 		this.buildLimits = new int[]{x1 + 4, z1 + 4, x2 - 4, z2 - 4};
@@ -309,9 +312,9 @@ public class Plot extends BaseObject<InfinitePlots> {
 		int[] buildLimits = this.getBuildLimits();
 		
 		int x3 = buildLimits[0];
-		int z3 = buildLimits[1] + (InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE) - 7);
+		int z3 = buildLimits[1] + (this.size - 7);
 		int x4 = buildLimits[2];
-		int z4 = buildLimits[3] - (InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE) - 7);
+		int z4 = buildLimits[3] - (this.size - 7);
 		int y = plugin.config.getInt(Config.GRID_HEIGHT);
 		World world = plugin.getServer().getWorld(this.getLocation().getWorldName());
 		
@@ -360,9 +363,9 @@ public class Plot extends BaseObject<InfinitePlots> {
 	public void removeSigns(){
 		int[] buildLimits = this.getBuildLimits();
 		int x3 = buildLimits[0];
-		int z3 = buildLimits[1] + (InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE) - 7);
+		int z3 = buildLimits[1] + (this.size - 7);
 		int x4 = buildLimits[2];
-		int z4 = buildLimits[3] - (InfinitePlots.getInstance().config.getInt(Config.GRID_SIZE) - 7);
+		int z4 = buildLimits[3] - (this.size - 7);
 		int y = plugin.config.getInt(Config.GRID_HEIGHT);
 		World world = plugin.getServer().getWorld(this.getLocation().getWorldName());
 		
