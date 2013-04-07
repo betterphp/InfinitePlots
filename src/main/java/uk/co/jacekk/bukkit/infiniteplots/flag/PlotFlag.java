@@ -2,7 +2,7 @@ package uk.co.jacekk.bukkit.infiniteplots.flag;
 
 import java.util.HashMap;
 
-import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfigKey;
+import uk.co.jacekk.bukkit.baseplugin.config.PluginConfigKey;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotConfig;
 
 /**

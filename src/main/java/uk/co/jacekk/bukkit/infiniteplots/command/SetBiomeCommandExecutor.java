@@ -8,9 +8,9 @@ import org.bukkit.block.Biome;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import uk.co.jacekk.bukkit.baseplugin.v9_1.command.BaseCommandExecutor;
-import uk.co.jacekk.bukkit.baseplugin.v9_1.command.CommandTabCompletion;
-import uk.co.jacekk.bukkit.baseplugin.v9_1.command.SubCommandHandler;
+import uk.co.jacekk.bukkit.baseplugin.command.BaseCommandExecutor;
+import uk.co.jacekk.bukkit.baseplugin.command.CommandTabCompletion;
+import uk.co.jacekk.bukkit.baseplugin.command.SubCommandHandler;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.Permission;
 import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
