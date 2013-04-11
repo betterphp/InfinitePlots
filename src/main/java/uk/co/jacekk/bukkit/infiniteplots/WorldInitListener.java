@@ -25,6 +25,8 @@ public class WorldInitListener extends BaseListener<InfinitePlots> {
 		World world = event.getWorld();
 		
 		if (world.getGenerator() instanceof PlotsGenerator){
+			this.plugin.getPlotManager().loadPlotsFor(world);
+			
 			WorldServer worldServer = ((CraftWorld) world).getHandle();
 			
 			try{

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bukkit.World;
+
 import uk.co.jacekk.bukkit.baseplugin.BaseObject;
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
@@ -20,12 +22,22 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 		super(plugin);
 		
 		this.plots = new HashMap<PlotLocation, Plot>();
-		
+	}
+	
+	/**
+	 * Loads all of the plots in a world.
+	 * 
+	 * @param world The world.
+	 */
+	public void loadPlotsFor(World world){
 		for (File configFile : plugin.getPlotsDir().listFiles()){
 			if (configFile.isFile() && configFile.getName().endsWith(".yml")){
-				Plot plot = new Plot(plugin, configFile, new PluginConfig(configFile, PlotConfig.class, plugin.log));
+				PluginConfig plotConfig = new PluginConfig(configFile, PlotConfig.class, plugin.log);
 				
-				this.plots.put(plot.getLocation(), plot);
+				if (plotConfig.getString(PlotConfig.LOCATION_WORLD_NAME).equals(world.getName())){
+					Plot plot = new Plot(plugin, configFile, plotConfig);
+					this.plots.put(plot.getLocation(), plot);
+				}
 			}
 		}
 	}

@@ -2,6 +2,7 @@ package uk.co.jacekk.bukkit.infiniteplots;
 
 import java.io.File;
 
+import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
 
 import uk.co.jacekk.bukkit.baseplugin.BasePlugin;
@@ -47,6 +48,10 @@ public class InfinitePlots extends BasePlugin {
 		
 		if (!this.config.getBoolean(Config.GENERATOR_ONLY)){
 			this.plotManager = new PlotManager(this);
+			
+			for (World world : this.server.getWorlds()){
+				this.plotManager.loadPlotsFor(world);
+			}
 			
 			this.permissionManager.registerPermissions(Permission.class);
 			
