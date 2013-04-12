@@ -169,12 +169,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	}
 	
 	/**
-	 * Checks to see if a player is within the buildable area of a plot. <<<<<<<
-	 * HEAD
-	 * 
-	 * =======
-	 * 
-	 * >>>>>>> Generic update commit
+	 * Checks to see if a player is within the buildable area of a plot.
 	 * 
 	 * @param player The {@link Player} to check.
 	 * @param location The {@link Location} to check.
@@ -318,10 +313,16 @@ public class Plot extends BaseObject<InfinitePlots> {
 		int y = plugin.config.getInt(Config.GRID_HEIGHT);
 		World world = plugin.getServer().getWorld(this.getLocation().getWorldName());
 		
-		Block cornerOne = world.getBlockAt(buildLimits[0] - 1, y + 2, buildLimits[1] - 1);
-		Block cornerTwo = world.getBlockAt(buildLimits[2] + 1, y + 2, buildLimits[3] + 1);
-		Block cornerThree = world.getBlockAt(x3 - 1, y + 2, z3);
-		Block cornerFour = world.getBlockAt(x4 + 1, y + 2, z4);
+		if (plugin.config.getInt(Config.BLOCKS_UPPER_WALL) == 0){
+			y += 1;
+		}else{
+			y += 2;
+		}
+		
+		Block cornerOne = world.getBlockAt(buildLimits[0] - 1, y, buildLimits[1] - 1);
+		Block cornerTwo = world.getBlockAt(buildLimits[2] + 1, y, buildLimits[3] + 1);
+		Block cornerThree = world.getBlockAt(x3 - 1, y, z3);
+		Block cornerFour = world.getBlockAt(x4 + 1, y, z4);
 		
 		cornerOne.setType(Material.SIGN_POST);
 		cornerTwo.setType(Material.SIGN_POST);
