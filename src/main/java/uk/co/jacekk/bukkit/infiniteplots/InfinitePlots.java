@@ -33,6 +33,7 @@ public class InfinitePlots extends BasePlugin {
 	private File plotsDir;
 	private PlotManager plotManager;
 	
+	@Override
 	public void onEnable(){
 		super.onEnable(true);
 		
@@ -81,10 +82,12 @@ public class InfinitePlots extends BasePlugin {
 		}
 	}
 	
+	@Override
 	public void onDisable(){
 		instance = null;
 	}
 	
+	@Override
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id){
 		int size = this.config.getInt(Config.GRID_SIZE);
 		
