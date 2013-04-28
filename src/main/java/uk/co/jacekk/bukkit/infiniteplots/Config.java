@@ -19,6 +19,7 @@ public class Config {
 	public static final PluginConfigKey RESET_PERTICK			= new PluginConfigKey("reset.pertick",			2000);
 	public static final PluginConfigKey CLAIM_PROTECT_PATHS		= new PluginConfigKey("claim.protect-paths",	false);
 	public static final PluginConfigKey CLAIM_MAX				= new PluginConfigKey("claim.max",				25);
+	public static final PluginConfigKey CLAIM_MAX_UNUSED		= new PluginConfigKey("claim.max-unused",		4);
 	
 	public static final PluginConfigKey BLOCKS_PATH				= new PluginConfigKey("blocks.path",				Material.DOUBLE_STEP.getId());
 	public static final PluginConfigKey BLOCKS_PATH_DATA		= new PluginConfigKey("blocks.path-data", 			0);

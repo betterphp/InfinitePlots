@@ -1,5 +1,7 @@
 package uk.co.jacekk.bukkit.infiniteplots.command;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -38,9 +40,28 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			return;
 		}
 		
-		if (!Permission.PLOT_BYPASS_CLAIM_LIMIT.has(player) && plugin.getPlotManager().getOwnedPlots(player.getName()).size() >= plugin.config.getInt(Config.CLAIM_MAX)){
-			player.sendMessage(ChatColor.RED + "You have already claimed the maximum number of plots");
-			return;
+		if (!Permission.PLOT_BYPASS_CLAIM_LIMIT.has(player)){
+			List<Plot> plots = plugin.getPlotManager().getOwnedPlots(player.getName());
+			int max = plugin.config.getInt(Config.CLAIM_MAX);
+			int maxUnused = plugin.config.getInt(Config.CLAIM_MAX_UNUSED);
+			
+			if (maxUnused > 0 && plugin.config.getBoolean(Config.TRACK_STATS)){
+				int unused = 0;
+				
+				for (Plot plot : plots){
+					if (plot.getStats().getBlocksBroken() == 0 || plot.getStats().getBlocksPlaced() == 0){
+						if (++unused > maxUnused){
+							player.sendMessage(ChatColor.RED + "You have too many claimed plots that have not been used");
+							return;
+						}
+					}
+				}
+			}
+			
+			if (max > 0 && plots.size() >= max){
+				player.sendMessage(ChatColor.RED + "You have already claimed the maximum number of plots");
+				return;
+			}
 		}
 		
 		Plot plot = plugin.getPlotManager().createPlotAt(PlotLocation.fromWorldLocation(player.getLocation()), false);
