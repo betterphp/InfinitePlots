@@ -13,6 +13,7 @@ public class Config {
 	public static final PluginConfigKey GRID_SIZE				= new PluginConfigKey("grid-size",				32);
 	public static final PluginConfigKey GRID_HEIGHT				= new PluginConfigKey("grid-height",			20);
 	public static final PluginConfigKey USE_SIGNS				= new PluginConfigKey("use-signs",				true);
+	public static final PluginConfigKey TRACK_STATS				= new PluginConfigKey("track-stats",			true);
 	public static final PluginConfigKey OWNER_PREFIX			= new PluginConfigKey("owner-prefix",			"Plot Owner");
 	public static final PluginConfigKey RESET_DELAY				= new PluginConfigKey("reset.delay",			5);
 	public static final PluginConfigKey RESET_PERTICK			= new PluginConfigKey("reset.pertick",			2000);

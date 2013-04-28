@@ -33,4 +33,7 @@ public class PlotConfig {
 	public static final PluginConfigKey PROTECTION_BUILD	= new PluginConfigKey("protection.build", 		true);
 	public static final PluginConfigKey PROTECTION_ENTER	= new PluginConfigKey("protection.enter", 		false);
 	
+	public static final PluginConfigKey STATS_BLOCKS_BROKEN	= new PluginConfigKey("stats.blocks.broken",	0);
+	public static final PluginConfigKey STATS_BLOCKS_PLACED	= new PluginConfigKey("stats.blocks.placed",	0);
+	
 }

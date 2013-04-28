@@ -30,6 +30,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	private final PluginConfig config;
 	private final PlotLocation location;
 	private final int size;
+	private final PlotStats stats;
 	
 	private int[] plotLimits;
 	private int[] buildLimits;
@@ -41,6 +42,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 		this.config = config;
 		this.location = new PlotLocation(config.getString(PlotConfig.LOCATION_WORLD_NAME), config.getInt(PlotConfig.LOCATION_X), config.getInt(PlotConfig.LOCATION_Z));
 		this.size = ((PlotsGenerator) this.location.getWorld().getGenerator()).getGridSize();
+		this.stats = new PlotStats(this, this.config);
 		
 		int x1 = (int) Math.floor(((this.location.getX() * this.size) / this.size) * this.size);
 		int z1 = (int) Math.floor(((this.location.getZ() * this.size) / this.size) * this.size);
@@ -67,6 +69,15 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 */
 	public PlotLocation getLocation(){
 		return this.location;
+	}
+	
+	/**
+	 * Gets the {@link PlotStats} for this plot.
+	 * 
+	 * @return The stats
+	 */
+	public PlotStats getStats(){
+		return this.stats;
 	}
 	
 	/**

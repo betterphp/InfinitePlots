@@ -63,6 +63,10 @@ public class InfinitePlots extends BasePlugin {
 			this.pluginManager.registerEvents(new IceListener(this), this);
 			this.pluginManager.registerEvents(new PhysicsListener(this), this);
 			
+			if (this.config.getBoolean(Config.TRACK_STATS)){
+				this.pluginManager.registerEvents(new PlotStatsListener(this), this);
+			}
+			
 			this.commandManager.registerCommandExecutor(new PlotCommandExecutor(this));
 			this.commandManager.registerCommandExecutor(new InfoCommandExecutor(this));
 			this.commandManager.registerCommandExecutor(new ClaimCommandExecutor(this));
