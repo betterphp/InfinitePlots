@@ -9,6 +9,7 @@ import uk.co.jacekk.bukkit.baseplugin.config.PluginConfigKey;
  */
 public class Config {
 	
+	public static final PluginConfigKey ENABLE_PROFILER			= new PluginConfigKey("enable-profiler",		true);
 	public static final PluginConfigKey GENERATOR_ONLY			= new PluginConfigKey("generator-only",			false);
 	public static final PluginConfigKey GRID_SIZE				= new PluginConfigKey("grid-size",				32);
 	public static final PluginConfigKey GRID_HEIGHT				= new PluginConfigKey("grid-height",			20);
