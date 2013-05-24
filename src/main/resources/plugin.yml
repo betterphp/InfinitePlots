@@ -1,6 +1,5 @@
 name: "${project.name}"
 version: "${project.version}"
-build-number: "${BUILD_NUMBER}"
 main: "${project.groupId}.${project.artifactId}.${project.name}"
 website: "${project.url}"
 load: startup
