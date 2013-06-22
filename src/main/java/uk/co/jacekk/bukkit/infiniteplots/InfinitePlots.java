@@ -8,6 +8,7 @@ import org.bukkit.generator.ChunkGenerator;
 import uk.co.jacekk.bukkit.baseplugin.BasePlugin;
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
 import uk.co.jacekk.bukkit.infiniteplots.command.AddBuilderCommandExecutor;
+import uk.co.jacekk.bukkit.infiniteplots.command.AutoCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.ClaimCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.ConvertCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.FlagCommandExecutor;
@@ -71,6 +72,7 @@ public class InfinitePlots extends BasePlugin {
 			this.commandManager.registerCommandExecutor(new PlotCommandExecutor(this));
 			this.commandManager.registerCommandExecutor(new InfoCommandExecutor(this));
 			this.commandManager.registerCommandExecutor(new ClaimCommandExecutor(this));
+			this.commandManager.registerCommandExecutor(new AutoCommandExecutor(this));
 			this.commandManager.registerCommandExecutor(new AddBuilderCommandExecutor(this));
 			this.commandManager.registerCommandExecutor(new FlagCommandExecutor(this));
 			this.commandManager.registerCommandExecutor(new SetBiomeCommandExecutor(this));

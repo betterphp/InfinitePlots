@@ -175,6 +175,33 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 	}
 	
 	/**
+	 * Creates a new plot at the first available space, working from the centre of the world outwards.
+	 * 
+	 * @param world The world to create the plot in.
+	 * @return The created plot.
+	 */
+	public Plot createFirstAvailablePlot(World world){
+		String worldName = world.getName();
+		
+		for (int i = 0; true; ++i){
+			for (int x = -i; x <= i; ++i){
+				PlotLocation[] locations = new PlotLocation[]{
+					new PlotLocation(worldName, x, -i),
+					new PlotLocation(worldName, x, i),
+					new PlotLocation(worldName, -i, x),
+					new PlotLocation(worldName, i, x),
+				};
+				
+				for (PlotLocation location : locations){
+					if (!this.plotExistsAt(location)){
+						return this.createPlotAt(location, true);
+					}
+				}
+			}
+		}
+	}
+	
+	/**
 	 * Removes a plot.
 	 * 
 	 * @param location The {@link PlotLocation} of the plot.
