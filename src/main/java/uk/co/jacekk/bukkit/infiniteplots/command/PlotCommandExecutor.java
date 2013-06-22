@@ -54,12 +54,12 @@ public class PlotCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			sender.sendMessage(ChatColor.RED + "  reset - Resets the plot");
 		}
 		
-		if (Permission.PLOT_LIST.has(sender)){
-			sender.sendMessage(ChatColor.RED + "  list - Lists all owned plots");
+		if (Permission.PLOT_DECORATE.has(sender)){
+			sender.sendMessage(ChatColor.RED + "  decorate - Generate terrain in the plot");
 		}
 		
-		if (Permission.CONVERT.has(sender)){
-			sender.sendMessage(ChatColor.RED + "  convert - Convert InfiniteClaims plots");
+		if (Permission.PLOT_LIST.has(sender)){
+			sender.sendMessage(ChatColor.RED + "  list - Lists all owned plots");
 		}
 	}
 	

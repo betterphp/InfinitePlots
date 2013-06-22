@@ -14,12 +14,12 @@ import org.bukkit.entity.Player;
 
 import uk.co.jacekk.bukkit.baseplugin.BaseObject;
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
-import uk.co.jacekk.bukkit.infiniteplots.BlockChangeTask;
 import uk.co.jacekk.bukkit.infiniteplots.Config;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.flag.PlotFlag;
 import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation.Direction;
+import uk.co.jacekk.bukkit.infiniteplots.plot.decorator.FlatPlotDecorator;
 
 /**
  * Represents a plot in the world.
@@ -280,35 +280,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * Regenerates the buildable region of this plot.
 	 */
 	public void regenerate(){
-		World world = plugin.server.getWorld(this.location.getWorldName());
-		
-		int worldHeight = world.getMaxHeight();
-		int gridHeight = plugin.config.getInt(Config.GRID_HEIGHT);
-		
-		BlockChangeTask task = new BlockChangeTask(plugin);
-		
-		Material surface = Material.getMaterial(plugin.config.getInt(Config.BLOCKS_SURFACE));
-		Material ground = Material.getMaterial(plugin.config.getInt(Config.BLOCKS_GROUND));
-		
-		for (int x = this.buildLimits[0]; x <= this.buildLimits[2]; ++x){
-			for (int z = this.buildLimits[1]; z <= this.buildLimits[3]; ++z){
-				task.setBlockType(world.getBlockAt(x, 0, z), Material.BEDROCK);
-				
-				for (int y = 1; y < gridHeight; ++y){
-					task.setBlockType(world.getBlockAt(x, y, z), ground);
-				}
-				
-				task.setBlockType(world.getBlockAt(x, gridHeight, z), surface);
-				
-				for (int y = gridHeight + 1; y < worldHeight; ++y){
-					task.setBlockType(world.getBlockAt(x, y, z), Material.AIR);
-				}
-				
-				world.setBiome(x, z, Biome.PLAINS);
-			}
-		}
-		
-		task.start(plugin.config.getInt(Config.RESET_DELAY), plugin.config.getInt(Config.RESET_PERTICK));
+		(new FlatPlotDecorator(plugin, Material.getMaterial(plugin.config.getInt(Config.BLOCKS_GROUND)), Material.getMaterial(plugin.config.getInt(Config.BLOCKS_SURFACE)), (byte) 0, (byte) 0)).decorate(this);
 	}
 	
 	/**

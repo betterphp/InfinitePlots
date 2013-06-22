@@ -10,6 +10,7 @@ import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
 import uk.co.jacekk.bukkit.infiniteplots.command.AddBuilderCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.AutoCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.ClaimCommandExecutor;
+import uk.co.jacekk.bukkit.infiniteplots.command.DecorateCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.FlagCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.InfoCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.ListCommandExecutor;
@@ -79,6 +80,7 @@ public class InfinitePlots extends BasePlugin {
 			this.commandManager.registerCommandExecutor(new ListCommandExecutor(this));
 			this.commandManager.registerCommandExecutor(new NameCommandExecutor(this));
 			this.commandManager.registerCommandExecutor(new TeleportCommandExecutor(this));
+			this.commandManager.registerCommandExecutor(new DecorateCommandExecutor(this));
 		}
 		
 		if (this.config.getBoolean(Config.ENABLE_PROFILER)){

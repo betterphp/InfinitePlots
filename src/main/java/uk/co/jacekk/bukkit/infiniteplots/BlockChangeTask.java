@@ -21,12 +21,14 @@ public class BlockChangeTask extends BaseTask<InfinitePlots> {
 	private int taskID;
 	private int perTick;
 	
-	private LinkedHashMap<Block, Material> changes;
+	private LinkedHashMap<Block, Material> materials;
+	private LinkedHashMap<Block, Byte> dataValues;
 	
 	public BlockChangeTask(InfinitePlots plugin){
 		super(plugin);
 		
-		this.changes = new LinkedHashMap<Block, Material>();
+		this.materials = new LinkedHashMap<Block, Material>();
+		this.dataValues = new LinkedHashMap<Block, Byte>();
 	}
 	
 	/**
@@ -34,12 +36,36 @@ public class BlockChangeTask extends BaseTask<InfinitePlots> {
 	 * 
 	 * @param block The block to change
 	 * @param type The type to set it to
+	 * @param data The data value to set
 	 * @param force Whether to force the change even if the block is already the same type 
 	 */
-	public void setBlockType(Block block, Material type, boolean force){
-		if (force || block.getType() != type){
-			this.changes.put(block, type);
+	public void setBlockType(Block block, Material type, byte data, boolean force){
+		if (force || (block.getType() != type || block.getData() != data)){
+			this.materials.put(block, type);
+			this.dataValues.put(block, data);
 		}
+	}
+	
+	/**
+	 * Adds a block changes to the schedule list.
+	 * 
+	 * @param block The block to change
+	 * @param type The type to set it to
+	 * @param data The data value to set
+	 */
+	public void setBlockType(Block block, Material type, byte data){
+		this.setBlockType(block, type, data, false);
+	}
+	
+	/**
+	 * Adds a block changes to the schedule list.
+	 * 
+	 * @param block The block to change
+	 * @param type The type to set it to
+	 * @param force Whether to force the change even if the block is already the same type
+	 */
+	public void setBlockType(Block block, Material type, boolean force){
+		this.setBlockType(block, type, (byte) 0, force);
 	}
 	
 	/**
@@ -65,16 +91,21 @@ public class BlockChangeTask extends BaseTask<InfinitePlots> {
 	
 	@Override
 	public void run(){
-		Iterator<Entry<Block, Material>> iterator = this.changes.entrySet().iterator();
+		Iterator<Entry<Block, Material>> materialIterator = this.materials.entrySet().iterator();
+		Iterator<Entry<Block, Byte>> dataIterator = this.dataValues.entrySet().iterator();
 		
-		for (int i = 0; i < this.perTick && iterator.hasNext(); ++i){
-			Entry<Block, Material> entry = iterator.next();
-			iterator.remove();
+		for (int i = 0; i < this.perTick && materialIterator.hasNext() && dataIterator.hasNext(); ++i){
+			Entry<Block, Material> materialEntry = materialIterator.next();
+			Entry<Block, Byte> dataEntry = dataIterator.next();
 			
-			entry.getKey().setType(entry.getValue());
+			materialIterator.remove();
+			dataIterator.remove();
+			
+			materialEntry.getKey().setType(materialEntry.getValue());
+			dataEntry.getKey().setData(dataEntry.getValue());
 		}
 		
-		if (this.changes.isEmpty()){
+		if (this.materials.isEmpty() || this.dataValues.isEmpty()){
 			plugin.scheduler.cancelTask(this.taskID);
 		}
 	}
