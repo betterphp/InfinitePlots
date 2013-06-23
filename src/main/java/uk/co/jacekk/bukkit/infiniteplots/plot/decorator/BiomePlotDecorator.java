@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 import net.minecraft.server.v1_5_R3.BiomeBase;
+import net.minecraft.server.v1_5_R3.BlockSand;
 import net.minecraft.server.v1_5_R3.ChunkProviderGenerate;
 import net.minecraft.server.v1_5_R3.IChunkProvider;
 import net.minecraft.server.v1_5_R3.World;
@@ -102,6 +103,8 @@ public class BiomePlotDecorator extends PlotDecorator {
 			}
 		}
 		
+		BlockSand.instaFall = true;
+		
 		task.start(plugin.config.getInt(Config.RESET_DELAY), plugin.config.getInt(Config.RESET_PERTICK));
 		
 		task.setOnComplete(new Runnable(){
@@ -123,6 +126,8 @@ public class BiomePlotDecorator extends PlotDecorator {
 				}
 				
 				world.chunkProvider = currentChunkProvider;
+				
+				BlockSand.instaFall = false;
 			}
 			
 		});
