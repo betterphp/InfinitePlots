@@ -88,7 +88,7 @@ public class BiomePlotDecorator extends PlotDecorator {
 						if (wx >= buildLimits[0] && wz >= buildLimits[1] && wx <= buildLimits[2] && wz <= buildLimits[3]){
 							craftWorld.setBiome(wx, wz, this.biome);
 							
-							for (int y = 127; y >= 0; --y){
+							for (int y = 0; y < 128; ++y){
 								int wy = y - (seaHeight - gridHeight);
 								
 								if (wy > 0 && wy < worldHeight){
