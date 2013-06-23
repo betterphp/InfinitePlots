@@ -7,7 +7,6 @@ import net.minecraft.server.v1_5_R3.BiomeBase;
 import net.minecraft.server.v1_5_R3.ChunkProviderGenerate;
 import net.minecraft.server.v1_5_R3.IChunkProvider;
 import net.minecraft.server.v1_5_R3.World;
-import net.minecraft.server.v1_5_R3.WorldGenBase;
 import net.minecraft.server.v1_5_R3.WorldGenCanyon;
 import net.minecraft.server.v1_5_R3.WorldGenCaves;
 
@@ -17,9 +16,9 @@ import org.bukkit.craftbukkit.v1_5_R3.CraftWorld;
 
 import uk.co.jacekk.bukkit.baseplugin.util.ReflectionUtils;
 import uk.co.jacekk.bukkit.infiniteplots.BlockChangeTask;
-import uk.co.jacekk.bukkit.infiniteplots.ChunkProviderWrapper;
 import uk.co.jacekk.bukkit.infiniteplots.Config;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
+import uk.co.jacekk.bukkit.infiniteplots.nms.ChunkProviderWrapper;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 
 /**

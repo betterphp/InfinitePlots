@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.infiniteplots;
+package uk.co.jacekk.bukkit.infiniteplots.nms;
 
 import net.minecraft.server.v1_5_R3.Chunk;
 import uk.co.jacekk.bukkit.baseplugin.util.ReflectionUtils;

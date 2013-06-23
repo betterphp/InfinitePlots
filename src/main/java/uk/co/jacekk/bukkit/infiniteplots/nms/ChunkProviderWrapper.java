@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.infiniteplots;
+package uk.co.jacekk.bukkit.infiniteplots.nms;
 
 import java.util.List;
 
@@ -49,6 +49,7 @@ public class ChunkProviderWrapper implements IChunkProvider {
 		return this.chunkProvider.getLoadedChunks();
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Override
 	public List getMobsFor(EnumCreatureType arg0, int arg1, int arg2, int arg3){
 		return this.chunkProvider.getMobsFor(arg0, arg1, arg2, arg3);
