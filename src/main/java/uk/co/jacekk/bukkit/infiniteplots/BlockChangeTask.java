@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 
 import uk.co.jacekk.bukkit.baseplugin.scheduler.BaseTask;
@@ -21,11 +22,17 @@ public class BlockChangeTask extends BaseTask<InfinitePlots> {
 	private int taskID;
 	private int perTick;
 	
+	private World world;
+	
 	private LinkedHashMap<Block, Material> materials;
 	private LinkedHashMap<Block, Byte> dataValues;
 	
-	public BlockChangeTask(InfinitePlots plugin){
+	private Runnable onComplete;
+	
+	public BlockChangeTask(InfinitePlots plugin, World world){
 		super(plugin);
+		
+		this.world = world;
 		
 		this.materials = new LinkedHashMap<Block, Material>();
 		this.dataValues = new LinkedHashMap<Block, Byte>();
@@ -79,6 +86,64 @@ public class BlockChangeTask extends BaseTask<InfinitePlots> {
 	}
 	
 	/**
+	 * Adds a block changes to the schedule list.
+	 * 
+	 * @param block The block to change
+	 * @param type The type to set it to
+	 * @param data The data value to set
+	 * @param force Whether to force the change even if the block is already the same type 
+	 */
+	public void setType(int x, int y, int z, Material type, byte data, boolean force){
+		Block block = this.world.getBlockAt(x, y, z);
+		
+		if (force || (block.getType() != type || block.getData() != data)){
+			this.materials.put(block, type);
+			this.dataValues.put(block, data);
+		}
+	}
+	
+	/**
+	 * Adds a block changes to the schedule list.
+	 * 
+	 * @param block The block to change
+	 * @param type The type to set it to
+	 * @param data The data value to set
+	 */
+	public void setType(int x, int y, int z, Material type, byte data){
+		this.setType(x, y, z, type, data, false);
+	}
+	
+	/**
+	 * Adds a block changes to the schedule list.
+	 * 
+	 * @param block The block to change
+	 * @param type The type to set it to
+	 * @param force Whether to force the change even if the block is already the same type
+	 */
+	public void setType(int x, int y, int z, Material type, boolean force){
+		this.setType(x, y, z, type, (byte) 0, force);
+	}
+	
+	/**
+	 * Adds a block changes to the schedule list.
+	 * 
+	 * @param block The block to change
+	 * @param type The type to set it to
+	 */
+	public void setType(int x, int y, int z, Material type){
+		this.setType(x, y, z, type, false);
+	}
+	
+	/**
+	 * Sets a Runnable that will be called once the task is complete.
+	 * 
+	 * @param runnable The runnable.
+	 */
+	public void setOnComplete(Runnable runnable){
+		this.onComplete = runnable;
+	}
+	
+	/**
 	 * Starts the scheduler running.
 	 * 
 	 * @param delay How many ticks to wait between operations
@@ -107,6 +172,10 @@ public class BlockChangeTask extends BaseTask<InfinitePlots> {
 		
 		if (this.materials.isEmpty() || this.dataValues.isEmpty()){
 			plugin.scheduler.cancelTask(this.taskID);
+			
+			if (this.onComplete != null){
+				this.onComplete.run();
+			}
 		}
 	}
 	

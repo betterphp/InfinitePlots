@@ -2,6 +2,7 @@ package uk.co.jacekk.bukkit.infiniteplots.command;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.block.Biome;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -13,6 +14,7 @@ import uk.co.jacekk.bukkit.infiniteplots.Permission;
 import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;
+import uk.co.jacekk.bukkit.infiniteplots.plot.decorator.BiomePlotDecorator;
 import uk.co.jacekk.bukkit.infiniteplots.plot.decorator.FlatPlotDecorator;
 
 public class DecorateCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
@@ -60,7 +62,7 @@ public class DecorateCommandExecutor extends BaseCommandExecutor<InfinitePlots> 
 		
 		if (args[0].equalsIgnoreCase("flat")){
 			if (args.length != 3){
-				sender.sendMessage(ChatColor.RED + "Usage: /" + label + " decorate <decorator> <ground_block> <surface_block>");
+				sender.sendMessage(ChatColor.RED + "Usage: /" + label + " decorate flat <ground_block> <surface_block>");
 				return;
 			}
 			
@@ -115,6 +117,22 @@ public class DecorateCommandExecutor extends BaseCommandExecutor<InfinitePlots> 
 			}
 			
 			(new FlatPlotDecorator(plugin, groundBlock, surfaceBlock, groundData, surfaceData)).decorate(plot);
+		}else if (args[0].equalsIgnoreCase("biome")){
+			if (args.length != 2){
+				sender.sendMessage(ChatColor.RED + "Usage: /" + label + " decorate biome <biome_name>");
+				return;
+			}
+			
+			Biome biome = Biome.PLAINS;
+			
+			try{
+				biome = Biome.valueOf(args[1].toUpperCase());
+			}catch (IllegalArgumentException e){
+				sender.sendMessage(ChatColor.RED + args[1] + " is not a valid biome");
+				return;
+			}
+			
+			(new BiomePlotDecorator(plugin, biome)).decorate(plot);
 		}
 	}
 	

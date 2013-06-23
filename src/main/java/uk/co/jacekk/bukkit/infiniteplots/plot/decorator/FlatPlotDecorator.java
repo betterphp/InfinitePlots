@@ -40,7 +40,7 @@ public class FlatPlotDecorator extends PlotDecorator {
 		int worldHeight = world.getMaxHeight();
 		int gridHeight = plugin.config.getInt(Config.GRID_HEIGHT);
 		
-		BlockChangeTask task = new BlockChangeTask(plugin);
+		BlockChangeTask task = new BlockChangeTask(plugin, world);
 		
 		int[] buildLimits = plot.getBuildLimits();
 		
