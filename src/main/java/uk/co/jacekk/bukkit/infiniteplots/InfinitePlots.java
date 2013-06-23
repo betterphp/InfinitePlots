@@ -82,10 +82,6 @@ public class InfinitePlots extends BasePlugin {
 			this.commandManager.registerCommandExecutor(new TeleportCommandExecutor(this));
 			this.commandManager.registerCommandExecutor(new DecorateCommandExecutor(this));
 		}
-		
-		if (this.config.getBoolean(Config.ENABLE_PROFILER)){
-			this.enableProfiling();
-		}
 	}
 	
 	@Override

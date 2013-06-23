@@ -13,8 +13,8 @@
 		<upload.dbo.category>server-mods</upload.dbo.category>
 		<upload.dbo.slug>infiniteplots</upload.dbo.slug>
 		
-		<baseplugin.version>11.1</baseplugin.version>
-		<baseplugin.package>11_1</baseplugin.package>
+		<baseplugin.version>12</baseplugin.version>
+		<baseplugin.package>12</baseplugin.package>
 	</properties>	
 	
 	<repositories>
