@@ -1,6 +1,6 @@
 package uk.co.jacekk.bukkit.infiniteplots.nms;
 
-import net.minecraft.server.v1_5_R3.Chunk;
+import net.minecraft.server.v1_6_R1.Chunk;
 import uk.co.jacekk.bukkit.baseplugin.util.ReflectionUtils;
 
 public class ChunkWrapper extends Chunk {
@@ -26,13 +26,14 @@ public class ChunkWrapper extends Chunk {
 		this.done = this.chunk.done;
 		this.l = this.chunk.l;
 		this.m = this.chunk.m;
+		this.n = this.chunk.n;
 		this.seenByPlayer = this.chunk.seenByPlayer;
 		this.p = this.chunk.p;
+		this.q = this.chunk.q;
 		
 		try{
 			ReflectionUtils.setFieldValue(Chunk.class, "t", this, ReflectionUtils.getFieldValue(Chunk.class, "t", Boolean.class, this.chunk));
 			ReflectionUtils.setFieldValue(Chunk.class, "u", this, ReflectionUtils.getFieldValue(Chunk.class, "u", Integer.class, this.chunk));
-			ReflectionUtils.setFieldValue(Chunk.class, "q", this, ReflectionUtils.getFieldValue(Chunk.class, "q", Boolean.class, this.chunk));
 		}catch (NoSuchFieldException e){
 			e.printStackTrace();
 		}
