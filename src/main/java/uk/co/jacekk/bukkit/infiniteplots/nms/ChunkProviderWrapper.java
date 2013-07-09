@@ -2,12 +2,12 @@ package uk.co.jacekk.bukkit.infiniteplots.nms;
 
 import java.util.List;
 
-import net.minecraft.server.v1_6_R1.Chunk;
-import net.minecraft.server.v1_6_R1.ChunkPosition;
-import net.minecraft.server.v1_6_R1.EnumCreatureType;
-import net.minecraft.server.v1_6_R1.IChunkProvider;
-import net.minecraft.server.v1_6_R1.IProgressUpdate;
-import net.minecraft.server.v1_6_R1.World;
+import net.minecraft.server.v1_6_R2.Chunk;
+import net.minecraft.server.v1_6_R2.ChunkPosition;
+import net.minecraft.server.v1_6_R2.EnumCreatureType;
+import net.minecraft.server.v1_6_R2.IChunkProvider;
+import net.minecraft.server.v1_6_R2.IProgressUpdate;
+import net.minecraft.server.v1_6_R2.World;
 
 public class ChunkProviderWrapper implements IChunkProvider {
 	
