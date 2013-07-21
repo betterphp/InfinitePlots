@@ -24,7 +24,7 @@ public class DecorateCommandExecutor extends BaseCommandExecutor<InfinitePlots> 
 	}
 	
 	@SubCommandHandler(parent = "iplot", name = "decorate")
-	@CommandTabCompletion({"flat"})
+	@CommandTabCompletion({"flat|biome"})
 	public void plotFlag(CommandSender sender, String label, String[] args){
 		if (!Permission.PLOT_DECORATE.has(sender)){
 			sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
