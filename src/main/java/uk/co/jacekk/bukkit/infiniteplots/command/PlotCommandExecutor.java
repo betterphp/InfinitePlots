@@ -58,6 +58,10 @@ public class PlotCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			sender.sendMessage(ChatColor.RED + "  decorate - Generate terrain in the plot");
 		}
 		
+		if (Permission.PLOT_PROTECTION.has(sender)){
+			sender.sendMessage(ChatColor.RED + "  protection - Modifies a plots protection");
+		}
+		
 		if (Permission.PLOT_LIST.has(sender)){
 			sender.sendMessage(ChatColor.RED + "  list - Lists all owned plots");
 		}

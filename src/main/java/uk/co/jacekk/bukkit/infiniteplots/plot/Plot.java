@@ -151,6 +151,36 @@ public class Plot extends BaseObject<InfinitePlots> {
 	}
 	
 	/**
+	 * Checks to see if a player can enter the plot.
+	 * 
+	 * Note that this does not perform a permissions check.
+	 * 
+	 * @param playerName The name of the player
+	 * @return True if they can enter false if not.
+	 */
+	public boolean canEnter(String playerName){
+		return (!this.config.getBoolean(PlotConfig.PROTECTION_ENTER) || this.canBuild(playerName));
+	}
+	
+	/**
+	 * Sets if the plot is protected from people building in it or not
+	 * 
+	 * @param enable The build protection state.
+	 */
+	public void setBuildProtection(boolean enable){
+		this.config.set(PlotConfig.PROTECTION_BUILD, enable);
+	}
+	
+	/**
+	 * Sets if the plot is protected from people entering it or not.
+	 * 
+	 * @param enable The enter protection state.
+	 */
+	public void setEnterProtection(boolean enable){
+		this.config.set(PlotConfig.PROTECTION_ENTER, enable);
+	}
+	
+	/**
 	 * Adds a builder to this plot.
 	 * 
 	 * @param playerName The name of the player to add.

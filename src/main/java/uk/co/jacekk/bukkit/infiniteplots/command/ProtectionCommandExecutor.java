@@ -12,15 +12,15 @@ import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;
 
-public class NameCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
+public class ProtectionCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 	
-	public NameCommandExecutor(InfinitePlots plugin){
+	public ProtectionCommandExecutor(InfinitePlots plugin){
 		super(plugin);
 	}
-	
-	@SubCommandHandler(parent = "iplot", name = "name")
-	public void plotName(CommandSender sender, String label, String[] args){
-		if (!Permission.PLOT_CLAIM.has(sender)){
+
+	@SubCommandHandler(parent = "iplot", name = "protection")
+	public void plotProtection(CommandSender sender, String label, String[] args){
+		if (!Permission.PLOT_PROTECTION.has(sender)){
 			sender.sendMessage(ChatColor.RED + "You do not have permission to use this command");
 			return;
 		}
@@ -30,8 +30,10 @@ public class NameCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			return;
 		}
 		
-		if (args.length != 1){
-			sender.sendMessage(ChatColor.RED + "Usage: /" + label + " <plot_name>");
+		if (args.length != 2){
+			sender.sendMessage(ChatColor.RED + "Usage: /" + label + " <protection> <true/false>");
+			sender.sendMessage(ChatColor.RED + "Example: /" + label + " build true");
+			sender.sendMessage(ChatColor.RED + "Example: /" + label + " enter false");
 			return;
 		}
 		
@@ -49,14 +51,22 @@ public class NameCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			return;
 		}
 		
-		if (!plot.getAdmin().equalsIgnoreCase(player.getName())){
+		if (!Permission.PLOT_PROTECTION_OTHER.has(player) && !plot.getAdmin().equalsIgnoreCase(player.getName())){
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 			return;
 		}
 		
-		plot.setName(args[0]);
+		if (args[0].equalsIgnoreCase("build")){
+			plot.setBuildProtection(args[1].equalsIgnoreCase("true") || args[1].equalsIgnoreCase("deny"));
+		}else if (args[0].equalsIgnoreCase("enter")){
+			plot.setEnterProtection(args[1].equalsIgnoreCase("true") || args[1].equalsIgnoreCase("deny"));
+		}else{
+			sender.sendMessage(ChatColor.RED + "Invalid protection.");
+		}
 		
-		sender.sendMessage(ChatColor.GREEN + "Name set to '" + args[0] + "'");
+		sender.sendMessage(ChatColor.GREEN + "Protection updated");
 	}
+	
+	
 	
 }

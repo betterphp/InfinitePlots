@@ -25,8 +25,10 @@ public class Permission {
 	public static final PluginPermission PLOT_LIST_OTHER = new PluginPermission("infiniteplots.plot.list.others", PermissionDefault.OP, "Allows the player to list another players plots");
 	public static final PluginPermission PLOT_TELEPORT = new PluginPermission("infiniteplots.plot.teleport", PermissionDefault.TRUE, "Allows the player to teleport to their plots");
 	public static final PluginPermission PLOT_TELEPORT_OTHER = new PluginPermission("infiniteplots.plot.teleport.others", PermissionDefault.OP, "Allows the player to teleport to another players plots");
-	public static final PluginPermission PLOT_DECORATE = new PluginPermission("infiniteplots.plot.decorate", PermissionDefault.TRUE, "Allows the player to  decorate plots");
+	public static final PluginPermission PLOT_DECORATE = new PluginPermission("infiniteplots.plot.decorate", PermissionDefault.TRUE, "Allows the player to decorate plots");
 	public static final PluginPermission PLOT_DECORATE_OTHER = new PluginPermission("infiniteplots.plot.decorate.others", PermissionDefault.OP, "Allows the player to decorate another players plots");
+	public static final PluginPermission PLOT_PROTECTION = new PluginPermission("infiniteplots.plot.protection", PermissionDefault.TRUE, "Allows the player to modify a plots protection");
+	public static final PluginPermission PLOT_PROTECTION_OTHER = new PluginPermission("infiniteplots.plot.protection.others", PermissionDefault.OP, "Allows the player to modify another players plot protection");
 	
 	public static final PluginPermission PLOT_BUILD_ALL = new PluginPermission("infiniteplots.plot.build-all", PermissionDefault.OP, "Allows the player to build in plots they do not own");
 	public static final PluginPermission PLOT_BYPASS_CLAIM_LIMIT = new PluginPermission("infiniteplots.plot.bypass-claim-limit", PermissionDefault.OP, "Allows the player to claim more plots than the limit");

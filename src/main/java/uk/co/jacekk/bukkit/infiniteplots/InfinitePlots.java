@@ -16,6 +16,7 @@ import uk.co.jacekk.bukkit.infiniteplots.command.InfoCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.ListCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.NameCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.PlotCommandExecutor;
+import uk.co.jacekk.bukkit.infiniteplots.command.ProtectionCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.ResetCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.SetBiomeCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.TeleportCommandExecutor;
@@ -26,6 +27,7 @@ import uk.co.jacekk.bukkit.infiniteplots.flag.PhysicsListener;
 import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotManager;
 import uk.co.jacekk.bukkit.infiniteplots.protection.BuildListener;
+import uk.co.jacekk.bukkit.infiniteplots.protection.EnterListener;
 
 public class InfinitePlots extends BasePlugin {
 	
@@ -60,6 +62,8 @@ public class InfinitePlots extends BasePlugin {
 			this.pluginManager.registerEvents(new WorldInitListener(this), this);
 			
 			this.pluginManager.registerEvents(new BuildListener(this), this);
+			this.pluginManager.registerEvents(new EnterListener(this), this);
+			
 			this.pluginManager.registerEvents(new MobSpawnListener(this), this);
 			this.pluginManager.registerEvents(new BlockFlowListener(this), this);
 			this.pluginManager.registerEvents(new IceListener(this), this);
@@ -81,6 +85,7 @@ public class InfinitePlots extends BasePlugin {
 			this.commandManager.registerCommandExecutor(new NameCommandExecutor(this));
 			this.commandManager.registerCommandExecutor(new TeleportCommandExecutor(this));
 			this.commandManager.registerCommandExecutor(new DecorateCommandExecutor(this));
+			this.commandManager.registerCommandExecutor(new ProtectionCommandExecutor(this));
 		}
 	}
 	
