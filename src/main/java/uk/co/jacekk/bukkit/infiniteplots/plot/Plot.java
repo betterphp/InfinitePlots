@@ -181,6 +181,30 @@ public class Plot extends BaseObject<InfinitePlots> {
 	}
 	
 	/**
+	 * Gets the build protection state of the plot.
+	 * 
+	 * If this is true then only the owner or players listed as a builder
+	 * will be allowed to modify the world inside the plot.
+	 * 
+	 * @return The state.
+	 */
+	public boolean isBuildProtected(){
+		return this.config.getBoolean(PlotConfig.PROTECTION_BUILD);
+	}
+	
+	/**
+	 * Gets the enter protection state of the plot.
+	 * 
+	 * If this is true then only the owner or players listed as a builder
+	 * will be allowed to move into the plot area.
+	 * 
+	 * @return The state.
+	 */
+	public boolean isEnterProtected(){
+		return this.config.getBoolean(PlotConfig.PROTECTION_ENTER);
+	}
+	
+	/**
 	 * Adds a builder to this plot.
 	 * 
 	 * @param playerName The name of the player to add.

@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import uk.co.jacekk.bukkit.baseplugin.command.BaseCommandExecutor;
 import uk.co.jacekk.bukkit.baseplugin.command.SubCommandHandler;
+import uk.co.jacekk.bukkit.baseplugin.util.ListUtils;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.Permission;
 import uk.co.jacekk.bukkit.infiniteplots.flag.PlotFlag;
@@ -46,22 +47,14 @@ public class InfoCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		}
 		
 		player.sendMessage(ChatColor.YELLOW + "Plot Information");
-		if (plot.getAdmin() != player.getName())
-			player.sendMessage(ChatColor.BLUE + "Name: " + ChatColor.RESET + plot.getAdmin());
+		
+		player.sendMessage(ChatColor.BLUE + "Owner: " + ChatColor.RESET + plot.getAdmin());
 		player.sendMessage(ChatColor.BLUE + "Name: " + ChatColor.RESET + plot.getName());
 		player.sendMessage(ChatColor.BLUE + "Location: " + ChatColor.RESET + plot.getLocation().getX() + ", " + plot.getLocation().getZ());
 		
-		StringBuilder builders = new StringBuilder();
-		
-		for (String builder : plot.getBuilders()){
-			builders.append(builder + " ");
+		if (!plot.getBuilders().isEmpty()){
+			player.sendMessage(ChatColor.LIGHT_PURPLE + "Builders: " + ChatColor.RESET + ListUtils.implode(", ", plot.getBuilders()));
 		}
-		
-		if (builders.length() < 1){
-			builders.append("None");
-		}
-		
-		player.sendMessage(ChatColor.LIGHT_PURPLE + "Builders: " + ChatColor.RESET + builders.toString());
 		
 		StringBuilder flags = new StringBuilder();
 		
@@ -70,6 +63,8 @@ public class InfoCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		}
 		
 		player.sendMessage("Flags: " + flags.toString());
+		
+		player.sendMessage("Protection: " + (plot.isBuildProtected() ? ChatColor.GREEN : ChatColor.RED) + "build " + (plot.isBuildProtected() ? ChatColor.GREEN : ChatColor.RED) + "enter");
 	}
 	
 }
