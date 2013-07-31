@@ -54,6 +54,11 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			int max = plugin.config.getInt(Config.CLAIM_MAX);
 			int maxUnused = plugin.config.getInt(Config.CLAIM_MAX_UNUSED);
 			
+			if (max > 0 && plots.size() >= max){
+				player.sendMessage(ChatColor.RED + "You have already claimed the maximum number of plots");
+				return;
+			}
+			
 			if (maxUnused > 0 && plugin.config.getBoolean(Config.TRACK_STATS)){
 				int unused = 0;
 				
@@ -65,11 +70,6 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 						}
 					}
 				}
-			}
-			
-			if (max > 0 && plots.size() >= max){
-				player.sendMessage(ChatColor.RED + "You have already claimed the maximum number of plots");
-				return;
 			}
 		}
 		
