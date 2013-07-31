@@ -2,8 +2,11 @@ package uk.co.jacekk.bukkit.infiniteplots;
 
 import java.io.File;
 
+import net.milkbowl.vault.economy.Economy;
+
 import org.bukkit.World;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 import uk.co.jacekk.bukkit.baseplugin.BasePlugin;
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
@@ -35,6 +38,7 @@ public class InfinitePlots extends BasePlugin {
 	
 	private File plotsDir;
 	private PlotManager plotManager;
+	private Economy economy;
 	
 	@Override
 	public void onEnable(){
@@ -71,6 +75,17 @@ public class InfinitePlots extends BasePlugin {
 			
 			if (this.config.getBoolean(Config.TRACK_STATS)){
 				this.pluginManager.registerEvents(new PlotStatsListener(this), this);
+			}
+			
+			if (this.config.getDouble(Config.CLAIM_COST) > 0.0d){
+				RegisteredServiceProvider<Economy> economyProvider = this.server.getServicesManager().getRegistration(Economy.class);
+				
+				if (economyProvider == null){
+					this.log.warn("Vault not found, players will not be charged to claim plots.");
+					this.log.warn("Download it from http://dev.bukkit.org/bukkit-plugins/vault/");
+				}else{
+					this.economy = economyProvider.getProvider();
+				}
 			}
 			
 			this.commandManager.registerCommandExecutor(new PlotCommandExecutor(this));
@@ -138,6 +153,15 @@ public class InfinitePlots extends BasePlugin {
 	 */
 	public PlotManager getPlotManager(){
 		return this.plotManager;
+	}
+	
+	/**
+	 * Gets the economy instance.
+	 * 
+	 * @return The instance.
+	 */
+	public Economy getEconomy(){
+		return this.economy;
 	}
 	
 }

@@ -2,6 +2,8 @@ package uk.co.jacekk.bukkit.infiniteplots.command;
 
 import java.util.List;
 
+import net.milkbowl.vault.economy.Economy;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -37,6 +39,13 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		
 		if (!(player.getWorld().getGenerator() instanceof PlotsGenerator)){
 			player.sendMessage(ChatColor.RED + "You must be in a plot world");
+			return;
+		}
+		
+		Economy economy = this.plugin.getEconomy();
+		
+		if (economy != null && economy.getBalance(player.getName()) < this.plugin.config.getDouble(Config.CLAIM_COST)){
+			player.sendMessage(ChatColor.RED + "You need " + this.plugin.config.getDouble(Config.CLAIM_COST) + " " + economy.currencyNamePlural() + " to claim a new plot.");
 			return;
 		}
 		
@@ -76,6 +85,10 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		
 		if (args.length == 1){
 			plot.setName(args[0]);
+		}
+		
+		if (economy != null){
+			economy.withdrawPlayer(player.getName(), this.plugin.config.getDouble(Config.CLAIM_COST));
 		}
 		
 		player.sendMessage(ChatColor.GREEN + "Plot claimed");
