@@ -147,7 +147,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * @return True if the player can build, false if not.
 	 */
 	public boolean canBuild(String playerName){
-		return (this.getAdmin().equalsIgnoreCase(playerName) || this.getBuilders().contains(playerName.toLowerCase()));
+		return (!this.isBuildProtected() || this.getAdmin().equalsIgnoreCase(playerName) || this.getBuilders().contains(playerName.toLowerCase()));
 	}
 	
 	/**
@@ -159,7 +159,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * @return True if they can enter false if not.
 	 */
 	public boolean canEnter(String playerName){
-		return (!this.config.getBoolean(PlotConfig.PROTECTION_ENTER) || this.canBuild(playerName));
+		return (!this.isEnterProtected() || this.canBuild(playerName));
 	}
 	
 	/**
