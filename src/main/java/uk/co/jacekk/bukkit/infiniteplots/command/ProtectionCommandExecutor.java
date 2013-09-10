@@ -31,9 +31,9 @@ public class ProtectionCommandExecutor extends BaseCommandExecutor<InfinitePlots
 		}
 		
 		if (args.length != 2){
-			sender.sendMessage(ChatColor.RED + "Usage: /" + label + " <protection> <true/false>");
-			sender.sendMessage(ChatColor.RED + "Example: /" + label + " build true");
-			sender.sendMessage(ChatColor.RED + "Example: /" + label + " enter false");
+			sender.sendMessage(ChatColor.RED + "Usage: /" + label + " protection <protection> <true/false>");
+			sender.sendMessage(ChatColor.RED + "Example: /" + label + " protection build true");
+			sender.sendMessage(ChatColor.RED + "Example: /" + label + " protection enter false");
 			return;
 		}
 		

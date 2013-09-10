@@ -16,7 +16,7 @@ public class PlotCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 	}
 	
 	@CommandHandler(names = {"iplot", "plot"}, description = "Manages the current plot.", usage = "[action] <args>")
-	@CommandTabCompletion({"info|claim|unclaim|addbuilder|removebuilder|flag|reset"})
+	@CommandTabCompletion({"info|claim|unclaim|addbuilder|removebuilder|flag|setbiome|reset|decorate|protection|list"})
 	public void iplot(CommandSender sender, String label, String[] args){
 		sender.sendMessage(ChatColor.RED + "Usage: /" + label + " [action] <args>");
 		sender.sendMessage(ChatColor.RED + "Actions:");
