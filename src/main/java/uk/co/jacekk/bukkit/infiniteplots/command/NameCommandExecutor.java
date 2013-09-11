@@ -31,7 +31,7 @@ public class NameCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		}
 		
 		if (args.length != 1){
-			sender.sendMessage(ChatColor.RED + "Usage: /" + label + " <plot_name>");
+			sender.sendMessage(ChatColor.RED + "Usage: /" + label + " name <plot_name>");
 			return;
 		}
 		

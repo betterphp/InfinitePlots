@@ -48,8 +48,8 @@ public class TeleportCommandExecutor extends BaseCommandExecutor<InfinitePlots> 
 			
 			plot = plugin.getPlotManager().getPlotAt(new PlotLocation(player.getWorld().getName(), x, z));
 		}else{
-			sender.sendMessage(ChatColor.RED + "Usage: /" + label + "<plot_name>");
-			sender.sendMessage(ChatColor.RED + "Usage: /" + label + "<x> <z>");
+			sender.sendMessage(ChatColor.RED + "Usage: /" + label + " tp <plot_name>");
+			sender.sendMessage(ChatColor.RED + "Usage: /" + label + " tp <x> <z>");
 			return;
 		}
 		
