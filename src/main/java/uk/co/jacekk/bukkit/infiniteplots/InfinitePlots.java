@@ -20,6 +20,7 @@ import uk.co.jacekk.bukkit.infiniteplots.command.ListCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.NameCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.PlotCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.ProtectionCommandExecutor;
+import uk.co.jacekk.bukkit.infiniteplots.command.PurgeCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.ResetCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.SetBiomeCommandExecutor;
 import uk.co.jacekk.bukkit.infiniteplots.command.TeleportCommandExecutor;
@@ -101,6 +102,7 @@ public class InfinitePlots extends BasePlugin {
 			this.commandManager.registerCommandExecutor(new TeleportCommandExecutor(this));
 			this.commandManager.registerCommandExecutor(new DecorateCommandExecutor(this));
 			this.commandManager.registerCommandExecutor(new ProtectionCommandExecutor(this));
+			this.commandManager.registerCommandExecutor(new PurgeCommandExecutor(this));
 		}
 	}
 	

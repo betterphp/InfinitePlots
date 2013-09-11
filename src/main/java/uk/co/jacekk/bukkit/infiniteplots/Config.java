@@ -21,6 +21,7 @@ public class Config {
 	public static final PluginConfigKey CLAIM_MAX				= new PluginConfigKey("claim.max",				25);
 	public static final PluginConfigKey CLAIM_MAX_UNUSED		= new PluginConfigKey("claim.max-unused",		4);
 	public static final PluginConfigKey CLAIM_COST				= new PluginConfigKey("claim.cost",				0.0d);
+	public static final PluginConfigKey PURGE_SAFE_LIST			= new PluginConfigKey("purge-safe-list",		new String[0]);
 	
 	public static final PluginConfigKey BLOCKS_PATH				= new PluginConfigKey("blocks.path",				Material.DOUBLE_STEP.getId());
 	public static final PluginConfigKey BLOCKS_PATH_DATA		= new PluginConfigKey("blocks.path-data", 			0);

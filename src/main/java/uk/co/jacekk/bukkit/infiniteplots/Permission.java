@@ -32,5 +32,6 @@ public class Permission {
 	
 	public static final PluginPermission PLOT_BUILD_ALL				= new PluginPermission("infiniteplots.plot.build-all",			PermissionDefault.OP,		"Allows the player to build in plots they do not own");
 	public static final PluginPermission PLOT_BYPASS_CLAIM_LIMIT	= new PluginPermission("infiniteplots.plot.bypass-claim-limit",	PermissionDefault.OP,		"Allows the player to claim more plots than the limit");
+	public static final PluginPermission PLOT_PURGE					= new PluginPermission("infiniteplots.plot.purge",				PermissionDefault.OP,		"Allows the player to remove dead plots");
 	
 }

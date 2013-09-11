@@ -3,8 +3,10 @@ package uk.co.jacekk.bukkit.infiniteplots.plot;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 
 import uk.co.jacekk.bukkit.baseplugin.BaseObject;
@@ -119,6 +121,26 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 		
 		for (Plot plot : this.plots.values()){
 			if (plot.canBuild(playerName)){
+				plots.add(plot);
+			}
+		}
+		
+		return plots;
+	}
+	
+	/**
+	 * Gets all plots that are owned by players that have not logged in in duration ms.
+	 * 
+	 * @param duration The duration.
+	 */
+	public List<Plot> getDeadPlots(long duration){
+		ArrayList<Plot> plots = new ArrayList<Plot>();
+		long now = System.currentTimeMillis();
+		
+		for (Plot plot : this.plots.values()){
+			OfflinePlayer admin = this.plugin.server.getOfflinePlayer(plot.getAdmin());
+			
+			if (now - admin.getLastPlayed() > duration){
 				plots.add(plot);
 			}
 		}

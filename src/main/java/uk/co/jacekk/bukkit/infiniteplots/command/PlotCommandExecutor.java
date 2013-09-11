@@ -65,6 +65,10 @@ public class PlotCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		if (Permission.PLOT_LIST.has(sender)){
 			sender.sendMessage(ChatColor.RED + "  list - Lists all owned plots");
 		}
+		
+		if (Permission.PLOT_PURGE.has(sender)){
+			sender.sendMessage(ChatColor.RED + "  purge - Removed dead plots");
+		}
 	}
 	
 }
