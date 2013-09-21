@@ -1,11 +1,11 @@
 package uk.co.jacekk.bukkit.infiniteplots;
 
-import net.minecraft.server.v1_6_R2.WorldData;
-import net.minecraft.server.v1_6_R2.WorldServer;
-import net.minecraft.server.v1_6_R2.WorldType;
+import net.minecraft.server.v1_6_R3.WorldData;
+import net.minecraft.server.v1_6_R3.WorldServer;
+import net.minecraft.server.v1_6_R3.WorldType;
 
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_6_R2.CraftWorld;
+import org.bukkit.craftbukkit.v1_6_R3.CraftWorld;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.world.WorldInitEvent;
