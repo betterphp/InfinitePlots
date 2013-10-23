@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.milkbowl.vault.economy.Economy;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -13,6 +14,8 @@ import uk.co.jacekk.bukkit.baseplugin.command.SubCommandHandler;
 import uk.co.jacekk.bukkit.infiniteplots.Config;
 import uk.co.jacekk.bukkit.infiniteplots.InfinitePlots;
 import uk.co.jacekk.bukkit.infiniteplots.Permission;
+import uk.co.jacekk.bukkit.infiniteplots.event.PlotClaimedEvent;
+import uk.co.jacekk.bukkit.infiniteplots.event.PlotUnclaimedEvent;
 import uk.co.jacekk.bukkit.infiniteplots.generation.PlotsGenerator;
 import uk.co.jacekk.bukkit.infiniteplots.plot.Plot;
 import uk.co.jacekk.bukkit.infiniteplots.plot.PlotLocation;
@@ -91,6 +94,7 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			economy.withdrawPlayer(player.getName(), this.plugin.config.getDouble(Config.CLAIM_COST));
 		}
 		
+        Bukkit.getServer().getPluginManager().callEvent(new PlotClaimedEvent(plot, player));
 		player.sendMessage(ChatColor.GREEN + "Plot claimed");
 	}
 	
@@ -124,6 +128,8 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 			return;
 		}
+		
+        Bukkit.getServer().getPluginManager().callEvent(new PlotUnclaimedEvent(plot, player));
 		
 		plot.removeSigns();
 		plot.regenerate();
