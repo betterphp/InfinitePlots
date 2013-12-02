@@ -3,17 +3,18 @@ package uk.co.jacekk.bukkit.infiniteplots.plot.decorator;
 import java.util.Arrays;
 import java.util.Random;
 
-import net.minecraft.server.v1_6_R3.BiomeBase;
-import net.minecraft.server.v1_6_R3.BlockSand;
-import net.minecraft.server.v1_6_R3.ChunkProviderGenerate;
-import net.minecraft.server.v1_6_R3.IChunkProvider;
-import net.minecraft.server.v1_6_R3.World;
-import net.minecraft.server.v1_6_R3.WorldGenCanyon;
-import net.minecraft.server.v1_6_R3.WorldGenCaves;
+import net.minecraft.server.v1_7_R1.BiomeBase;
+import net.minecraft.server.v1_7_R1.Block;
+import net.minecraft.server.v1_7_R1.BlockSand;
+import net.minecraft.server.v1_7_R1.ChunkProviderGenerate;
+import net.minecraft.server.v1_7_R1.IChunkProvider;
+import net.minecraft.server.v1_7_R1.World;
+import net.minecraft.server.v1_7_R1.WorldGenCanyon;
+import net.minecraft.server.v1_7_R1.WorldGenCaves;
 
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
-import org.bukkit.craftbukkit.v1_6_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_7_R1.CraftWorld;
 
 import uk.co.jacekk.bukkit.baseplugin.util.ReflectionUtils;
 import uk.co.jacekk.bukkit.infiniteplots.BlockChangeTask;
@@ -44,14 +45,15 @@ public class BiomePlotDecorator extends PlotDecorator {
 		}
 	}
 	
-	private byte[] createChunk(ChunkProviderGenerate generator, World world, int x, int z, BiomeBase biomeBase){
+	private Block[] createChunk(ChunkProviderGenerate generator, World world, int x, int z, BiomeBase biomeBase){
 		BiomeBase[] biomeBases = new BiomeBase[256];
 		Arrays.fill(biomeBases, biomeBase);
 		
-		byte[] blocks = new byte[32768];
+		Block[] blocks = new Block[65536];
+		byte[] bytes = new byte[65536];
 		
 		generator.a(x, z, blocks);
-		generator.a(x, z, blocks, biomeBases);
+		generator.a(x, z, blocks, bytes, biomeBases);
 		
 		try{
 			ReflectionUtils.getFieldValue(ChunkProviderGenerate.class, "t", WorldGenCaves.class, generator).a(generator, world, x, z, blocks);
@@ -78,7 +80,7 @@ public class BiomePlotDecorator extends PlotDecorator {
 		
 		for (int x = buildLimits[0]; x <= buildLimits[2]; x += 16){
 			for (int z = buildLimits[1]; z <= buildLimits[3]; z += 16){
-				byte[] chunk = this.createChunk(generator, world, x >> 4, z >> 4, this.biomeBase);
+				Block[] chunk = this.createChunk(generator, world, x >> 4, z >> 4, this.biomeBase);
 				
 				for (int cx = 0; cx < 16; ++cx){
 					for (int cz = 0; cz < 16; ++cz){
@@ -88,11 +90,17 @@ public class BiomePlotDecorator extends PlotDecorator {
 						if (wx >= buildLimits[0] && wz >= buildLimits[1] && wx <= buildLimits[2] && wz <= buildLimits[3]){
 							craftWorld.setBiome(wx, wz, this.biome);
 							
-							for (int y = 0; y < 128; ++y){
+							for (int y = 0; y < 256; ++y){
 								int wy = y - (seaHeight - gridHeight);
 								
 								if (wy > 0 && wy < worldHeight){
-									task.setBlockType(craftWorld.getBlockAt(wx, wy, wz), Material.getMaterial(chunk[(cx * 16 + cz) * 128 + y]));
+									Material type = Material.getMaterial(Block.REGISTRY.b(chunk[(cx * 16 + cz) * 256 + y]));
+									
+									if (type == null){
+										type = Material.AIR;
+									}
+									
+									task.setBlockType(craftWorld.getBlockAt(wx, wy, wz), type);
 								}
 							}
 							
@@ -118,7 +126,7 @@ public class BiomePlotDecorator extends PlotDecorator {
 						world.chunkProvider = new ChunkProviderWrapper(currentChunkProvider, buildLimits);
 						
 						try{
-							biomeBase.a(world, ReflectionUtils.getFieldValue(ChunkProviderGenerate.class, "k", Random.class, generator), (x >> 4) * 16, (z >> 4) * 16);
+							biomeBase.a(world, ReflectionUtils.getFieldValue(ChunkProviderGenerate.class, "i", Random.class, generator), (x >> 4) * 16, (z >> 4) * 16);
 						}catch (NoSuchFieldException e){
 							e.printStackTrace();
 						}
