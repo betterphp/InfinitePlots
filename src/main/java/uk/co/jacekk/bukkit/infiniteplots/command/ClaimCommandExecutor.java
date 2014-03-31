@@ -94,7 +94,8 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			economy.withdrawPlayer(player.getName(), this.plugin.config.getDouble(Config.CLAIM_COST));
 		}
 		
-        Bukkit.getServer().getPluginManager().callEvent(new PlotClaimedEvent(plot, player));
+        plugin.pluginManager.callEvent(new PlotClaimedEvent(plot, player));
+        
 		player.sendMessage(ChatColor.GREEN + "Plot claimed");
 	}
 	
@@ -129,7 +130,7 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			return;
 		}
 		
-        Bukkit.getServer().getPluginManager().callEvent(new PlotUnclaimedEvent(plot, player));
+        plugin.pluginManager.callEvent(new PlotUnclaimedEvent(plot, player));
 		
 		plot.removeSigns();
 		plot.regenerate();
