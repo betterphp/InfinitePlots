@@ -1,8 +1,8 @@
 package uk.co.jacekk.bukkit.infiniteplots.nms;
 
-import net.minecraft.server.v1_7_R1.Block;
-import net.minecraft.server.v1_7_R1.Blocks;
-import net.minecraft.server.v1_7_R1.Chunk;
+import net.minecraft.server.v1_7_R2.Block;
+import net.minecraft.server.v1_7_R2.Blocks;
+import net.minecraft.server.v1_7_R2.Chunk;
 import uk.co.jacekk.bukkit.baseplugin.util.ReflectionUtils;
 
 public class ChunkWrapper extends Chunk {
