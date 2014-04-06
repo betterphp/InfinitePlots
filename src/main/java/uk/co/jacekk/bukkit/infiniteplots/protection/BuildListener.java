@@ -7,6 +7,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
@@ -70,6 +71,13 @@ public class BuildListener extends BaseListener<InfinitePlots> {
 	public void onInteractEntity(PlayerInteractEntityEvent event){
 		if (!this.canBuild(event.getPlayer(), event.getRightClicked().getLocation())){
 			event.setCancelled(true);
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+	public void onEntityExplode(EntityExplodeEvent event){
+		if (event.getLocation().getWorld().getGenerator() instanceof PlotsGenerator){
+			event.blockList().clear();
 		}
 	}
 	
