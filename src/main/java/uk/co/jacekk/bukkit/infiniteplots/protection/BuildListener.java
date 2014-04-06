@@ -1,11 +1,13 @@
 package uk.co.jacekk.bukkit.infiniteplots.protection;
 
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -78,6 +80,26 @@ public class BuildListener extends BaseListener<InfinitePlots> {
 	public void onEntityExplode(EntityExplodeEvent event){
 		if (event.getLocation().getWorld().getGenerator() instanceof PlotsGenerator){
 			event.blockList().clear();
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+	public void onPistonExtend(BlockPistonExtendEvent event){
+		Block piston = event.getBlock();
+		Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(piston.getLocation()));
+		
+		if (plot == null){
+			event.setCancelled(true);
+			return;
+		}
+		
+		for (Block block : event.getBlocks()){
+			Plot blockPlot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(block.getLocation()));
+			
+			if (blockPlot == null || (blockPlot.isBuildProtected() && !plot.getLocation().equals(blockPlot.getLocation()) && !plot.getAdmin().equals(blockPlot.getAdmin()))){
+				event.setCancelled(true);
+				return;
+			}
 		}
 	}
 	
