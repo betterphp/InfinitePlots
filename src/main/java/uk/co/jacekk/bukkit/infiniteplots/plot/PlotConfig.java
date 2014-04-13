@@ -18,6 +18,9 @@ public class PlotConfig {
 	public static final PluginConfigKey AUTH_ADMIN_NAME		= new PluginConfigKey("auth.admin-name", 		"");
 	public static final PluginConfigKey AUTH_BUILDER_NAMES	= new PluginConfigKey("auth.builder-names", 	Arrays.asList());
 	
+	public static final PluginConfigKey AUTH_ADMIN_UUID		= new PluginConfigKey("auth.admin-uuid",		"");
+	public static final PluginConfigKey AUTH_BUILDER_UUIDS	= new PluginConfigKey("auth.builder-uuids",		Arrays.asList());
+	
 	public static final PluginConfigKey FLAG_WATER_FLOW		= new PluginConfigKey("flag.water-flow", 		true);
 	public static final PluginConfigKey FLAG_LAVA_FLOW		= new PluginConfigKey("flag.lava-flow", 		true);
 	

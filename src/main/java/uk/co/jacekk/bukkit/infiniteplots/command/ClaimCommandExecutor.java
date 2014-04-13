@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.milkbowl.vault.economy.Economy;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -53,7 +52,7 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		}
 		
 		if (!Permission.PLOT_BYPASS_CLAIM_LIMIT.has(player)){
-			List<Plot> plots = plugin.getPlotManager().getOwnedPlots(player.getName());
+			List<Plot> plots = plugin.getPlotManager().getOwnedPlots(player);
 			int max = plugin.config.getInt(Config.CLAIM_MAX);
 			int maxUnused = plugin.config.getInt(Config.CLAIM_MAX_UNUSED);
 			
@@ -83,7 +82,7 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			return;
 		}
 		
-		plot.setAdmin(player.getName());
+		plot.setAdmin(player);
 		plot.createSigns();
 		
 		if (args.length == 1){
@@ -94,7 +93,7 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			economy.withdrawPlayer(player.getName(), this.plugin.config.getDouble(Config.CLAIM_COST));
 		}
 		
-        plugin.pluginManager.callEvent(new PlotClaimedEvent(plot, player));
+        plugin.getServer().getPluginManager().callEvent(new PlotClaimedEvent(plot, player));
         
 		player.sendMessage(ChatColor.GREEN + "Plot claimed");
 	}
@@ -125,12 +124,12 @@ public class ClaimCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			return;
 		}
 		
-		if (!Permission.PLOT_UNCLAIM_OTHERS.has(sender) && !plot.getAdmin().equalsIgnoreCase(player.getName())){
+		if (!Permission.PLOT_UNCLAIM_OTHERS.has(sender) && !plot.getAdmin().getUniqueId().equals(player.getUniqueId())){
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 			return;
 		}
 		
-        plugin.pluginManager.callEvent(new PlotUnclaimedEvent(plot, player));
+        plugin.getServer().getPluginManager().callEvent(new PlotUnclaimedEvent(plot, player));
 		
 		plot.removeSigns();
 		plot.regenerate();

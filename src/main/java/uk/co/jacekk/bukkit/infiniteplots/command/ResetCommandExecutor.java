@@ -44,7 +44,7 @@ public class ResetCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			return;
 		}
 		
-		if (!Permission.PLOT_RESET_OTHER.has(sender) && !plot.getAdmin().equalsIgnoreCase(player.getName())){
+		if (!Permission.PLOT_RESET_OTHER.has(sender) && !plot.getAdmin().getUniqueId().equals(player.getUniqueId())){
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 			return;
 		}

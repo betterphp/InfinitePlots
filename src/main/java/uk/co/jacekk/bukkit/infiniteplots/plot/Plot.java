@@ -1,11 +1,14 @@
 package uk.co.jacekk.bukkit.infiniteplots.plot;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
@@ -112,8 +115,8 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * 
 	 * @return The player name.
 	 */
-	public String getAdmin(){
-		return this.config.getString(PlotConfig.AUTH_ADMIN_NAME);
+	public OfflinePlayer getAdmin(){
+		return plugin.getServer().getOfflinePlayer(UUID.fromString(this.config.getString(PlotConfig.AUTH_ADMIN_UUID)));
 	}
 	
 	/**
@@ -121,8 +124,8 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * 
 	 * @param admin The name of the player.
 	 */
-	public void setAdmin(String admin){
-		this.config.set(PlotConfig.AUTH_ADMIN_NAME, admin);
+	public void setAdmin(OfflinePlayer admin){
+		this.config.set(PlotConfig.AUTH_ADMIN_UUID, admin.getUniqueId());
 	}
 	
 	/**
@@ -131,8 +134,15 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * 
 	 * @return The list of player names.
 	 */
-	public List<String> getBuilders(){
-		return this.config.getStringList(PlotConfig.AUTH_BUILDER_NAMES);
+	public List<OfflinePlayer> getBuilders(){
+		List<String> ids = this.config.getStringList(PlotConfig.AUTH_BUILDER_UUIDS);
+		List<OfflinePlayer> players = new ArrayList<OfflinePlayer>(ids.size());
+		
+		for (String id : ids){
+			players.add(plugin.getServer().getOfflinePlayer(UUID.fromString(id)));
+		}
+		
+		return players;
 	}
 	
 	/**
@@ -146,8 +156,8 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * @param playerName The name of the player to test.
 	 * @return True if the player can build, false if not.
 	 */
-	public boolean canBuild(String playerName){
-		return (!this.isBuildProtected() || this.getAdmin().equalsIgnoreCase(playerName) || this.getBuilders().contains(playerName.toLowerCase()));
+	public boolean canBuild(OfflinePlayer player){
+		return (!this.isBuildProtected() || this.getAdmin().getUniqueId().equals(player.getUniqueId()) || this.getBuilders().contains(player));
 	}
 	
 	/**
@@ -158,8 +168,8 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * @param playerName The name of the player
 	 * @return True if they can enter false if not.
 	 */
-	public boolean canEnter(String playerName){
-		return (!this.isEnterProtected() || this.canBuild(playerName));
+	public boolean canEnter(OfflinePlayer player){
+		return (!this.isEnterProtected() || this.canBuild(player));
 	}
 	
 	/**
@@ -209,10 +219,11 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * 
 	 * @param playerName The name of the player to add.
 	 */
-	public void addBuilder(String playerName){
-		List<String> builders = this.getBuilders();
-		builders.add(playerName.toLowerCase());
-		this.config.set(PlotConfig.AUTH_BUILDER_NAMES, builders);
+	public void addBuilder(OfflinePlayer player){
+		List<OfflinePlayer> builders = this.getBuilders();
+		builders.add(player);
+		
+		this.config.set(PlotConfig.AUTH_BUILDER_UUIDS, builders);
 	}
 	
 	/**
@@ -220,17 +231,18 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * 
 	 * @param playerName The name of the player to remove.
 	 */
-	public void removeBuilder(String playerName){
-		List<String> builders = this.getBuilders();
-		builders.remove(playerName.toLowerCase());
-		this.config.set(PlotConfig.AUTH_BUILDER_NAMES, builders);
+	public void removeBuilder(OfflinePlayer player){
+		List<OfflinePlayer> builders = this.getBuilders();
+		builders.remove(player);
+		
+		this.config.set(PlotConfig.AUTH_BUILDER_UUIDS, builders);
 	}
 	
 	/**
 	 * Removes all builders from this plot.
 	 */
 	public void removeAllBuilders(){
-		this.config.set(PlotConfig.AUTH_BUILDER_NAMES, Arrays.asList(new String[0]));
+		this.config.set(PlotConfig.AUTH_BUILDER_UUIDS, Arrays.asList(new String[0]));
 	}
 	
 	/**
@@ -241,7 +253,6 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * @return True if the player is in the area false if not.
 	 */
 	public boolean withinBuildableArea(Player player, Location location){
-		String playerName = player.getName();
 		int x = location.getBlockX();
 		int z = location.getBlockZ();
 		
@@ -258,19 +269,19 @@ public class Plot extends BaseObject<InfinitePlots> {
 		Plot plot2 = plugin.getPlotManager().getPlotAt(this.location.getRelative(Direction.NORTH));
 		Plot plot3 = plugin.getPlotManager().getPlotAt(this.location.getRelative(Direction.EAST));
 		
-		if ((plot0 == null || !plot0.canBuild(playerName)) && x < this.buildLimits[0]){
+		if ((plot0 == null || !plot0.canBuild(player)) && x < this.buildLimits[0]){
 			return false;
 		}
 		
-		if ((plot1 == null || !plot1.canBuild(playerName)) && z < this.buildLimits[1]){
+		if ((plot1 == null || !plot1.canBuild(player)) && z < this.buildLimits[1]){
 			return false;
 		}
 		
-		if ((plot2 == null || !plot2.canBuild(playerName)) && x > this.buildLimits[2]){
+		if ((plot2 == null || !plot2.canBuild(player)) && x > this.buildLimits[2]){
 			return false;
 		}
 		
-		if ((plot3 == null || !plot3.canBuild(playerName)) && z > this.buildLimits[3]){
+		if ((plot3 == null || !plot3.canBuild(player)) && z > this.buildLimits[3]){
 			return false;
 		}
 		
@@ -311,7 +322,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * @param biome The biome to set.
 	 */
 	public void setBiome(Biome biome){
-		World world = plugin.server.getWorld(this.location.getWorldName());
+		World world = plugin.getServer().getWorld(this.location.getWorldName());
 		
 		for (int x = this.buildLimits[0]; x <= this.buildLimits[2]; ++x){
 			for (int z = this.buildLimits[1]; z <= this.buildLimits[3]; ++z){
@@ -326,7 +337,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * @return The {@link Biome} used
 	 */
 	public Biome getBiome(){
-		World world = plugin.server.getWorld(this.location.getWorldName());
+		World world = plugin.getServer().getWorld(this.location.getWorldName());
 		return world.getBiome(this.buildLimits[0], this.buildLimits[1]);
 	}
 	
@@ -381,13 +392,13 @@ public class Plot extends BaseObject<InfinitePlots> {
 		signFour.setRawData((byte) 0xA);
 		
 		signOne.setLine(1, plugin.config.getString(Config.OWNER_PREFIX));
-		signOne.setLine(2, this.getAdmin());
+		signOne.setLine(2, this.getAdmin().getName());
 		signTwo.setLine(1, plugin.config.getString(Config.OWNER_PREFIX));
-		signTwo.setLine(2, this.getAdmin());
+		signTwo.setLine(2, this.getAdmin().getName());
 		signThree.setLine(1, plugin.config.getString(Config.OWNER_PREFIX));
-		signThree.setLine(2, this.getAdmin());
+		signThree.setLine(2, this.getAdmin().getName());
 		signFour.setLine(1, plugin.config.getString(Config.OWNER_PREFIX));
-		signFour.setLine(2, this.getAdmin());
+		signFour.setLine(2, this.getAdmin().getName());
 		
 		signOne.update();
 		signTwo.update();

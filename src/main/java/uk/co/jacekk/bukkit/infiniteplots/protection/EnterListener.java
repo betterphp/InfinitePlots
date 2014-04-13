@@ -40,7 +40,7 @@ public class EnterListener extends BaseListener<InfinitePlots> {
 		
 		Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(to));
 		
-		if (plot != null && !plot.canEnter(player.getName()) && plot.withinBuildableArea(player, to)){
+		if (plot != null && !plot.canEnter(player) && plot.withinBuildableArea(player, to)){
 			event.setCancelled(true);
 		}
 	}

@@ -151,7 +151,7 @@ public class BlockChangeTask extends BaseTask<InfinitePlots> {
 	 */
 	public void start(int delay, int perTick){
 		this.perTick = perTick;
-		this.taskID = plugin.scheduler.scheduleSyncRepeatingTask(plugin, this, 0, delay);
+		this.taskID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, this, 0, delay);
 	}
 	
 	@Override
@@ -171,7 +171,7 @@ public class BlockChangeTask extends BaseTask<InfinitePlots> {
 		}
 		
 		if (this.materials.isEmpty() || this.dataValues.isEmpty()){
-			plugin.scheduler.cancelTask(this.taskID);
+			plugin.getServer().getScheduler().cancelTask(this.taskID);
 			
 			if (this.onComplete != null){
 				this.onComplete.run();

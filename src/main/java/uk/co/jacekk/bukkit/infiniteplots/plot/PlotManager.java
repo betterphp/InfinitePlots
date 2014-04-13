@@ -2,12 +2,16 @@ package uk.co.jacekk.bukkit.infiniteplots.plot;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
+
+import com.evilmidget38.UUIDFetcher;
 
 import uk.co.jacekk.bukkit.baseplugin.BaseObject;
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
@@ -37,6 +41,37 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 				PluginConfig plotConfig = new PluginConfig(configFile, PlotConfig.class, plugin.log);
 				
 				if (plotConfig.getString(PlotConfig.LOCATION_WORLD_NAME).equals(world.getName())){
+					//TODO Remove conversion
+					String adminName = plotConfig.getString(PlotConfig.AUTH_ADMIN_NAME);
+					String adminUUID = plotConfig.getString(PlotConfig.AUTH_ADMIN_UUID);
+					
+					List<String> builderNames = plotConfig.getStringList(PlotConfig.AUTH_BUILDER_NAMES);
+					List<String> builderUUIDs = plotConfig.getStringList(PlotConfig.AUTH_BUILDER_UUIDS);
+					
+					if (!adminName.isEmpty() && adminUUID.isEmpty()){
+						plugin.log.info("Converting admin name to UUID for plot at " + plotConfig.getInt(PlotConfig.LOCATION_X) + "," + plotConfig.getInt(PlotConfig.LOCATION_Z) + " in " + plotConfig.getString(PlotConfig.LOCATION_WORLD_NAME));
+						
+						try{
+							Map<String, UUID> map = (new UUIDFetcher(Arrays.asList(adminName))).call();
+							plotConfig.set(PlotConfig.AUTH_ADMIN_UUID, map.get(adminName).toString());
+							plotConfig.set(PlotConfig.AUTH_ADMIN_NAME, "");
+						}catch (Exception e){
+							plugin.log.warn("Failed to fetch UUID for plot admin " + adminName + ": " + e.getMessage());
+						}
+					}
+					
+					if (!builderNames.isEmpty() && builderUUIDs.isEmpty()){
+						plugin.log.info("Converting builder names to UUIDs for plot at " + plotConfig.getInt(PlotConfig.LOCATION_X) + "," + plotConfig.getInt(PlotConfig.LOCATION_Z) + " in " + plotConfig.getString(PlotConfig.LOCATION_WORLD_NAME));
+						
+						try{
+							Map<String, UUID> map = (new UUIDFetcher(builderNames)).call();
+							plotConfig.set(PlotConfig.AUTH_BUILDER_UUIDS, map.values());
+							plotConfig.set(PlotConfig.AUTH_BUILDER_NAMES, Arrays.asList());
+						}catch (Exception e){
+							plugin.log.warn("Failed to fetch UUID for plot builders: " + e.getMessage());
+						}
+					}
+					
 					Plot plot = new Plot(plugin, configFile, plotConfig);
 					this.plots.put(plot.getLocation(), plot);
 				}
@@ -76,14 +111,14 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 	/**
 	 * Gets all of the plots that a player is the owner of.
 	 * 
-	 * @param playerName The name of the player.
+	 * @param player The player.
 	 * @return The list of plots they own.
 	 */
-	public List<Plot> getOwnedPlots(String playerName){
+	public List<Plot> getOwnedPlots(OfflinePlayer player){
 		ArrayList<Plot> plots = new ArrayList<Plot>();
 		
 		for (Plot plot : this.plots.values()){
-			if (plot.getAdmin().equalsIgnoreCase(playerName)){
+			if (plot.getAdmin().getUniqueId().equals(player.getUniqueId())){
 				plots.add(plot);
 			}
 		}
@@ -94,15 +129,15 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 	/**
 	 * Gets all of the plots that a player is the owner of in a world.
 	 * 
-	 * @param playerName The name of the player.
+	 * @param player The player.
 	 * @param worldName The name of the world.
 	 * @return The list of plots they own in that world.
 	 */
-	public List<Plot> getOwnedPlots(String playerName, String worldName){
+	public List<Plot> getOwnedPlots(OfflinePlayer player, String worldName){
 		ArrayList<Plot> plots = new ArrayList<Plot>();
 		
 		for (Plot plot : this.plots.values()){
-			if (plot.getAdmin().equalsIgnoreCase(playerName) && plot.getLocation().getWorldName().equals(worldName)){
+			if (plot.getAdmin().getUniqueId().equals(player.getUniqueId()) && plot.getLocation().getWorldName().equals(worldName)){
 				plots.add(plot);
 			}
 		}
@@ -113,14 +148,14 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 	/**
 	 * Gets all of the plots that a player can build in.
 	 * 
-	 * @param playerName The name of the player.
+	 * @param player The player.
 	 * @return The list of plots where they can build.
 	 */
-	public List<Plot> getBuildablePlots(String playerName){
+	public List<Plot> getBuildablePlots(OfflinePlayer player){
 		ArrayList<Plot> plots = new ArrayList<Plot>();
 		
 		for (Plot plot : this.plots.values()){
-			if (plot.canBuild(playerName)){
+			if (plot.canBuild(player)){
 				plots.add(plot);
 			}
 		}
@@ -138,7 +173,7 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 		long now = System.currentTimeMillis();
 		
 		for (Plot plot : this.plots.values()){
-			OfflinePlayer admin = this.plugin.server.getOfflinePlayer(plot.getAdmin());
+			OfflinePlayer admin = plot.getAdmin();
 			
 			if (now - admin.getLastPlayed() > duration){
 				plots.add(plot);
@@ -151,13 +186,13 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 	/**
 	 * Gets a plot by its name
 	 * 
-	 * @param playerName The name of the player owning the plot
+	 * @param player The player owning the plot
 	 * @param plotName The name of the plot
 	 * @return The {@link Plot} or null if one was not found
 	 */
-	public Plot getPlotByName(String playerName, String plotName){
+	public Plot getPlotByName(OfflinePlayer player, String plotName){
 		for (Plot plot : this.plots.values()){
-			if (plot.getAdmin().equalsIgnoreCase(playerName) && plot.getName().equals(plotName)){
+			if (plot.getAdmin().getUniqueId().equals(player.getUniqueId()) && plot.getName().equals(plotName)){
 				return plot;
 			}
 		}

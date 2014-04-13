@@ -37,7 +37,7 @@ public class BuildListener extends BaseListener<InfinitePlots> {
 		
 		Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(location));
 		
-		if (plot == null || !plot.canBuild(player.getName())){
+		if (plot == null || !plot.canBuild(player)){
 			return false;
 		}
 		

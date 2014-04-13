@@ -13,8 +13,8 @@
 		<upload.dbo.category>bukkit-plugins</upload.dbo.category>
 		<upload.dbo.slug>infiniteplots</upload.dbo.slug>
 		
-		<baseplugin.version>13</baseplugin.version>
-		<baseplugin.package>13</baseplugin.package>
+		<baseplugin.version>14</baseplugin.version>
+		<baseplugin.package>14</baseplugin.package>
 	</properties>
 	
 	<repositories>
@@ -45,7 +45,7 @@
 		<dependency>
 			<groupId>org.bukkit</groupId>
 			<artifactId>craftbukkit</artifactId>
-			<version>1.7.5-R0.1-SNAPSHOT</version>
+			<version>1.7.8-R0.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		

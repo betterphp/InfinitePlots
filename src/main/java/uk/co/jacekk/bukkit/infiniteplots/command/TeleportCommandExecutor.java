@@ -33,7 +33,7 @@ public class TeleportCommandExecutor extends BaseCommandExecutor<InfinitePlots> 
 		Plot plot = null;
 		
 		if (args.length == 1){
-			plot = plugin.getPlotManager().getPlotByName(player.getName(), args[0]);
+			plot = plugin.getPlotManager().getPlotByName(player, args[0]);
 		}else if (args.length == 2){
 			int x = 0;
 			int z = 0;
@@ -58,7 +58,7 @@ public class TeleportCommandExecutor extends BaseCommandExecutor<InfinitePlots> 
 			return;
 		}
 		
-		if (!Permission.PLOT_TELEPORT_OTHER.has(sender) && !plot.getAdmin().equalsIgnoreCase(player.getName())){
+		if (!Permission.PLOT_TELEPORT_OTHER.has(sender) && !plot.getAdmin().getUniqueId().equals(player.getUniqueId())){
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 			return;
 		}

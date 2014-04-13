@@ -49,7 +49,7 @@ public class NameCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 			return;
 		}
 		
-		if (!plot.getAdmin().equalsIgnoreCase(player.getName())){
+		if (!plot.getAdmin().getUniqueId().equals(player.getUniqueId())){
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 			return;
 		}

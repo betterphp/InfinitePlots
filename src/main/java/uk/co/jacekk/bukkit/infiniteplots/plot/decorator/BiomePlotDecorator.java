@@ -3,18 +3,18 @@ package uk.co.jacekk.bukkit.infiniteplots.plot.decorator;
 import java.util.Arrays;
 import java.util.Random;
 
-import net.minecraft.server.v1_7_R2.BiomeBase;
-import net.minecraft.server.v1_7_R2.Block;
-import net.minecraft.server.v1_7_R2.BlockSand;
-import net.minecraft.server.v1_7_R2.ChunkProviderGenerate;
-import net.minecraft.server.v1_7_R2.IChunkProvider;
-import net.minecraft.server.v1_7_R2.World;
-import net.minecraft.server.v1_7_R2.WorldGenCanyon;
-import net.minecraft.server.v1_7_R2.WorldGenCaves;
+import net.minecraft.server.v1_7_R3.BiomeBase;
+import net.minecraft.server.v1_7_R3.Block;
+import net.minecraft.server.v1_7_R3.BlockSand;
+import net.minecraft.server.v1_7_R3.ChunkProviderGenerate;
+import net.minecraft.server.v1_7_R3.IChunkProvider;
+import net.minecraft.server.v1_7_R3.World;
+import net.minecraft.server.v1_7_R3.WorldGenCanyon;
+import net.minecraft.server.v1_7_R3.WorldGenCaves;
 
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
-import org.bukkit.craftbukkit.v1_7_R2.CraftWorld;
+import org.bukkit.craftbukkit.v1_7_R3.CraftWorld;
 
 import uk.co.jacekk.bukkit.baseplugin.util.ReflectionUtils;
 import uk.co.jacekk.bukkit.infiniteplots.BlockChangeTask;
@@ -67,7 +67,7 @@ public class BiomePlotDecorator extends PlotDecorator {
 	
 	@Override
 	public void decorate(Plot plot){
-		CraftWorld craftWorld = (CraftWorld) plugin.server.getWorld(plot.getLocation().getWorldName());
+		CraftWorld craftWorld = (CraftWorld) plugin.getServer().getWorld(plot.getLocation().getWorldName());
 		final World world = craftWorld.getHandle();
 		final ChunkProviderGenerate generator = new ChunkProviderGenerate(world, this.seed, false);
 		

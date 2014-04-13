@@ -58,28 +58,28 @@ public class InfinitePlots extends BasePlugin {
 		if (!this.config.getBoolean(Config.GENERATOR_ONLY)){
 			this.plotManager = new PlotManager(this);
 			
-			for (World world : this.server.getWorlds()){
+			for (World world : this.getServer().getWorlds()){
 				this.plotManager.loadPlotsFor(world);
 			}
 			
-			this.permissionManager.registerPermissions(Permission.class);
+			this.getPermissionManager().registerPermissions(Permission.class);
 			
-			this.pluginManager.registerEvents(new WorldInitListener(this), this);
+			this.getServer().getPluginManager().registerEvents(new WorldInitListener(this), this);
 			
-			this.pluginManager.registerEvents(new BuildListener(this), this);
-			this.pluginManager.registerEvents(new EnterListener(this), this);
+			this.getServer().getPluginManager().registerEvents(new BuildListener(this), this);
+			this.getServer().getPluginManager().registerEvents(new EnterListener(this), this);
 			
-			this.pluginManager.registerEvents(new MobSpawnListener(this), this);
-			this.pluginManager.registerEvents(new BlockFlowListener(this), this);
-			this.pluginManager.registerEvents(new IceListener(this), this);
-			this.pluginManager.registerEvents(new PhysicsListener(this), this);
+			this.getServer().getPluginManager().registerEvents(new MobSpawnListener(this), this);
+			this.getServer().getPluginManager().registerEvents(new BlockFlowListener(this), this);
+			this.getServer().getPluginManager().registerEvents(new IceListener(this), this);
+			this.getServer().getPluginManager().registerEvents(new PhysicsListener(this), this);
 			
 			if (this.config.getBoolean(Config.TRACK_STATS)){
-				this.pluginManager.registerEvents(new PlotStatsListener(this), this);
+				this.getServer().getPluginManager().registerEvents(new PlotStatsListener(this), this);
 			}
 			
 			if (this.config.getDouble(Config.CLAIM_COST) > 0.0d){
-				RegisteredServiceProvider<Economy> economyProvider = this.server.getServicesManager().getRegistration(Economy.class);
+				RegisteredServiceProvider<Economy> economyProvider = this.getServer().getServicesManager().getRegistration(Economy.class);
 				
 				if (economyProvider == null){
 					this.log.warn("Vault not found, players will not be charged to claim plots.");
@@ -89,20 +89,20 @@ public class InfinitePlots extends BasePlugin {
 				}
 			}
 			
-			this.commandManager.registerCommandExecutor(new PlotCommandExecutor(this));
-			this.commandManager.registerCommandExecutor(new InfoCommandExecutor(this));
-			this.commandManager.registerCommandExecutor(new ClaimCommandExecutor(this));
-			this.commandManager.registerCommandExecutor(new AutoCommandExecutor(this));
-			this.commandManager.registerCommandExecutor(new AddBuilderCommandExecutor(this));
-			this.commandManager.registerCommandExecutor(new FlagCommandExecutor(this));
-			this.commandManager.registerCommandExecutor(new SetBiomeCommandExecutor(this));
-			this.commandManager.registerCommandExecutor(new ResetCommandExecutor(this));
-			this.commandManager.registerCommandExecutor(new ListCommandExecutor(this));
-			this.commandManager.registerCommandExecutor(new NameCommandExecutor(this));
-			this.commandManager.registerCommandExecutor(new TeleportCommandExecutor(this));
-			this.commandManager.registerCommandExecutor(new DecorateCommandExecutor(this));
-			this.commandManager.registerCommandExecutor(new ProtectionCommandExecutor(this));
-			this.commandManager.registerCommandExecutor(new PurgeCommandExecutor(this));
+			this.getCommandManager().registerCommandExecutor(new PlotCommandExecutor(this));
+			this.getCommandManager().registerCommandExecutor(new InfoCommandExecutor(this));
+			this.getCommandManager().registerCommandExecutor(new ClaimCommandExecutor(this));
+			this.getCommandManager().registerCommandExecutor(new AutoCommandExecutor(this));
+			this.getCommandManager().registerCommandExecutor(new AddBuilderCommandExecutor(this));
+			this.getCommandManager().registerCommandExecutor(new FlagCommandExecutor(this));
+			this.getCommandManager().registerCommandExecutor(new SetBiomeCommandExecutor(this));
+			this.getCommandManager().registerCommandExecutor(new ResetCommandExecutor(this));
+			this.getCommandManager().registerCommandExecutor(new ListCommandExecutor(this));
+			this.getCommandManager().registerCommandExecutor(new NameCommandExecutor(this));
+			this.getCommandManager().registerCommandExecutor(new TeleportCommandExecutor(this));
+			this.getCommandManager().registerCommandExecutor(new DecorateCommandExecutor(this));
+			this.getCommandManager().registerCommandExecutor(new ProtectionCommandExecutor(this));
+			this.getCommandManager().registerCommandExecutor(new PurgeCommandExecutor(this));
 		}
 	}
 	

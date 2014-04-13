@@ -1,8 +1,15 @@
 package uk.co.jacekk.bukkit.infiniteplots.command;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.UUID;
+
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import com.evilmidget38.UUIDFetcher;
 
 import uk.co.jacekk.bukkit.baseplugin.command.BaseCommandExecutor;
 import uk.co.jacekk.bukkit.baseplugin.command.CommandTabCompletion;
@@ -51,7 +58,7 @@ public class AddBuilderCommandExecutor extends BaseCommandExecutor<InfinitePlots
 			return;
 		}
 		
-		if (!plot.getAdmin().equalsIgnoreCase(player.getName())){
+		if (!plot.getAdmin().getUniqueId().equals(player.getUniqueId())){
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 			return;
 		}
@@ -61,7 +68,25 @@ public class AddBuilderCommandExecutor extends BaseCommandExecutor<InfinitePlots
 			return;
 		}
 		
-		plot.addBuilder(args[0]);
+		OfflinePlayer addPlayer = plugin.getServer().getPlayerExact(args[0]);
+		
+		if (addPlayer == null){
+			try{
+				Map<String, UUID> ids = (new UUIDFetcher(Arrays.asList(args[0]))).call();
+				
+				if (!ids.containsKey(args[0])){
+					player.sendMessage(ChatColor.RED + args[0] + " was not online and does not have a UUID stored");
+					return;
+				}
+				
+				addPlayer = plugin.getServer().getOfflinePlayer(ids.get(args[0]));
+			}catch (Exception e){
+				player.sendMessage(ChatColor.RED + "Error fetching UUID: " + e.getMessage());
+				return;
+			}
+		}
+		
+		plot.addBuilder(addPlayer);
 		
 		player.sendMessage(ChatColor.GREEN + "Added " + args[0] + " as a builder to your plot");
 	}
@@ -98,7 +123,7 @@ public class AddBuilderCommandExecutor extends BaseCommandExecutor<InfinitePlots
 			return;
 		}
 		
-		if (!plot.getAdmin().equalsIgnoreCase(player.getName())){
+		if (!plot.getAdmin().getUniqueId().equals(player.getUniqueId())){
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 			return;
 		}
@@ -114,7 +139,25 @@ public class AddBuilderCommandExecutor extends BaseCommandExecutor<InfinitePlots
 			return;
 		}
 		
-		plot.removeBuilder(args[0]);
+		OfflinePlayer removePlayer = plugin.getServer().getPlayerExact(args[0]);
+		
+		if (removePlayer == null){
+			try{
+				Map<String, UUID> ids = (new UUIDFetcher(Arrays.asList(args[0]))).call();
+				
+				if (!ids.containsKey(args[0])){
+					player.sendMessage(ChatColor.RED + args[0] + " was not online and does not have a UUID stored");
+					return;
+				}
+				
+				removePlayer = plugin.getServer().getOfflinePlayer(ids.get(args[0]));
+			}catch (Exception e){
+				player.sendMessage(ChatColor.RED + "Error fetching UUID: " + e.getMessage());
+				return;
+			}
+		}
+		
+		plot.removeBuilder(removePlayer);
 		
 		player.sendMessage(ChatColor.GREEN + "Removed " + args[0] + " from your plot");
 	}

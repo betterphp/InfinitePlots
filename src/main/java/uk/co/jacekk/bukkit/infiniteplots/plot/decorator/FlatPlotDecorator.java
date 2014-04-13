@@ -35,7 +35,7 @@ public class FlatPlotDecorator extends PlotDecorator {
 	
 	@Override
 	public void decorate(Plot plot){
-		World world = plugin.server.getWorld(plot.getLocation().getWorldName());
+		World world = plugin.getServer().getWorld(plot.getLocation().getWorldName());
 		
 		int worldHeight = world.getMaxHeight();
 		int gridHeight = plugin.config.getInt(Config.GRID_HEIGHT);

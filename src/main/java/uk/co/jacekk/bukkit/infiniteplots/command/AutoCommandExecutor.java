@@ -40,7 +40,7 @@ public class AutoCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		}
 		
 		if (!Permission.PLOT_BYPASS_CLAIM_LIMIT.has(player)){
-			List<Plot> plots = plugin.getPlotManager().getOwnedPlots(player.getName());
+			List<Plot> plots = plugin.getPlotManager().getOwnedPlots(player);
 			int max = plugin.config.getInt(Config.CLAIM_MAX);
 			int maxUnused = plugin.config.getInt(Config.CLAIM_MAX_UNUSED);
 			
@@ -65,7 +65,7 @@ public class AutoCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		
 		Plot plot = plugin.getPlotManager().createFirstAvailablePlot(player.getWorld());
 		
-		plot.setAdmin(player.getName());
+		plot.setAdmin(player);
 		plot.createSigns();
 		
 		if (args.length == 1){

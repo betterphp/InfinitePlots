@@ -60,7 +60,7 @@ public class SetBiomeCommandExecutor extends BaseCommandExecutor<InfinitePlots> 
 			return;
 		}
 		
-		if (!Permission.PLOT_SET_BIOME_OTHERS.has(sender) && !plot.getAdmin().equalsIgnoreCase(player.getName())){
+		if (!Permission.PLOT_SET_BIOME_OTHERS.has(sender) && !plot.getAdmin().getUniqueId().equals(player.getUniqueId())){
 			player.sendMessage(ChatColor.RED + "You do not own this plot");
 			return;
 		}

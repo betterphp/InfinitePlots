@@ -29,12 +29,11 @@ public class ListCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		}
 		
 		Player player = (Player) sender;
-		String playerName = player.getName();
 		String worldName = player.getWorld().getName();
 		
 		player.sendMessage(ChatColor.GREEN + "Owned Plots:");
 		
-		for (Plot plot : plugin.getPlotManager().getOwnedPlots(playerName, worldName)){
+		for (Plot plot : plugin.getPlotManager().getOwnedPlots(player, worldName)){
 			player.sendMessage(ChatColor.GREEN + "  " + plot.getLocation().getX() + "," + plot.getLocation().getZ() + " - " + plot.getName());
 		}
 	}
