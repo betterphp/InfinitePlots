@@ -53,6 +53,17 @@ public class PlotLocation {
 	}
 	
 	/**
+	 * Returns whether a given location is in a plot world
+	 * 
+	 * @param worldLocation The {@link Location} in block space.
+	 * @return true if the given location is in a plot world
+	 */
+	public static boolean isInPlotWorld(Location worldLocation) {
+		ChunkGenerator generator = worldLocation.getWorld().getGenerator();
+		return generator instanceof PlotsGenerator;
+	}
+	
+	/**
 	 * Creates a new PlotLocation based on the location in block space.
 	 * 
 	 * @param worldLocation The {@link Location} in block space.
