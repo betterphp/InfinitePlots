@@ -65,7 +65,12 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 						
 						try{
 							Map<String, UUID> map = (new UUIDFetcher(builderNames)).call();
-							plotConfig.set(PlotConfig.AUTH_BUILDER_UUIDS, map.values());
+							List<String> builderUuids = new ArrayList<String>();
+							for (UUID uuid: map.values()) {
+								builderUuids.add(uuid.toString());
+							}
+							
+							plotConfig.set(PlotConfig.AUTH_BUILDER_UUIDS, builderUuids);
 							plotConfig.set(PlotConfig.AUTH_BUILDER_NAMES, Arrays.asList());
 						}catch (Exception e){
 							plugin.log.warn("Failed to fetch UUID for plot builders: " + e.getMessage());
