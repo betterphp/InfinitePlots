@@ -159,11 +159,13 @@ public class Plot extends BaseObject<InfinitePlots> {
 		for (String id : ids){
 			OfflinePlayer player = plugin.getServer().getOfflinePlayer(UUID.fromString(id));
 			String name = null;
-			if (player != null)
+			if (player != null){
 				name = player.getName();
-			if (name == null) {
+			}
+				
+			if (name == null){
 				players.add(id);
-			} else {
+			}else{
 				players.add(name);
 			}
 		}
@@ -248,7 +250,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 */
 	protected List<String> getStringList(Collection<OfflinePlayer> playerList) {
 		List<String> uuids = new ArrayList<String>();
-		for (OfflinePlayer player: playerList) {
+		for (OfflinePlayer player: playerList){
 			uuids.add(player.getUniqueId().toString());
 		}
 		return uuids;

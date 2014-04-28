@@ -66,7 +66,7 @@ public class PlotManager extends BaseObject<InfinitePlots> {
 						try{
 							Map<String, UUID> map = (new UUIDFetcher(builderNames)).call();
 							List<String> uuids = new ArrayList<String>();
-							for (UUID uuid: map.values()) {
+							for (UUID uuid: map.values()){
 								uuids.add(uuid.toString());
 							}
 							
