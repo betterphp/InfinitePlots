@@ -157,7 +157,10 @@ public class Plot extends BaseObject<InfinitePlots> {
 		List<String> players = new ArrayList<String>(ids.size());
 		
 		for (String id : ids){
-			String name = plugin.getServer().getOfflinePlayer(UUID.fromString(id)).getName();
+			OfflinePlayer player = plugin.getServer().getOfflinePlayer(UUID.fromString(id));
+			String name = null;
+			if (player != null)
+				name = player.getName();
 			if (name == null) {
 				players.add(id);
 			} else {
