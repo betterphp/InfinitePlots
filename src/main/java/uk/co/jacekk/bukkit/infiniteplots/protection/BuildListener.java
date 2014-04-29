@@ -86,6 +86,10 @@ public class BuildListener extends BaseListener<InfinitePlots> {
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onPistonExtend(BlockPistonExtendEvent event){
 		Block piston = event.getBlock();
+		if (!PlotLocation.isInPlotWorld(piston.getLocation())){
+			return;
+		}
+			
 		Plot plot = plugin.getPlotManager().getPlotAt(PlotLocation.fromWorldLocation(piston.getLocation()));
 		
 		if (plot == null){

@@ -48,12 +48,12 @@ public class InfoCommandExecutor extends BaseCommandExecutor<InfinitePlots> {
 		
 		player.sendMessage(ChatColor.YELLOW + "Plot Information");
 		
-		player.sendMessage(ChatColor.BLUE + "Owner: " + ChatColor.RESET + plot.getAdmin());
+		player.sendMessage(ChatColor.BLUE + "Owner: " + ChatColor.RESET + plot.getAdmin().getName());
 		player.sendMessage(ChatColor.BLUE + "Name: " + ChatColor.RESET + plot.getName());
 		player.sendMessage(ChatColor.BLUE + "Location: " + ChatColor.RESET + plot.getLocation().getX() + ", " + plot.getLocation().getZ());
 		
 		if (!plot.getBuilders().isEmpty()){
-			player.sendMessage(ChatColor.LIGHT_PURPLE + "Builders: " + ChatColor.RESET + ListUtils.implode(", ", plot.getBuilders()));
+			player.sendMessage(ChatColor.LIGHT_PURPLE + "Builders: " + ChatColor.RESET + ListUtils.implode(", ", plot.getBuilderNames()));
 		}
 		
 		StringBuilder flags = new StringBuilder();

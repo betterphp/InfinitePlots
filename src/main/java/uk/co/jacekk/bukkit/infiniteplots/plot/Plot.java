@@ -3,6 +3,7 @@ package uk.co.jacekk.bukkit.infiniteplots.plot;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -132,7 +133,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 	 * Gets all of the players (not including the plot admin) that are allowed
 	 * to build in this plot.
 	 * 
-	 * @return The list of player names.
+	 * @return The list of players.
 	 */
 	public List<OfflinePlayer> getBuilders(){
 		List<String> ids = this.config.getStringList(PlotConfig.AUTH_BUILDER_UUIDS);
@@ -140,6 +141,33 @@ public class Plot extends BaseObject<InfinitePlots> {
 		
 		for (String id : ids){
 			players.add(plugin.getServer().getOfflinePlayer(UUID.fromString(id)));
+		}
+		
+		return players;
+	}
+	
+	/**
+	 * Gets the names of all of the players (not including the plot admin) that 
+	 * are allowed to build in this plot.
+	 * 
+	 * @return The list of player names.
+	 */
+	public List<String> getBuilderNames(){
+		List<String> ids = this.config.getStringList(PlotConfig.AUTH_BUILDER_UUIDS);
+		List<String> players = new ArrayList<String>(ids.size());
+		
+		for (String id : ids){
+			OfflinePlayer player = plugin.getServer().getOfflinePlayer(UUID.fromString(id));
+			String name = null;
+			if (player != null){
+				name = player.getName();
+			}
+				
+			if (name == null){
+				players.add(id);
+			}else{
+				players.add(name);
+			}
 		}
 		
 		return players;
@@ -215,6 +243,20 @@ public class Plot extends BaseObject<InfinitePlots> {
 	}
 	
 	/**
+	 * Returns a list of strings representing the list of player UUIDs.
+	 * 
+	 * @param playerList 
+	 * @return A list of UUIDs represented as strings
+	 */
+	protected List<String> getStringList(Collection<OfflinePlayer> playerList) {
+		List<String> uuids = new ArrayList<String>();
+		for (OfflinePlayer player: playerList){
+			uuids.add(player.getUniqueId().toString());
+		}
+		return uuids;
+	}
+	
+	/**
 	 * Adds a builder to this plot.
 	 * 
 	 * @param playerName The name of the player to add.
@@ -223,7 +265,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 		List<OfflinePlayer> builders = this.getBuilders();
 		builders.add(player);
 		
-		this.config.set(PlotConfig.AUTH_BUILDER_UUIDS, builders);
+		this.config.set(PlotConfig.AUTH_BUILDER_UUIDS, getStringList(builders));
 	}
 	
 	/**
@@ -235,7 +277,7 @@ public class Plot extends BaseObject<InfinitePlots> {
 		List<OfflinePlayer> builders = this.getBuilders();
 		builders.remove(player);
 		
-		this.config.set(PlotConfig.AUTH_BUILDER_UUIDS, builders);
+		this.config.set(PlotConfig.AUTH_BUILDER_UUIDS, getStringList(builders));
 	}
 	
 	/**
