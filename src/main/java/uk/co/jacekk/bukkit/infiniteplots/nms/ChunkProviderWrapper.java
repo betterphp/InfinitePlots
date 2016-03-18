@@ -13,14 +13,18 @@ public class ChunkProviderWrapper implements IChunkProvider {
 		this.buildLimits = buildLimits;
 	}
 	
+	private Chunk wrapChunk(Chunk chunk){
+		return new ChunkWrapper(chunk, this.buildLimits);
+	}
+	
 	@Override
 	public Chunk getLoadedChunkAt(int i, int j){
-		return this.getLoadedChunkAt(i, j);
+		return this.wrapChunk(this.chunkProvider.getLoadedChunkAt(i, j));
 	}
 	
 	@Override
 	public Chunk getChunkAt(int arg0, int arg1){
-		return this.chunkProvider.getChunkAt(arg0, arg1);
+		return this.wrapChunk(this.chunkProvider.getChunkAt(arg0, arg1));
 	}
 	
 	@Override
@@ -35,7 +39,7 @@ public class ChunkProviderWrapper implements IChunkProvider {
 	
 	@Override
 	public Chunk getOrCreateChunkFast(int x, int z){
-		return new ChunkWrapper(this.chunkProvider.getOrCreateChunkFast(x, z), this.buildLimits);
+		return this.wrapChunk(this.chunkProvider.getOrCreateChunkFast(x, z));
 	}
 
 }
