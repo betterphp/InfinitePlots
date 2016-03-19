@@ -127,12 +127,12 @@ public class BiomePlotDecorator extends PlotDecorator {
 				IChunkProvider currentChunkProvider = world.getChunkProvider();
 				
 				try{
+					ChunkProviderWrapper wrappedChunkProvider = new ChunkProviderWrapper(currentChunkProvider, buildLimits);
+					ReflectionUtils.setFieldValue(World.class, "chunkProvider", world, wrappedChunkProvider);
+					Random random = ReflectionUtils.getFieldValue(ChunkProviderGenerate.class, "i", Random.class, generator);
+
 					for (int x = buildLimits[0]; x <= buildLimits[2]; x += 16){
 						for (int z = buildLimits[1]; z <= buildLimits[3]; z += 16){
-							ChunkProviderWrapper wrappedChunkProvider = new ChunkProviderWrapper(currentChunkProvider, buildLimits);
-							ReflectionUtils.setFieldValue(World.class, "chunkProvider", world, wrappedChunkProvider);
-							Random random = ReflectionUtils.getFieldValue(ChunkProviderGenerate.class, "i", Random.class, generator);
-							
 							biomeBase.a(world, random, new BlockPosition((x >> 4) * 16, 0, (z >> 4) * 16));
 						}
 					}
