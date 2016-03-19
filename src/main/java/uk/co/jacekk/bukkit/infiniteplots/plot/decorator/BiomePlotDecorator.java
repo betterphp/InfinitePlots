@@ -11,6 +11,7 @@ import net.minecraft.server.v1_9_R1.ChunkProviderGenerate;
 import net.minecraft.server.v1_9_R1.ChunkSnapshot;
 import net.minecraft.server.v1_9_R1.IBlockData;
 import net.minecraft.server.v1_9_R1.IChunkProvider;
+import net.minecraft.server.v1_9_R1.MinecraftKey;
 import net.minecraft.server.v1_9_R1.World;
 import net.minecraft.server.v1_9_R1.WorldGenCanyon;
 import net.minecraft.server.v1_9_R1.WorldGenCaves;
@@ -42,11 +43,7 @@ public class BiomePlotDecorator extends PlotDecorator {
 		this.biome = biome;
 		this.seed = (new Random()).nextLong();
 		
-		try{
-			this.biomeBase = ReflectionUtils.getFieldValue(BiomeBase.class, biome.name(), BiomeBase.class, null);
-		}catch (NoSuchFieldException e){
-			e.printStackTrace();
-		}
+		this.biomeBase = BiomeBase.REGISTRY_ID.get(new MinecraftKey(biome.name().toLowerCase()));
 	}
 	
 	private ChunkSnapshot createChunk(ChunkProviderGenerate generator, World world, int x, int z, BiomeBase biomeBase){
