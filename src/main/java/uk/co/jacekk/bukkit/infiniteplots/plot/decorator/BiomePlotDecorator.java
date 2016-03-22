@@ -68,7 +68,7 @@ public class BiomePlotDecorator extends PlotDecorator {
 	public void decorate(Plot plot){
 		CraftWorld craftWorld = (CraftWorld) plugin.getServer().getWorld(plot.getLocation().getWorldName());
 		final WorldServer world = craftWorld.getHandle();
-		final ChunkProviderGenerate generator = new ChunkProviderGenerate(world, this.seed, false, null);
+		final ChunkProviderGenerate generator = new ChunkProviderGenerate(world, this.seed, false, "");
 		
 		int worldHeight = craftWorld.getMaxHeight();
 		int seaHeight = craftWorld.getSeaLevel();
